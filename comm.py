@@ -12,9 +12,9 @@ def fmtNull(v):
     #寫入到資料庫中.....
 def ExecuteMSSQL(sql):
 	server = 'UBT\SQLEXPRESS'
-	database = 'DB_9AB840_Vague'
-	username = 'DB_9AB840_Vague_admin'
-	password = 'Apple005'
+	database = ''
+	username = ''
+	password = ''
 	driver= '{ODBC Driver 17 for SQL Server}'
 	cnxn = pyodbc.connect(f'DRIVER={driver};PORT=1433;SERVER={server};PORT=1443;DATABASE={database};UID={username};PWD={password}')
 	cursor = cnxn.cursor()
