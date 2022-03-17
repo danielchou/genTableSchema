@@ -9,6 +9,7 @@ def fmtSquare(v):
 def fmtNull(v):
     return " NULL" if(v=="Y") else " NOT NULL"
 
+
     #寫入到資料庫中.....
 def ExecuteMSSQL(sql):
 	server = 'UBT\SQLEXPRESS'
