@@ -25,7 +25,8 @@ def ExecuteMSSQL(sql):
 	return cnxn
 
 def connMSSQL(db):
-	server = 'UBT\SQLEXPRESS'
+	# server = 'UBT\SQLEXPRESS'
+	server = "DESKTOP-T0P44I2"
 	database = "newcti"
 	username = 'sa'
 	password = 'Passw0rd'
