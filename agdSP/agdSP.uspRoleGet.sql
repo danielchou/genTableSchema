@@ -4,14 +4,8 @@
 **
 ** Return values: 0 成功
 ** Return Recordset: 
-**	SeqNo	INT	-	角色序號
 **	RoleId	VARCHAR(20)	-	角色代碼
 **	RoleName	NVARCHAR(50)	-	角色名稱
-**	IsEnable	BIT	-	是否啟用
-**	CreateDT	DATETIME2	-	建立日期
-**	Creator	NVARCHAR(20)	-	建立者
-**	UpdateDT	DATETIME2	-	更新日期
-**	Updator	NVARCHAR(20)	-	更新者
 **
 ** Called by: 
 **	AGD WebApi
@@ -19,7 +13,8 @@
 ** Parameters:
 **	Input
 ** -----------
-	@SeqNo INT	-	角色序號
+	@RoleId VARCHAR(20)	-	角色代碼
+	@RoleName NVARCHAR(50)	-	角色名稱
 **
 **   Output
 ** -----------
@@ -44,7 +39,7 @@
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-18 00:27:00    Daniel Chou	    first release
+** 2022-03-22 00:40:39    Daniel Chou	    first release
 *****************************************************************/
 ALTER PROCEDURE [agdSp].[uspRoleGet] (
 	@SeqNo INT
@@ -57,14 +52,8 @@ SET @ErrorMsg = N''
 BEGIN
 	BEGIN TRY
 		SELECT
-			f.SeqNo
-			,f.RoleId
+			f.RoleId
 			,f.RoleName
-			,f.IsEnable
-			,f.CreateDT
-			,f.Creator
-			,f.UpdateDT
-			,f.Updator
 			,u.UserName AS UpdatorName
 		FROM agdSet.tbRole AS f
 		JOIN agdSet.tbUser AS u ON u.UserId = f.Updator

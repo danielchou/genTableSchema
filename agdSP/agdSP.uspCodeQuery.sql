@@ -32,34 +32,34 @@
 ** 
 ** Example:
 ** -----------
-	DECLARE @return_value INT
-        @SeqNo INT
-		,@CodeType NVARCHAR(20)
-		,@CodeId VARCHAR(20)
-		,@CodeName NVARCHAR(20)
-        ,@Page INT = 1
-        ,@RowsPerPage INT = 20
-        ,@SortColumn NVARCHAR(30) = 'CreateDT'
-        ,@SortOrder VARCHAR(10) = 'ASC'
-        ,@ErrorMsg NVARCHAR(100)
+DECLARE @return_value INT
+	@SeqNo INT
+	,@CodeType NVARCHAR(20)
+	,@CodeId VARCHAR(20)
+	,@CodeName NVARCHAR(20)
+	,@Page INT = 1
+	,@RowsPerPage INT = 20
+	,@SortColumn NVARCHAR(30) = 'CreateDT'
+	,@SortOrder VARCHAR(10) = 'ASC'
+	,@ErrorMsg NVARCHAR(100)
 
-    SET @SeqNo = ''
-	SET @CodeType = 'sys'
-	SET @CodeId = 1
-	SET @CodeName = 'admin'
+SET @SeqNo = ''
+	SET @CodeType = 'aux'
+	SET @CodeId = 'B02'
+	SET @CodeName = '休息'
 
-	EXEC @return_value = agdSp.uspCodeQuery
-        @SeqNo = @SeqNo
-		,@CodeType = @CodeType
-		,@CodeId = @CodeId
-		,@CodeName = @CodeName
-		,@Page = @Page
-		,@RowsPerPage = @RowsPerPage
-		,@SortColumn = @SortColumn
-		,@SortOrder = @SortOrder
-		,@ErrorMsg = @ErrorMsg OUTPUT
+EXEC @return_value = agdSp.uspCodeQuery
+	@SeqNo = @SeqNo
+	,@CodeType = @CodeType
+	,@CodeId = @CodeId
+	,@CodeName = @CodeName
+	,@Page = @Page
+	,@RowsPerPage = @RowsPerPage
+	,@SortColumn = @SortColumn
+	,@SortOrder = @SortOrder
+	,@ErrorMsg = @ErrorMsg OUTPUT
 
-	SELECT @return_value AS 'Return Value'
+SELECT @return_value AS 'Return Value'
 		,@ErrorMsg AS N'@ErrorMsg'
 **
 *****************************************************************
@@ -67,18 +67,18 @@
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-18 00:27:00    Daniel Chou     first release
+** 2022-03-22 00:40:40    Daniel Chou     first release
 *****************************************************************/
 ALTER PROCEDURE [agdSp].[uspCodeQuery] (
-        @SeqNo INT
-		,@CodeType NVARCHAR(20)
-		,@CodeId VARCHAR(20)
-		,@CodeName NVARCHAR(20)
-        ,@Page INT = 1
-        ,@RowsPerPage INT = 20
-        ,@SortColumn NVARCHAR(30) = 'CreateDT'
-        ,@SortOrder VARCHAR(10) = 'ASC'
-        ,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
+	@SeqNo INT
+	,@CodeType NVARCHAR(20)
+	,@CodeId VARCHAR(20)
+	,@CodeName NVARCHAR(20)
+	,@Page INT = 1
+	,@RowsPerPage INT = 20
+	,@SortColumn NVARCHAR(30) = 'CreateDT'
+	,@SortOrder VARCHAR(10) = 'ASC'
+    ,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
 )
 AS
 SET NOCOUNT ON
@@ -100,16 +100,20 @@ BEGIN
 		FROM agdSet.tbCode AS f
 		JOIN agdSet.tbUser AS u ON u.UserId = f.Updator
 		------- WHERE 查詢條件 -------
-		WHERE 
-            f.GroupId LIKE CASE WHEN @GroupId = '' THEN f.GroupId ELSE '%' + @GroupId + '%' END
-		AND f.GroupName LIKE CASE WHEN @GroupName = '' THEN f.GroupName ELSE '%' + @GroupName + '%' END
-		AND f.IsEnable = CASE WHEN @IsEnable = 'ALL' THEN f.IsEnable ELSE CASE WHEN @IsEnable = '1' THEN 1 ELSE 0 END END
+		WHERE  f.CodeType LIKE CASE WHEN @CodeType = '' THEN f.CodeType ELSE '%' + @CodeType + '%' END
+				AND f.CodeId LIKE CASE WHEN @CodeId = '' THEN f.CodeId ELSE '%' + @CodeId + '%' END
+				AND f.CodeName LIKE CASE WHEN @CodeName = '' THEN f.CodeName ELSE '%' + @CodeName + '%' END
+				AND f.IsEnable = CASE WHEN @IsEnable = 'ALL' THEN f.IsEnable ELSE CASE WHEN @IsEnable = '1' THEN 1 ELSE 0 END END
 		------- Sort 排序條件 -------
 		ORDER BY 
-            CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
-			CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
-            CASE WHEN @SortColumn = 'CodeId' AND @SortOrder = 'ASC' THEN f.CodeId END ASC,
-            CASE WHEN @SortColumn = 'CodeId' AND @SortOrder = 'DESC' THEN f.CodeId END DESC,
+				CASE WHEN @SortColumn = 'CodeType' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
+				CASE WHEN @SortColumn = 'CodeType' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
+				CASE WHEN @SortColumn = 'CodeId' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
+				CASE WHEN @SortColumn = 'CodeId' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
+				CASE WHEN @SortColumn = 'CodeName' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
+				CASE WHEN @SortColumn = 'CodeName' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
+				CASE WHEN @SortColumn = 'Creator' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
+				CASE WHEN @SortColumn = 'Creator' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC
 		------- Page 分頁條件 -------
 		OFFSET @RowsPerPage * (@page - 1) ROWS
 

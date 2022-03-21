@@ -1,11 +1,10 @@
 /****************************************************************
-** Name: [agdSp].[uspGroupGet]
-** Desc: 群組單位查詢
+** Name: [agdSp].[uspGroupDelete]
+** Desc: 群組單位刪除
 **
 ** Return values: 0 成功
 ** Return Recordset: 
-**	GroupId	VARCHAR(20)	-	部門代碼
-**	GroupName	NVARCHAR(50)	-	部門名稱
+**	NA
 **
 ** Called by: 
 **	AGD WebApi
@@ -13,8 +12,7 @@
 ** Parameters:
 **	Input
 ** -----------
-	@GroupId VARCHAR(20)	-	部門代碼
-	@GroupName NVARCHAR(50)	-	部門名稱
+	@SeqNo INT - 部門序號
 **
 **   Output
 ** -----------
@@ -26,9 +24,9 @@
 		,@SeqNo INT
 		,@ErrorMsg NVARCHAR(100)
 
-	SET @SeqNo = 1
+	SET @SeqNo = 25
 
-	EXEC @return_value = [agdSp].[uspGroupGet] @SeqNo = @SeqNo
+	EXEC @return_value = [agdSp].[uspGroupDelete] @SeqNo = @SeqNo
 		,@ErrorMsg = @ErrorMsg OUTPUT
 
 	SELECT @return_value AS 'Return Value'
@@ -37,13 +35,13 @@
 *****************************************************************
 ** Change History
 *****************************************************************
-** Date:            Author:         Description:
+** Date:		Author:			Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-22 00:40:39    Daniel Chou	    first release
+** 2022-03-22 00:40:39 Jerry Yang		first release
 *****************************************************************/
-ALTER PROCEDURE [agdSp].[uspGroupGet] (
+ALTER PROCEDURE [agdSp].[uspGroupDelete] (
 	@SeqNo INT
-	,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
+	,@ErrorMsg NVARCHAR(100) = NULL OUTPUT
 	)
 AS
 SET NOCOUNT ON
@@ -51,13 +49,8 @@ SET @ErrorMsg = N''
 
 BEGIN
 	BEGIN TRY
-		SELECT
-			f.GroupId
-			,f.GroupName
-			,u.UserName AS UpdatorName
-		FROM agdSet.tbGroup AS f
-		JOIN agdSet.tbUser AS u ON u.UserId = f.Updator
-		WHERE f.SeqNo = @SeqNo;
+		DELETE agdSet.tbGroup
+		WHERE SeqNo = @SeqNo;
 	END TRY
 
 	BEGIN CATCH

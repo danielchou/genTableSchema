@@ -28,28 +28,28 @@
 ** 
 ** Example:
 ** -----------
-	DECLARE @return_value INT
-        @RoleId VARCHAR(20)
-		,@RoleName NVARCHAR(50)
-        ,@Page INT = 1
-        ,@RowsPerPage INT = 20
-        ,@SortColumn NVARCHAR(30) = 'CreateDT'
-        ,@SortOrder VARCHAR(10) = 'ASC'
-        ,@ErrorMsg NVARCHAR(100)
+DECLARE @return_value INT
+	@RoleId VARCHAR(20)
+	,@RoleName NVARCHAR(50)
+	,@Page INT = 1
+	,@RowsPerPage INT = 20
+	,@SortColumn NVARCHAR(30) = 'CreateDT'
+	,@SortOrder VARCHAR(10) = 'ASC'
+	,@ErrorMsg NVARCHAR(100)
 
-    SET @RoleId = 1
+SET @RoleId = 1
 	SET @RoleName = 'admin'
 
-	EXEC @return_value = agdSp.uspRoleQuery
-        @RoleId = @RoleId
-		,@RoleName = @RoleName
-		,@Page = @Page
-		,@RowsPerPage = @RowsPerPage
-		,@SortColumn = @SortColumn
-		,@SortOrder = @SortOrder
-		,@ErrorMsg = @ErrorMsg OUTPUT
+EXEC @return_value = agdSp.uspRoleQuery
+	@RoleId = @RoleId
+	,@RoleName = @RoleName
+	,@Page = @Page
+	,@RowsPerPage = @RowsPerPage
+	,@SortColumn = @SortColumn
+	,@SortOrder = @SortOrder
+	,@ErrorMsg = @ErrorMsg OUTPUT
 
-	SELECT @return_value AS 'Return Value'
+SELECT @return_value AS 'Return Value'
 		,@ErrorMsg AS N'@ErrorMsg'
 **
 *****************************************************************
@@ -57,16 +57,16 @@
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-18 00:27:00    Daniel Chou     first release
+** 2022-03-22 00:40:39    Daniel Chou     first release
 *****************************************************************/
 ALTER PROCEDURE [agdSp].[uspRoleQuery] (
-        @RoleId VARCHAR(20)
-		,@RoleName NVARCHAR(50)
-        ,@Page INT = 1
-        ,@RowsPerPage INT = 20
-        ,@SortColumn NVARCHAR(30) = 'CreateDT'
-        ,@SortOrder VARCHAR(10) = 'ASC'
-        ,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
+	@RoleId VARCHAR(20)
+	,@RoleName NVARCHAR(50)
+	,@Page INT = 1
+	,@RowsPerPage INT = 20
+	,@SortColumn NVARCHAR(30) = 'CreateDT'
+	,@SortOrder VARCHAR(10) = 'ASC'
+    ,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
 )
 AS
 SET NOCOUNT ON
@@ -86,16 +86,17 @@ BEGIN
 		FROM agdSet.tbRole AS f
 		JOIN agdSet.tbUser AS u ON u.UserId = f.Updator
 		------- WHERE 查詢條件 -------
-		WHERE 
-            f.GroupId LIKE CASE WHEN @GroupId = '' THEN f.GroupId ELSE '%' + @GroupId + '%' END
-		AND f.GroupName LIKE CASE WHEN @GroupName = '' THEN f.GroupName ELSE '%' + @GroupName + '%' END
-		AND f.IsEnable = CASE WHEN @IsEnable = 'ALL' THEN f.IsEnable ELSE CASE WHEN @IsEnable = '1' THEN 1 ELSE 0 END END
+		WHERE  f.RoleId LIKE CASE WHEN @RoleId = '' THEN f.RoleId ELSE '%' + @RoleId + '%' END
+				AND f.RoleName LIKE CASE WHEN @RoleName = '' THEN f.RoleName ELSE '%' + @RoleName + '%' END
+				AND f.IsEnable = CASE WHEN @IsEnable = 'ALL' THEN f.IsEnable ELSE CASE WHEN @IsEnable = '1' THEN 1 ELSE 0 END END
 		------- Sort 排序條件 -------
 		ORDER BY 
-            CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
-			CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
-            CASE WHEN @SortColumn = 'RoleId' AND @SortOrder = 'ASC' THEN f.RoleId END ASC,
-            CASE WHEN @SortColumn = 'RoleId' AND @SortOrder = 'DESC' THEN f.RoleId END DESC,
+				CASE WHEN @SortColumn = 'RoleId' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
+				CASE WHEN @SortColumn = 'RoleId' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
+				CASE WHEN @SortColumn = 'RoleName' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
+				CASE WHEN @SortColumn = 'RoleName' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
+				CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
+				CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC
 		------- Page 分頁條件 -------
 		OFFSET @RowsPerPage * (@page - 1) ROWS
 

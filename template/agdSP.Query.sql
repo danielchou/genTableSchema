@@ -26,25 +26,25 @@
 ** 
 ** Example:
 ** -----------
-	DECLARE @return_value INT
-        {pt_Declare}
-        ,@Page INT = 1
-        ,@RowsPerPage INT = 20
-        ,@SortColumn NVARCHAR(30) = 'CreateDT'
-        ,@SortOrder VARCHAR(10) = 'ASC'
-        ,@ErrorMsg NVARCHAR(100)
+DECLARE @return_value INT
+	{pt_Declare}
+	,@Page INT = 1
+	,@RowsPerPage INT = 20
+	,@SortColumn NVARCHAR(30) = 'CreateDT'
+	,@SortOrder VARCHAR(10) = 'ASC'
+	,@ErrorMsg NVARCHAR(100)
 
-    {pt_SetValue}
+{pt_SetValue}
 
-	EXEC @return_value = agdSp.usp{tb}Query
-        {pt_Exec}
-		,@Page = @Page
-		,@RowsPerPage = @RowsPerPage
-		,@SortColumn = @SortColumn
-		,@SortOrder = @SortOrder
-		,@ErrorMsg = @ErrorMsg OUTPUT
+EXEC @return_value = agdSp.usp{tb}Query
+	{pt_Exec}
+	,@Page = @Page
+	,@RowsPerPage = @RowsPerPage
+	,@SortColumn = @SortColumn
+	,@SortOrder = @SortOrder
+	,@ErrorMsg = @ErrorMsg OUTPUT
 
-	SELECT @return_value AS 'Return Value'
+SELECT @return_value AS 'Return Value'
 		,@ErrorMsg AS N'@ErrorMsg'
 **
 *****************************************************************
@@ -55,12 +55,12 @@
 ** {pt_DateTime}    Daniel Chou     first release
 *****************************************************************/
 ALTER PROCEDURE [agdSp].[usp{tb}Query] (
-        {pt_Declare}
-        ,@Page INT = 1
-        ,@RowsPerPage INT = 20
-        ,@SortColumn NVARCHAR(30) = 'CreateDT'
-        ,@SortOrder VARCHAR(10) = 'ASC'
-        ,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
+	{pt_Declare}
+	,@Page INT = 1
+	,@RowsPerPage INT = 20
+	,@SortColumn NVARCHAR(30) = 'CreateDT'
+	,@SortOrder VARCHAR(10) = 'ASC'
+    ,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
 )
 AS
 SET NOCOUNT ON
@@ -79,16 +79,11 @@ BEGIN
 		FROM agdSet.tb{tb} AS f
 		JOIN agdSet.tbUser AS u ON u.UserId = f.Updator
 		------- WHERE 查詢條件 -------
-		WHERE 
-            f.GroupId LIKE CASE WHEN @GroupId = '' THEN f.GroupId ELSE '%' + @GroupId + '%' END
-		AND f.GroupName LIKE CASE WHEN @GroupName = '' THEN f.GroupName ELSE '%' + @GroupName + '%' END
-		AND f.IsEnable = CASE WHEN @IsEnable = 'ALL' THEN f.IsEnable ELSE CASE WHEN @IsEnable = '1' THEN 1 ELSE 0 END END
+		WHERE {pt_queryWhere}
+				AND f.IsEnable = CASE WHEN @IsEnable = 'ALL' THEN f.IsEnable ELSE CASE WHEN @IsEnable = '1' THEN 1 ELSE 0 END END
 		------- Sort 排序條件 -------
 		ORDER BY 
-            CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
-			CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
-            CASE WHEN @SortColumn = '{tb}Id' AND @SortOrder = 'ASC' THEN f.{tb}Id END ASC,
-            CASE WHEN @SortColumn = '{tb}Id' AND @SortOrder = 'DESC' THEN f.{tb}Id END DESC,
+{pt_orderBy}
 		------- Page 分頁條件 -------
 		OFFSET @RowsPerPage * (@page - 1) ROWS
 

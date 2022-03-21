@@ -42,7 +42,7 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-18 00:27:00    Daniel Chou     first release
+** 2022-03-22 00:40:39    Daniel Chou     first release
 *****************************************************************/
 ALTER PROCEDURE [agdSp].[uspGroupExists]
     @GroupId VARCHAR(20)
