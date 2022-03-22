@@ -31,9 +31,9 @@ DECLARE @return_value INT
     ,@ErrorMsg NVARCHAR(100)
 
     SET @SeqNo = ''
-	SET @CodeType = 'sys'
-	SET @CodeId = 1
-	SET @CodeName = 'admin'
+	SET @CodeType = 'aux'
+	SET @CodeId = 'B02'
+	SET @CodeName = '休息'
 
 EXEC @return_value = [agdSp].[uspCodeExists] 
     @SeqNo = @SeqNo
@@ -50,7 +50,7 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-18 00:27:00    Daniel Chou     first release
+** 2022-03-22 00:40:40    Daniel Chou     first release
 *****************************************************************/
 ALTER PROCEDURE [agdSp].[uspCodeExists]
     @SeqNo INT

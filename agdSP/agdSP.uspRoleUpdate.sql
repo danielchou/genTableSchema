@@ -1,10 +1,10 @@
 /****************************************************************
-** Name: [agdSp].[uspUserExists]
-** Desc: 使用者查詢是否重複
+** Name: [agdSp].[uspRoleUpdate]
+** Desc: 角色更新
 **
 ** Return values: 0 成功
 ** Return Recordset: 
-**	Total		:資料總筆數
+**	NA
 **
 ** Called by: 
 **	AGD WebApi
@@ -12,30 +12,30 @@
 ** Parameters:
 **	Input
 ** -----------
-	@SeqNo INT	-	使用者序號
-	@UserId NVARCHAR(20)	-	使用者帳號
-	@UserName NVARCHAR(50)	-	使用者名稱
+    @SeqNo INT	-	角色序號
+	@RoleId VARCHAR(20)	-	角色代碼
+	@RoleName NVARCHAR(50)	-	角色名稱
 **
 **   Output
 ** -----------
 	@ErrorMsg NVARCHAR(100) - 錯誤回傳訊息
 ** 
-** Example: 
+** Example:
 ** -----------
 DECLARE @return_value INT
     ,@SeqNo INT
-	,@UserId NVARCHAR(20)
-	,@UserName NVARCHAR(50)
+	,@RoleId VARCHAR(20)
+	,@RoleName NVARCHAR(50)
     ,@ErrorMsg NVARCHAR(100)
 
-    SET @SeqNo = 2
-	SET @UserId = 'agent'
-	SET @UserName = 'BBB'
+    SET @SeqNo = ''
+	SET @RoleId = 1
+	SET @RoleName = 'admin'
 
-EXEC @return_value = [agdSp].[uspUserExists] 
-    @SeqNo = @SeqNo
-	,@UserId = @UserId
-	,@UserName = @UserName
+EXEC @return_value = [agdSp].[uspCodeUpdate]
+    ,@SeqNo = @SeqNo
+	,@RoleId = @RoleId
+	,@RoleName = @RoleName
     ,@ErrorMsg = @ErrorMsg OUTPUT
 
 SELECT @return_value AS 'Return Value'
@@ -46,26 +46,26 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-22 00:40:38    Daniel Chou     first release
+** 2022-03-22 00:40:40    Daniel Chou	    first release
 *****************************************************************/
-ALTER PROCEDURE [agdSp].[uspUserExists]
-    @SeqNo INT
-	,@UserId NVARCHAR(20)
-	,@UserName NVARCHAR(50)
-    ,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
+ALTER PROCEDURE [agdSp].[uspRoleUpdate] (
+	@SeqNo INT
+	,@RoleId VARCHAR(20)
+	,@RoleName NVARCHAR(50)
+	,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
+	)
 AS
 SET NOCOUNT ON
 SET @ErrorMsg = N''
 
 BEGIN
 	BEGIN TRY
-		SELECT COUNT(SeqNo) AS Total
-		FROM agdSet.tbUser
-		WHERE SeqNo != @SeqNo
-			AND ( 
-                UserId = @UserId OR
-				UserName = @UserName
-            );
+		UPDATE agdSet.tbRole
+		SET RoleId = @RoleId
+			,RoleName = @RoleName
+            ,UpdateDT = GETDATE()
+			,Updator = @Updator
+		WHERE SeqNo = @SeqNo;
 	END TRY
 
 	BEGIN CATCH

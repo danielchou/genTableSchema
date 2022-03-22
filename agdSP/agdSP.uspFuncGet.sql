@@ -4,16 +4,8 @@
 **
 ** Return values: 0 成功
 ** Return Recordset: 
-**	SeqNo	INT	-	功能序號
 **	FuncId	VARCHAR(20)	-	功能代碼
 **	FuncName	NVARCHAR(50)	-	功能名稱
-**	FuncPath	NVARCHAR(30)	-	功能路由
-**	FuncIcon	NVARCHAR(30)	-	功能Icon
-**	IsEnable	BIT	-	是否啟用
-**	CreateDT	DATETIME2	-	建立日期
-**	Creator	NVARCHAR(20)	-	建立者
-**	UpdateDT	DATETIME2	-	更新日期
-**	Updator	NVARCHAR(20)	-	更新者
 **
 ** Called by: 
 **	AGD WebApi
@@ -21,7 +13,8 @@
 ** Parameters:
 **	Input
 ** -----------
-	@SeqNo INT	-	功能序號
+	@FuncId VARCHAR(20)	-	功能代碼
+	@FuncName NVARCHAR(50)	-	功能名稱
 **
 **   Output
 ** -----------
@@ -46,7 +39,7 @@
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-18 00:27:00    Daniel Chou	    first release
+** 2022-03-22 00:40:39    Daniel Chou	    first release
 *****************************************************************/
 ALTER PROCEDURE [agdSp].[uspFuncGet] (
 	@SeqNo INT
@@ -59,16 +52,8 @@ SET @ErrorMsg = N''
 BEGIN
 	BEGIN TRY
 		SELECT
-			f.SeqNo
-			,f.FuncId
+			f.FuncId
 			,f.FuncName
-			,f.FuncPath
-			,f.FuncIcon
-			,f.IsEnable
-			,f.CreateDT
-			,f.Creator
-			,f.UpdateDT
-			,f.Updator
 			,u.UserName AS UpdatorName
 		FROM agdSet.tbFunc AS f
 		JOIN agdSet.tbUser AS u ON u.UserId = f.Updator

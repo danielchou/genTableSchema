@@ -30,31 +30,31 @@
 ** 
 ** Example:
 ** -----------
-	DECLARE @return_value INT
-        @SeqNo INT
-		,@UserId NVARCHAR(20)
-		,@UserName NVARCHAR(50)
-        ,@Page INT = 1
-        ,@RowsPerPage INT = 20
-        ,@SortColumn NVARCHAR(30) = 'CreateDT'
-        ,@SortOrder VARCHAR(10) = 'ASC'
-        ,@ErrorMsg NVARCHAR(100)
+DECLARE @return_value INT
+	@SeqNo INT
+	,@UserId NVARCHAR(20)
+	,@UserName NVARCHAR(50)
+	,@Page INT = 1
+	,@RowsPerPage INT = 20
+	,@SortColumn NVARCHAR(30) = 'CreateDT'
+	,@SortOrder VARCHAR(10) = 'ASC'
+	,@ErrorMsg NVARCHAR(100)
 
-    SET @SeqNo = 2
+SET @SeqNo = 2
 	SET @UserId = 'agent'
 	SET @UserName = 'BBB'
 
-	EXEC @return_value = agdSp.uspUserQuery
-        @SeqNo = @SeqNo
-		,@UserId = @UserId
-		,@UserName = @UserName
-		,@Page = @Page
-		,@RowsPerPage = @RowsPerPage
-		,@SortColumn = @SortColumn
-		,@SortOrder = @SortOrder
-		,@ErrorMsg = @ErrorMsg OUTPUT
+EXEC @return_value = agdSp.uspUserQuery
+	@SeqNo = @SeqNo
+	,@UserId = @UserId
+	,@UserName = @UserName
+	,@Page = @Page
+	,@RowsPerPage = @RowsPerPage
+	,@SortColumn = @SortColumn
+	,@SortOrder = @SortOrder
+	,@ErrorMsg = @ErrorMsg OUTPUT
 
-	SELECT @return_value AS 'Return Value'
+SELECT @return_value AS 'Return Value'
 		,@ErrorMsg AS N'@ErrorMsg'
 **
 *****************************************************************
@@ -62,17 +62,17 @@
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-18 00:27:00    Daniel Chou     first release
+** 2022-03-22 00:40:38    Daniel Chou     first release
 *****************************************************************/
 ALTER PROCEDURE [agdSp].[uspUserQuery] (
-        @SeqNo INT
-		,@UserId NVARCHAR(20)
-		,@UserName NVARCHAR(50)
-        ,@Page INT = 1
-        ,@RowsPerPage INT = 20
-        ,@SortColumn NVARCHAR(30) = 'CreateDT'
-        ,@SortOrder VARCHAR(10) = 'ASC'
-        ,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
+	@SeqNo INT
+	,@UserId NVARCHAR(20)
+	,@UserName NVARCHAR(50)
+	,@Page INT = 1
+	,@RowsPerPage INT = 20
+	,@SortColumn NVARCHAR(30) = 'CreateDT'
+	,@SortOrder VARCHAR(10) = 'ASC'
+    ,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
 )
 AS
 SET NOCOUNT ON
@@ -93,16 +93,33 @@ BEGIN
 		FROM agdSet.tbUser AS f
 		JOIN agdSet.tbUser AS u ON u.UserId = f.Updator
 		------- WHERE 查詢條件 -------
-		WHERE 
-            f.GroupId LIKE CASE WHEN @GroupId = '' THEN f.GroupId ELSE '%' + @GroupId + '%' END
-		AND f.GroupName LIKE CASE WHEN @GroupName = '' THEN f.GroupName ELSE '%' + @GroupName + '%' END
-		AND f.IsEnable = CASE WHEN @IsEnable = 'ALL' THEN f.IsEnable ELSE CASE WHEN @IsEnable = '1' THEN 1 ELSE 0 END END
+		WHERE  f.UserId LIKE CASE WHEN @UserId = '' THEN f.UserId ELSE '%' + @UserId + '%' END
+				AND f.UserName LIKE CASE WHEN @UserName = '' THEN f.UserName ELSE '%' + @UserName + '%' END
+				AND f.AgentId LIKE CASE WHEN @AgentId = '' THEN f.AgentId ELSE '%' + @AgentId + '%' END
+				AND f.DeptId LIKE CASE WHEN @DeptId = '' THEN f.DeptId ELSE '%' + @DeptId + '%' END
+				AND f.ExtPhone LIKE CASE WHEN @ExtPhone = '' THEN f.ExtPhone ELSE '%' + @ExtPhone + '%' END
+				AND f.MobilePhone LIKE CASE WHEN @MobilePhone = '' THEN f.MobilePhone ELSE '%' + @MobilePhone + '%' END
+				AND f.Email LIKE CASE WHEN @Email = '' THEN f.Email ELSE '%' + @Email + '%' END
+				AND f.IsAdmin LIKE CASE WHEN @IsAdmin = '' THEN f.IsAdmin ELSE '%' + @IsAdmin + '%' END
+				AND f.IsEnable = CASE WHEN @IsEnable = 'ALL' THEN f.IsEnable ELSE CASE WHEN @IsEnable = '1' THEN 1 ELSE 0 END END
 		------- Sort 排序條件 -------
 		ORDER BY 
-            CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
-			CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
-            CASE WHEN @SortColumn = 'UserId' AND @SortOrder = 'ASC' THEN f.UserId END ASC,
-            CASE WHEN @SortColumn = 'UserId' AND @SortOrder = 'DESC' THEN f.UserId END DESC,
+				CASE WHEN @SortColumn = 'SeqNo' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
+				CASE WHEN @SortColumn = 'SeqNo' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
+				CASE WHEN @SortColumn = 'UserId' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
+				CASE WHEN @SortColumn = 'UserId' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
+				CASE WHEN @SortColumn = 'Password' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
+				CASE WHEN @SortColumn = 'Password' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
+				CASE WHEN @SortColumn = 'DeptId' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
+				CASE WHEN @SortColumn = 'DeptId' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
+				CASE WHEN @SortColumn = 'ExtPhone' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
+				CASE WHEN @SortColumn = 'ExtPhone' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
+				CASE WHEN @SortColumn = 'MobilePhone' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
+				CASE WHEN @SortColumn = 'MobilePhone' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
+				CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
+				CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
+				CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
+				CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC
 		------- Page 分頁條件 -------
 		OFFSET @RowsPerPage * (@page - 1) ROWS
 

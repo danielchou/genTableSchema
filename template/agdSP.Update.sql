@@ -1,11 +1,10 @@
 /****************************************************************
-** Name: [agdSp].[uspGroupGet]
-** Desc: 群組單位查詢
+** Name: [agdSp].[usp{tb}Update]
+** Desc: {tbDscr}更新
 **
 ** Return values: 0 成功
 ** Return Recordset: 
-**	GroupId	VARCHAR(20)	-	部門代碼
-**	GroupName	NVARCHAR(50)	-	部門名稱
+**	NA
 **
 ** Called by: 
 **	AGD WebApi
@@ -13,8 +12,7 @@
 ** Parameters:
 **	Input
 ** -----------
-	@GroupId VARCHAR(20)	-	部門代碼
-	@GroupName NVARCHAR(50)	-	部門名稱
+    {pt_input}
 **
 **   Output
 ** -----------
@@ -22,27 +20,28 @@
 ** 
 ** Example:
 ** -----------
-	DECLARE @return_value INT
-		,@SeqNo INT
-		,@ErrorMsg NVARCHAR(100)
+DECLARE @return_value INT
+    ,{pt_Declare}
+    ,@ErrorMsg NVARCHAR(100)
 
-	SET @SeqNo = 1
+    {pt_SetValue}
 
-	EXEC @return_value = [agdSp].[uspGroupGet] @SeqNo = @SeqNo
-		,@ErrorMsg = @ErrorMsg OUTPUT
+EXEC @return_value = [agdSp].[uspCodeUpdate]
+    ,{pt_Exec}
+    ,@ErrorMsg = @ErrorMsg OUTPUT
 
-	SELECT @return_value AS 'Return Value'
-		,@ErrorMsg AS N'@ErrorMsg'
+SELECT @return_value AS 'Return Value'
+    ,@ErrorMsg AS N'@ErrorMsg'
 **
 *****************************************************************
 ** Change History
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-22 00:40:39    Daniel Chou	    first release
+** {pt_DateTime}    Daniel Chou	    first release
 *****************************************************************/
-ALTER PROCEDURE [agdSp].[uspGroupGet] (
-	@SeqNo INT
+ALTER PROCEDURE [agdSp].[usp{tb}Update] (
+	{pt_Declare}
 	,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
 	)
 AS
@@ -51,13 +50,11 @@ SET @ErrorMsg = N''
 
 BEGIN
 	BEGIN TRY
-		SELECT
-			f.GroupId
-			,f.GroupName
-			,u.UserName AS UpdatorName
-		FROM agdSet.tbGroup AS f
-		JOIN agdSet.tbUser AS u ON u.UserId = f.Updator
-		WHERE f.SeqNo = @SeqNo;
+		UPDATE agdSet.tb{tb}
+		SET {pt_UpdateSet}
+            ,UpdateDT = GETDATE()
+			,Updator = @Updator
+		WHERE SeqNo = @SeqNo;
 	END TRY
 
 	BEGIN CATCH

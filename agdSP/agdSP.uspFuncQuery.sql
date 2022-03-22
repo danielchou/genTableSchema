@@ -28,28 +28,28 @@
 ** 
 ** Example:
 ** -----------
-	DECLARE @return_value INT
-        @FuncId VARCHAR(20)
-		,@FuncName NVARCHAR(50)
-        ,@Page INT = 1
-        ,@RowsPerPage INT = 20
-        ,@SortColumn NVARCHAR(30) = 'CreateDT'
-        ,@SortOrder VARCHAR(10) = 'ASC'
-        ,@ErrorMsg NVARCHAR(100)
+DECLARE @return_value INT
+	@FuncId VARCHAR(20)
+	,@FuncName NVARCHAR(50)
+	,@Page INT = 1
+	,@RowsPerPage INT = 20
+	,@SortColumn NVARCHAR(30) = 'CreateDT'
+	,@SortOrder VARCHAR(10) = 'ASC'
+	,@ErrorMsg NVARCHAR(100)
 
-    SET @FuncId = 1
+SET @FuncId = 1
 	SET @FuncName = '代碼設定'
 
-	EXEC @return_value = agdSp.uspFuncQuery
-        @FuncId = @FuncId
-		,@FuncName = @FuncName
-		,@Page = @Page
-		,@RowsPerPage = @RowsPerPage
-		,@SortColumn = @SortColumn
-		,@SortOrder = @SortOrder
-		,@ErrorMsg = @ErrorMsg OUTPUT
+EXEC @return_value = agdSp.uspFuncQuery
+	@FuncId = @FuncId
+	,@FuncName = @FuncName
+	,@Page = @Page
+	,@RowsPerPage = @RowsPerPage
+	,@SortColumn = @SortColumn
+	,@SortOrder = @SortOrder
+	,@ErrorMsg = @ErrorMsg OUTPUT
 
-	SELECT @return_value AS 'Return Value'
+SELECT @return_value AS 'Return Value'
 		,@ErrorMsg AS N'@ErrorMsg'
 **
 *****************************************************************
@@ -57,16 +57,16 @@
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-18 00:27:00    Daniel Chou     first release
+** 2022-03-22 00:40:38    Daniel Chou     first release
 *****************************************************************/
 ALTER PROCEDURE [agdSp].[uspFuncQuery] (
-        @FuncId VARCHAR(20)
-		,@FuncName NVARCHAR(50)
-        ,@Page INT = 1
-        ,@RowsPerPage INT = 20
-        ,@SortColumn NVARCHAR(30) = 'CreateDT'
-        ,@SortOrder VARCHAR(10) = 'ASC'
-        ,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
+	@FuncId VARCHAR(20)
+	,@FuncName NVARCHAR(50)
+	,@Page INT = 1
+	,@RowsPerPage INT = 20
+	,@SortColumn NVARCHAR(30) = 'CreateDT'
+	,@SortOrder VARCHAR(10) = 'ASC'
+    ,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
 )
 AS
 SET NOCOUNT ON
@@ -86,16 +86,19 @@ BEGIN
 		FROM agdSet.tbFunc AS f
 		JOIN agdSet.tbUser AS u ON u.UserId = f.Updator
 		------- WHERE 查詢條件 -------
-		WHERE 
-            f.GroupId LIKE CASE WHEN @GroupId = '' THEN f.GroupId ELSE '%' + @GroupId + '%' END
-		AND f.GroupName LIKE CASE WHEN @GroupName = '' THEN f.GroupName ELSE '%' + @GroupName + '%' END
-		AND f.IsEnable = CASE WHEN @IsEnable = 'ALL' THEN f.IsEnable ELSE CASE WHEN @IsEnable = '1' THEN 1 ELSE 0 END END
+		WHERE  f.FuncId LIKE CASE WHEN @FuncId = '' THEN f.FuncId ELSE '%' + @FuncId + '%' END
+				AND f.FuncName LIKE CASE WHEN @FuncName = '' THEN f.FuncName ELSE '%' + @FuncName + '%' END
+				AND f.FuncPath LIKE CASE WHEN @FuncPath = '' THEN f.FuncPath ELSE '%' + @FuncPath + '%' END
+				AND f.FuncIcon LIKE CASE WHEN @FuncIcon = '' THEN f.FuncIcon ELSE '%' + @FuncIcon + '%' END
+				AND f.IsEnable = CASE WHEN @IsEnable = 'ALL' THEN f.IsEnable ELSE CASE WHEN @IsEnable = '1' THEN 1 ELSE 0 END END
 		------- Sort 排序條件 -------
 		ORDER BY 
-            CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
-			CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
-            CASE WHEN @SortColumn = 'FuncId' AND @SortOrder = 'ASC' THEN f.FuncId END ASC,
-            CASE WHEN @SortColumn = 'FuncId' AND @SortOrder = 'DESC' THEN f.FuncId END DESC,
+				CASE WHEN @SortColumn = 'FuncId' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
+				CASE WHEN @SortColumn = 'FuncId' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
+				CASE WHEN @SortColumn = 'FuncName' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
+				CASE WHEN @SortColumn = 'FuncName' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
+				CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
+				CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC
 		------- Page 分頁條件 -------
 		OFFSET @RowsPerPage * (@page - 1) ROWS
 
