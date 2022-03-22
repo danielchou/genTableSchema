@@ -12,6 +12,7 @@
 ** Parameters:
 **	Input
 ** -----------
+	@SeqNo INT	-	部門序號
 	@GroupId VARCHAR(20)	-	部門代碼
 	@GroupName NVARCHAR(50)	-	部門名稱
 **
@@ -22,15 +23,18 @@
 ** Example: 
 ** -----------
 DECLARE @return_value INT
-    ,@GroupId VARCHAR(20)
+    ,@SeqNo INT
+	,@GroupId VARCHAR(20)
 	,@GroupName NVARCHAR(50)
     ,@ErrorMsg NVARCHAR(100)
 
-    SET @GroupId = 1
+    SET @SeqNo = 1
+	SET @GroupId = 1
 	SET @GroupName = '經辦'
 
 EXEC @return_value = [agdSp].[uspGroupExists] 
-    @GroupId = @GroupId
+    @SeqNo = @SeqNo
+	,@GroupId = @GroupId
 	,@GroupName = @GroupName
     ,@ErrorMsg = @ErrorMsg OUTPUT
 
@@ -42,10 +46,11 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-22 00:40:39    Daniel Chou     first release
+** 2022-03-22 23:44:28    Daniel Chou     first release
 *****************************************************************/
 ALTER PROCEDURE [agdSp].[uspGroupExists]
-    @GroupId VARCHAR(20)
+    @SeqNo INT
+	,@GroupId VARCHAR(20)
 	,@GroupName NVARCHAR(50)
     ,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
 AS

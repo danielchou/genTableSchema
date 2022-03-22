@@ -12,6 +12,7 @@
 ** Parameters:
 **	Input
 ** -----------
+	@SeqNo INT	-	角色序號
 	@RoleId VARCHAR(20)	-	角色代碼
 	@RoleName NVARCHAR(50)	-	角色名稱
 **
@@ -22,15 +23,18 @@
 ** Example: 
 ** -----------
 DECLARE @return_value INT
-    ,@RoleId VARCHAR(20)
+    ,@SeqNo INT
+	,@RoleId VARCHAR(20)
 	,@RoleName NVARCHAR(50)
     ,@ErrorMsg NVARCHAR(100)
 
-    SET @RoleId = 1
+    SET @SeqNo = 1
+	SET @RoleId = 1
 	SET @RoleName = 'admin'
 
 EXEC @return_value = [agdSp].[uspRoleExists] 
-    @RoleId = @RoleId
+    @SeqNo = @SeqNo
+	,@RoleId = @RoleId
 	,@RoleName = @RoleName
     ,@ErrorMsg = @ErrorMsg OUTPUT
 
@@ -42,10 +46,11 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-22 00:40:39    Daniel Chou     first release
+** 2022-03-22 23:44:28    Daniel Chou     first release
 *****************************************************************/
 ALTER PROCEDURE [agdSp].[uspRoleExists]
-    @RoleId VARCHAR(20)
+    @SeqNo INT
+	,@RoleId VARCHAR(20)
 	,@RoleName NVARCHAR(50)
     ,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
 AS

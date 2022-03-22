@@ -1,6 +1,6 @@
 /****************************************************************
-** Name: [agdSp].[uspGroupDelete]
-** Desc: 群組單位刪除
+** Name: [agdSp].[uspPcPhoneDelete]
+** Desc: 電腦電話刪除
 **
 ** Return values: 0 成功
 ** Return Recordset: 
@@ -26,7 +26,7 @@
 
 	SET @SeqNo = 25
 
-	EXEC @return_value = [agdSp].[uspGroupDelete] @SeqNo = @SeqNo
+	EXEC @return_value = [agdSp].[uspPcPhoneDelete] @SeqNo = @SeqNo
 		,@ErrorMsg = @ErrorMsg OUTPUT
 
 	SELECT @return_value AS 'Return Value'
@@ -37,9 +37,9 @@
 *****************************************************************
 ** Date:		Author:			Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-22 23:44:28 Jerry Yang		first release
+** 2022-03-22 23:44:29 Jerry Yang		first release
 *****************************************************************/
-ALTER PROCEDURE [agdSp].[uspGroupDelete] (
+ALTER PROCEDURE [agdSp].[uspPcPhoneDelete] (
 	@SeqNo INT
 	,@ErrorMsg NVARCHAR(100) = NULL OUTPUT
 	)
@@ -49,7 +49,7 @@ SET @ErrorMsg = N''
 
 BEGIN
 	BEGIN TRY
-		DELETE agdSet.tbGroup
+		DELETE agdSet.tbPcPhone
 		WHERE SeqNo = @SeqNo;
 	END TRY
 

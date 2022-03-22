@@ -42,7 +42,7 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************/
 ALTER PROCEDURE [agdSp].[usp{tb}Update] (
 	{pt_Declare}
-	,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
+	,@ErrorMsg NVARCHAR(100) = NULL OUTPUT
 	)
 AS
 SET NOCOUNT ON

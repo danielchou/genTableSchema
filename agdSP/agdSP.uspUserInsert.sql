@@ -1,6 +1,6 @@
 /****************************************************************
-** Name: [agdSp].[uspUserUpdate]
-** Desc: 使用者更新
+** Name: [agdSp].[uspUserInsert]
+** Desc: 使用者新增
 **
 ** Return values: 0 成功
 ** Return Recordset: 
@@ -12,7 +12,6 @@
 ** Parameters:
 **	Input
 ** -----------
-    @SeqNo INT	-	使用者序號
 	@UserId NVARCHAR(20)	-	使用者帳號
 	@Password NVARCHAR(100)	-	使用者密碼
 	@UserName NVARCHAR(50)	-	使用者名稱
@@ -27,10 +26,9 @@
 ** -----------
 	@ErrorMsg NVARCHAR(100) - 錯誤回傳訊息
 ** 
-** Example:
+** Example: 
 ** -----------
 DECLARE @return_value INT
-    ,@SeqNo INT
 	,@UserId NVARCHAR(20)
 	,@Password NVARCHAR(100)
 	,@UserName NVARCHAR(50)
@@ -40,22 +38,22 @@ DECLARE @return_value INT
 	,@Email VARCHAR(50)
 	,@IsAdmin BIT
 	,@IsEnable BIT
-    ,@ErrorMsg NVARCHAR(100)
+	,@Creator VARCHAR(20)
+	,@ErrorMsg NVARCHAR(100);
 
-    SET @SeqNo = 2
-	SET @UserId = 'agent'
-	SET @Password = ''
-	SET @UserName = 'BBB'
-	SET @AgentId = ''
-	SET @ExtPhone = ''
-	SET @MobilePhone = ''
-	SET @Email = ''
-	SET @IsAdmin = ''
-	SET @IsEnable = ''
+	SET @UserId = 'A02344'
+	SET @Password = '0000'
+	SET @UserName = 'daniel'
+	SET @AgentId = '0034'
+	SET @ExtPhone = '334'
+	SET @MobilePhone = '0930744573'
+	SET @Email = 'daniel@esun.bank.com'
+	SET @IsAdmin = '1'
+	SET @IsEnable = '1'
+	SET @Creator = 'admin'
 
-EXEC @return_value = [agdSp].[uspCodeUpdate]
-    ,@SeqNo = @SeqNo
-	,@UserId = @UserId
+EXEC @return_value = [agdSp].[uspUserInsert] 
+	 @UserId = @UserId
 	,@Password = @Password
 	,@UserName = @UserName
 	,@AgentId = @AgentId
@@ -64,10 +62,11 @@ EXEC @return_value = [agdSp].[uspCodeUpdate]
 	,@Email = @Email
 	,@IsAdmin = @IsAdmin
 	,@IsEnable = @IsEnable
-    ,@ErrorMsg = @ErrorMsg OUTPUT
+	,@Creator = @Creator
+	,@ErrorMsg = @ErrorMsg OUTPUT
 
 SELECT @return_value AS 'Return Value'
-    ,@ErrorMsg AS N'@ErrorMsg'
+	,@ErrorMsg AS N'@ErrorMsg'
 **
 *****************************************************************
 ** Change History
@@ -76,9 +75,8 @@ SELECT @return_value AS 'Return Value'
 ** ---------- ------- ------------------------------------
 ** 2022-03-22 23:44:27    Daniel Chou	    first release
 *****************************************************************/
-ALTER PROCEDURE [agdSp].[uspUserUpdate] (
-	@SeqNo INT
-	,@UserId NVARCHAR(20)
+ALTER PROCEDURE [agdSp].[uspUserInsert] (
+	@UserId NVARCHAR(20)
 	,@Password NVARCHAR(100)
 	,@UserName NVARCHAR(50)
 	,@AgentId NVARCHAR(20)
@@ -86,7 +84,8 @@ ALTER PROCEDURE [agdSp].[uspUserUpdate] (
 	,@MobilePhone NVARCHAR(20)
 	,@Email VARCHAR(50)
 	,@IsAdmin BIT
-	,@IsEnable BIT
+	,@IsEnable BIT    
+	,@Creator VARCHAR(20)
 	,@ErrorMsg NVARCHAR(100) = NULL OUTPUT
 	)
 AS
@@ -95,20 +94,39 @@ SET @ErrorMsg = N''
 
 BEGIN
 	BEGIN TRY
-		UPDATE agdSet.tbUser
-		SET UserId = @UserId
-			,Password = @Password
-			,UserName = @UserName
-			,AgentId = @AgentId
-			,DeptId = @DeptId
-			,ExtPhone = @ExtPhone
-			,MobilePhone = @MobilePhone
-			,Email = @Email
-			,IsAdmin = @IsAdmin
-			,IsEnable = @IsEnable
-            ,UpdateDT = GETDATE()
-			,Updator = @Updator
-		WHERE SeqNo = @SeqNo;
+INSERT INTO [agdSet].[tbCode]
+           (
+			[UserId]
+			,[Password]
+			,[UserName]
+			,[AgentId]
+			,[DeptId]
+			,[ExtPhone]
+			,[MobilePhone]
+			,[Email]
+			,[IsAdmin]
+			,[IsEnable]
+			,[CreateDT]
+			,[Creator]
+			,[UpdateDT]
+			,[Updator]
+        )
+		VALUES (
+			@UserId
+			,@Password
+			,@UserName
+			,@AgentId
+			,@DeptId
+			,@ExtPhone
+			,@MobilePhone
+			,@Email
+			,@IsAdmin
+			,@IsEnable
+			,GETDATE()
+			,@Creator
+			,GETDATE()
+			,@Creator
+			);
 	END TRY
 
 	BEGIN CATCH

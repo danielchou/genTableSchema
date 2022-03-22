@@ -1,10 +1,10 @@
 /****************************************************************
-** Name: [agdSp].[uspGroupUpdate]
-** Desc: 群組單位更新
+** Name: [agdSp].[uspPcPhoneExists]
+** Desc: 電腦電話查詢是否重複
 **
 ** Return values: 0 成功
 ** Return Recordset: 
-**	NA
+**	Total		:資料總筆數
 **
 ** Called by: 
 **	AGD WebApi
@@ -12,30 +12,30 @@
 ** Parameters:
 **	Input
 ** -----------
-    @SeqNo INT	-	部門序號
-	@GroupId VARCHAR(20)	-	部門代碼
-	@GroupName NVARCHAR(50)	-	部門名稱
+	@SeqNo INT	-	電腦電話序號
+	@ExtCode VARCHAR(20)	-	分機號碼
+	@ComputerIP VARCHAR(45)	-	電腦IP
 **
 **   Output
 ** -----------
 	@ErrorMsg NVARCHAR(100) - 錯誤回傳訊息
 ** 
-** Example:
+** Example: 
 ** -----------
 DECLARE @return_value INT
     ,@SeqNo INT
-	,@GroupId VARCHAR(20)
-	,@GroupName NVARCHAR(50)
+	,@ExtCode VARCHAR(20)
+	,@ComputerIP VARCHAR(45)
     ,@ErrorMsg NVARCHAR(100)
 
-    SET @SeqNo = 1
-	SET @GroupId = 1
-	SET @GroupName = '經辦'
+    SET @SeqNo = '1'
+	SET @ExtCode = '1111'
+	SET @ComputerIP = '1111'
 
-EXEC @return_value = [agdSp].[uspCodeUpdate]
-    ,@SeqNo = @SeqNo
-	,@GroupId = @GroupId
-	,@GroupName = @GroupName
+EXEC @return_value = [agdSp].[uspPcPhoneExists] 
+    @SeqNo = @SeqNo
+	,@ExtCode = @ExtCode
+	,@ComputerIP = @ComputerIP
     ,@ErrorMsg = @ErrorMsg OUTPUT
 
 SELECT @return_value AS 'Return Value'
@@ -46,26 +46,26 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-22 23:44:28    Daniel Chou	    first release
+** 2022-03-22 23:44:29    Daniel Chou     first release
 *****************************************************************/
-ALTER PROCEDURE [agdSp].[uspGroupUpdate] (
-	@SeqNo INT
-	,@GroupId VARCHAR(20)
-	,@GroupName NVARCHAR(50)
-	,@ErrorMsg NVARCHAR(100) = NULL OUTPUT
-	)
+ALTER PROCEDURE [agdSp].[uspPcPhoneExists]
+    @SeqNo INT
+	,@ExtCode VARCHAR(20)
+	,@ComputerIP VARCHAR(45)
+    ,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
 AS
 SET NOCOUNT ON
 SET @ErrorMsg = N''
 
 BEGIN
 	BEGIN TRY
-		UPDATE agdSet.tbGroup
-		SET GroupId = @GroupId
-			,GroupName = @GroupName
-            ,UpdateDT = GETDATE()
-			,Updator = @Updator
-		WHERE SeqNo = @SeqNo;
+		SELECT COUNT(SeqNo) AS Total
+		FROM agdSet.tbPcPhone
+		WHERE SeqNo != @SeqNo
+			AND ( 
+                ExtCode = @ExtCode OR
+				ComputerIP = @ComputerIP
+            );
 	END TRY
 
 	BEGIN CATCH

@@ -28,7 +28,7 @@ DECLARE @return_value INT
 	,@RoleName NVARCHAR(50)
     ,@ErrorMsg NVARCHAR(100)
 
-    SET @SeqNo = ''
+    SET @SeqNo = 1
 	SET @RoleId = 1
 	SET @RoleName = 'admin'
 
@@ -46,13 +46,13 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-22 00:40:40    Daniel Chou	    first release
+** 2022-03-22 23:44:29    Daniel Chou	    first release
 *****************************************************************/
 ALTER PROCEDURE [agdSp].[uspRoleUpdate] (
 	@SeqNo INT
 	,@RoleId VARCHAR(20)
 	,@RoleName NVARCHAR(50)
-	,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
+	,@ErrorMsg NVARCHAR(100) = NULL OUTPUT
 	)
 AS
 SET NOCOUNT ON

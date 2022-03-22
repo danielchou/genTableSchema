@@ -12,6 +12,7 @@
 ** Parameters:
 **	Input
 ** -----------
+	@SeqNo INT	-	功能序號
 	@FuncId VARCHAR(20)	-	功能代碼
 	@FuncName NVARCHAR(50)	-	功能名稱
 **
@@ -22,15 +23,18 @@
 ** Example: 
 ** -----------
 DECLARE @return_value INT
-    ,@FuncId VARCHAR(20)
+    ,@SeqNo INT
+	,@FuncId VARCHAR(20)
 	,@FuncName NVARCHAR(50)
     ,@ErrorMsg NVARCHAR(100)
 
-    SET @FuncId = 1
+    SET @SeqNo = 1
+	SET @FuncId = 1
 	SET @FuncName = '代碼設定'
 
 EXEC @return_value = [agdSp].[uspFuncExists] 
-    @FuncId = @FuncId
+    @SeqNo = @SeqNo
+	,@FuncId = @FuncId
 	,@FuncName = @FuncName
     ,@ErrorMsg = @ErrorMsg OUTPUT
 
@@ -42,10 +46,11 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-22 00:40:39    Daniel Chou     first release
+** 2022-03-22 23:44:27    Daniel Chou     first release
 *****************************************************************/
 ALTER PROCEDURE [agdSp].[uspFuncExists]
-    @FuncId VARCHAR(20)
+    @SeqNo INT
+	,@FuncId VARCHAR(20)
 	,@FuncName NVARCHAR(50)
     ,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
 AS

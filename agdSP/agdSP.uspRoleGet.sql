@@ -4,6 +4,7 @@
 **
 ** Return values: 0 成功
 ** Return Recordset: 
+**	SeqNo	INT	-	角色序號
 **	RoleId	VARCHAR(20)	-	角色代碼
 **	RoleName	NVARCHAR(50)	-	角色名稱
 **
@@ -13,6 +14,7 @@
 ** Parameters:
 **	Input
 ** -----------
+	@SeqNo INT	-	角色序號
 	@RoleId VARCHAR(20)	-	角色代碼
 	@RoleName NVARCHAR(50)	-	角色名稱
 **
@@ -39,7 +41,7 @@
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-22 00:40:39    Daniel Chou	    first release
+** 2022-03-22 23:44:28    Daniel Chou	    first release
 *****************************************************************/
 ALTER PROCEDURE [agdSp].[uspRoleGet] (
 	@SeqNo INT
@@ -52,7 +54,8 @@ SET @ErrorMsg = N''
 BEGIN
 	BEGIN TRY
 		SELECT
-			f.RoleId
+			f.SeqNo
+			,f.RoleId
 			,f.RoleName
 			,u.UserName AS UpdatorName
 		FROM agdSet.tbRole AS f

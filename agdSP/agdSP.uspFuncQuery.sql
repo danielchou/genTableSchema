@@ -4,7 +4,8 @@
 **
 ** Return values: 0 成功
 ** Return Recordset: 
-    @FuncId VARCHAR(20)	-	功能代碼
+    @SeqNo INT	-	功能序號
+	@FuncId VARCHAR(20)	-	功能代碼
 	@FuncName NVARCHAR(50)	-	功能名稱
 **	UpdatorName NVARCHAR(20) - 更新者名稱
 **  Total INT - 資料總筆數
@@ -15,7 +16,8 @@
 ** Parameters:
 **	Input
 ** -----------
-    @FuncId VARCHAR(20)	-	功能代碼
+    @SeqNo INT	-	功能序號
+	@FuncId VARCHAR(20)	-	功能代碼
 	@FuncName NVARCHAR(50)	-	功能名稱
 	@Page INT - 頁數
 	@RowsPerPage INT - 每頁筆數
@@ -29,7 +31,8 @@
 ** Example:
 ** -----------
 DECLARE @return_value INT
-	@FuncId VARCHAR(20)
+	@SeqNo INT
+	,@FuncId VARCHAR(20)
 	,@FuncName NVARCHAR(50)
 	,@Page INT = 1
 	,@RowsPerPage INT = 20
@@ -37,11 +40,13 @@ DECLARE @return_value INT
 	,@SortOrder VARCHAR(10) = 'ASC'
 	,@ErrorMsg NVARCHAR(100)
 
-SET @FuncId = 1
+SET @SeqNo = 1
+	SET @FuncId = 1
 	SET @FuncName = '代碼設定'
 
 EXEC @return_value = agdSp.uspFuncQuery
-	@FuncId = @FuncId
+	@SeqNo = @SeqNo
+	,@FuncId = @FuncId
 	,@FuncName = @FuncName
 	,@Page = @Page
 	,@RowsPerPage = @RowsPerPage
@@ -57,10 +62,11 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-22 00:40:38    Daniel Chou     first release
+** 2022-03-22 23:44:27    Daniel Chou     first release
 *****************************************************************/
 ALTER PROCEDURE [agdSp].[uspFuncQuery] (
-	@FuncId VARCHAR(20)
+	@SeqNo INT
+	,@FuncId VARCHAR(20)
 	,@FuncName NVARCHAR(50)
 	,@Page INT = 1
 	,@RowsPerPage INT = 20
@@ -75,7 +81,8 @@ SET @ErrorMsg = N''
 BEGIN
 	BEGIN TRY
 		SELECT
-            f.FuncId
+            f.SeqNo
+			,f.FuncId
 			,f.FuncName
 			,f.CreateDT
 			,f.Creator

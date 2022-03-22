@@ -4,7 +4,8 @@
 **
 ** Return values: 0 成功
 ** Return Recordset: 
-    @RoleId VARCHAR(20)	-	角色代碼
+    @SeqNo INT	-	角色序號
+	@RoleId VARCHAR(20)	-	角色代碼
 	@RoleName NVARCHAR(50)	-	角色名稱
 **	UpdatorName NVARCHAR(20) - 更新者名稱
 **  Total INT - 資料總筆數
@@ -15,7 +16,8 @@
 ** Parameters:
 **	Input
 ** -----------
-    @RoleId VARCHAR(20)	-	角色代碼
+    @SeqNo INT	-	角色序號
+	@RoleId VARCHAR(20)	-	角色代碼
 	@RoleName NVARCHAR(50)	-	角色名稱
 	@Page INT - 頁數
 	@RowsPerPage INT - 每頁筆數
@@ -29,7 +31,8 @@
 ** Example:
 ** -----------
 DECLARE @return_value INT
-	@RoleId VARCHAR(20)
+	@SeqNo INT
+	,@RoleId VARCHAR(20)
 	,@RoleName NVARCHAR(50)
 	,@Page INT = 1
 	,@RowsPerPage INT = 20
@@ -37,11 +40,13 @@ DECLARE @return_value INT
 	,@SortOrder VARCHAR(10) = 'ASC'
 	,@ErrorMsg NVARCHAR(100)
 
-SET @RoleId = 1
+SET @SeqNo = 1
+	SET @RoleId = 1
 	SET @RoleName = 'admin'
 
 EXEC @return_value = agdSp.uspRoleQuery
-	@RoleId = @RoleId
+	@SeqNo = @SeqNo
+	,@RoleId = @RoleId
 	,@RoleName = @RoleName
 	,@Page = @Page
 	,@RowsPerPage = @RowsPerPage
@@ -57,10 +62,11 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-22 00:40:39    Daniel Chou     first release
+** 2022-03-22 23:44:28    Daniel Chou     first release
 *****************************************************************/
 ALTER PROCEDURE [agdSp].[uspRoleQuery] (
-	@RoleId VARCHAR(20)
+	@SeqNo INT
+	,@RoleId VARCHAR(20)
 	,@RoleName NVARCHAR(50)
 	,@Page INT = 1
 	,@RowsPerPage INT = 20
@@ -75,7 +81,8 @@ SET @ErrorMsg = N''
 BEGIN
 	BEGIN TRY
 		SELECT
-            f.RoleId
+            f.SeqNo
+			,f.RoleId
 			,f.RoleName
 			,f.CreateDT
 			,f.Creator

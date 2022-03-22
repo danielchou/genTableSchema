@@ -1,6 +1,6 @@
 /****************************************************************
-** Name: [agdSp].[uspCodeUpdate]
-** Desc: 系統代碼更新
+** Name: [agdSp].[uspPcPhoneUpdate]
+** Desc: 電腦電話更新
 **
 ** Return values: 0 成功
 ** Return Recordset: 
@@ -12,10 +12,11 @@
 ** Parameters:
 **	Input
 ** -----------
-    @SeqNo INT	-	代碼序號
-	@CodeType NVARCHAR(20)	-	代碼類型
-	@CodeId VARCHAR(20)	-	代碼
-	@CodeName NVARCHAR(20)	-	代碼名稱
+    @SeqNo INT	-	電腦電話序號
+	@ExtCode VARCHAR(20)	-	分機號碼
+	@ComputerName NVARCHAR(50)	-	電腦名稱
+	@ComputerIP VARCHAR(45)	-	電腦IP
+	@Memo NVARCHAR(600)	-	備註
 	@IsEnable BIT	-	是否啟用
 **
 **   Output
@@ -26,23 +27,26 @@
 ** -----------
 DECLARE @return_value INT
     ,@SeqNo INT
-	,@CodeType NVARCHAR(20)
-	,@CodeId VARCHAR(20)
-	,@CodeName NVARCHAR(20)
+	,@ExtCode VARCHAR(20)
+	,@ComputerName NVARCHAR(50)
+	,@ComputerIP VARCHAR(45)
+	,@Memo NVARCHAR(600)
 	,@IsEnable BIT
     ,@ErrorMsg NVARCHAR(100)
 
-    SET @SeqNo = 1
-	SET @CodeType = 'aux'
-	SET @CodeId = 'B02'
-	SET @CodeName = '休息'
-	SET @IsEnable = 1
+    SET @SeqNo = '1'
+	SET @ExtCode = '1111'
+	SET @ComputerName = ''
+	SET @ComputerIP = '1111'
+	SET @Memo = ''
+	SET @IsEnable = ''
 
 EXEC @return_value = [agdSp].[uspCodeUpdate]
     ,@SeqNo = @SeqNo
-	,@CodeType = @CodeType
-	,@CodeId = @CodeId
-	,@CodeName = @CodeName
+	,@ExtCode = @ExtCode
+	,@ComputerName = @ComputerName
+	,@ComputerIP = @ComputerIP
+	,@Memo = @Memo
 	,@IsEnable = @IsEnable
     ,@ErrorMsg = @ErrorMsg OUTPUT
 
@@ -56,11 +60,12 @@ SELECT @return_value AS 'Return Value'
 ** ---------- ------- ------------------------------------
 ** 2022-03-22 23:44:29    Daniel Chou	    first release
 *****************************************************************/
-ALTER PROCEDURE [agdSp].[uspCodeUpdate] (
+ALTER PROCEDURE [agdSp].[uspPcPhoneUpdate] (
 	@SeqNo INT
-	,@CodeType NVARCHAR(20)
-	,@CodeId VARCHAR(20)
-	,@CodeName NVARCHAR(20)
+	,@ExtCode VARCHAR(20)
+	,@ComputerName NVARCHAR(50)
+	,@ComputerIP VARCHAR(45)
+	,@Memo NVARCHAR(600)
 	,@IsEnable BIT
 	,@ErrorMsg NVARCHAR(100) = NULL OUTPUT
 	)
@@ -70,10 +75,11 @@ SET @ErrorMsg = N''
 
 BEGIN
 	BEGIN TRY
-		UPDATE agdSet.tbCode
-		SET CodeType = @CodeType
-			,CodeId = @CodeId
-			,CodeName = @CodeName
+		UPDATE agdSet.tbPcPhone
+		SET ExtCode = @ExtCode
+			,ComputerName = @ComputerName
+			,ComputerIP = @ComputerIP
+			,Memo = @Memo
 			,IsEnable = @IsEnable
             ,UpdateDT = GETDATE()
 			,Updator = @Updator

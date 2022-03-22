@@ -4,6 +4,7 @@
 **
 ** Return values: 0 成功
 ** Return Recordset: 
+**	SeqNo	INT	-	功能序號
 **	FuncId	VARCHAR(20)	-	功能代碼
 **	FuncName	NVARCHAR(50)	-	功能名稱
 **
@@ -13,6 +14,7 @@
 ** Parameters:
 **	Input
 ** -----------
+	@SeqNo INT	-	功能序號
 	@FuncId VARCHAR(20)	-	功能代碼
 	@FuncName NVARCHAR(50)	-	功能名稱
 **
@@ -39,7 +41,7 @@
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-22 00:40:39    Daniel Chou	    first release
+** 2022-03-22 23:44:27    Daniel Chou	    first release
 *****************************************************************/
 ALTER PROCEDURE [agdSp].[uspFuncGet] (
 	@SeqNo INT
@@ -52,7 +54,8 @@ SET @ErrorMsg = N''
 BEGIN
 	BEGIN TRY
 		SELECT
-			f.FuncId
+			f.SeqNo
+			,f.FuncId
 			,f.FuncName
 			,u.UserName AS UpdatorName
 		FROM agdSet.tbFunc AS f

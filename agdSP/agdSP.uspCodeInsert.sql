@@ -1,6 +1,6 @@
 /****************************************************************
-** Name: [agdSp].[uspCodeUpdate]
-** Desc: 系統代碼更新
+** Name: [agdSp].[uspCodeInsert]
+** Desc: 系統代碼新增
 **
 ** Return values: 0 成功
 ** Return Recordset: 
@@ -12,7 +12,6 @@
 ** Parameters:
 **	Input
 ** -----------
-    @SeqNo INT	-	代碼序號
 	@CodeType NVARCHAR(20)	-	代碼類型
 	@CodeId VARCHAR(20)	-	代碼
 	@CodeName NVARCHAR(20)	-	代碼名稱
@@ -22,32 +21,32 @@
 ** -----------
 	@ErrorMsg NVARCHAR(100) - 錯誤回傳訊息
 ** 
-** Example:
+** Example: 
 ** -----------
 DECLARE @return_value INT
-    ,@SeqNo INT
 	,@CodeType NVARCHAR(20)
 	,@CodeId VARCHAR(20)
 	,@CodeName NVARCHAR(20)
 	,@IsEnable BIT
-    ,@ErrorMsg NVARCHAR(100)
+	,@Creator VARCHAR(20)
+	,@ErrorMsg NVARCHAR(100);
 
-    SET @SeqNo = 1
 	SET @CodeType = 'aux'
 	SET @CodeId = 'B02'
 	SET @CodeName = '休息'
 	SET @IsEnable = 1
+	SET @Creator = 'admin'
 
-EXEC @return_value = [agdSp].[uspCodeUpdate]
-    ,@SeqNo = @SeqNo
-	,@CodeType = @CodeType
+EXEC @return_value = [agdSp].[uspCodeInsert] 
+	 @CodeType = @CodeType
 	,@CodeId = @CodeId
 	,@CodeName = @CodeName
 	,@IsEnable = @IsEnable
-    ,@ErrorMsg = @ErrorMsg OUTPUT
+	,@Creator = @Creator
+	,@ErrorMsg = @ErrorMsg OUTPUT
 
 SELECT @return_value AS 'Return Value'
-    ,@ErrorMsg AS N'@ErrorMsg'
+	,@ErrorMsg AS N'@ErrorMsg'
 **
 *****************************************************************
 ** Change History
@@ -56,12 +55,12 @@ SELECT @return_value AS 'Return Value'
 ** ---------- ------- ------------------------------------
 ** 2022-03-22 23:44:29    Daniel Chou	    first release
 *****************************************************************/
-ALTER PROCEDURE [agdSp].[uspCodeUpdate] (
-	@SeqNo INT
-	,@CodeType NVARCHAR(20)
+ALTER PROCEDURE [agdSp].[uspCodeInsert] (
+	@CodeType NVARCHAR(20)
 	,@CodeId VARCHAR(20)
 	,@CodeName NVARCHAR(20)
-	,@IsEnable BIT
+	,@IsEnable BIT    
+	,@Creator VARCHAR(20)
 	,@ErrorMsg NVARCHAR(100) = NULL OUTPUT
 	)
 AS
@@ -70,14 +69,27 @@ SET @ErrorMsg = N''
 
 BEGIN
 	BEGIN TRY
-		UPDATE agdSet.tbCode
-		SET CodeType = @CodeType
-			,CodeId = @CodeId
-			,CodeName = @CodeName
-			,IsEnable = @IsEnable
-            ,UpdateDT = GETDATE()
-			,Updator = @Updator
-		WHERE SeqNo = @SeqNo;
+INSERT INTO [agdSet].[tbCode]
+           (
+			[CodeType]
+			,[CodeId]
+			,[CodeName]
+			,[IsEnable]
+			,[CreateDT]
+			,[Creator]
+			,[UpdateDT]
+			,[Updator]
+        )
+		VALUES (
+			@CodeType
+			,@CodeId
+			,@CodeName
+			,@IsEnable
+			,GETDATE()
+			,@Creator
+			,GETDATE()
+			,@Creator
+			);
 	END TRY
 
 	BEGIN CATCH

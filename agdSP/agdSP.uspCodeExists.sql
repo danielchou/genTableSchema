@@ -30,7 +30,7 @@ DECLARE @return_value INT
 	,@CodeName NVARCHAR(20)
     ,@ErrorMsg NVARCHAR(100)
 
-    SET @SeqNo = ''
+    SET @SeqNo = 1
 	SET @CodeType = 'aux'
 	SET @CodeId = 'B02'
 	SET @CodeName = '休息'
@@ -50,7 +50,7 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-22 00:40:40    Daniel Chou     first release
+** 2022-03-22 23:44:29    Daniel Chou     first release
 *****************************************************************/
 ALTER PROCEDURE [agdSp].[uspCodeExists]
     @SeqNo INT

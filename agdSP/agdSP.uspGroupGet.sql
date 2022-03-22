@@ -4,6 +4,7 @@
 **
 ** Return values: 0 成功
 ** Return Recordset: 
+**	SeqNo	INT	-	部門序號
 **	GroupId	VARCHAR(20)	-	部門代碼
 **	GroupName	NVARCHAR(50)	-	部門名稱
 **
@@ -13,6 +14,7 @@
 ** Parameters:
 **	Input
 ** -----------
+	@SeqNo INT	-	部門序號
 	@GroupId VARCHAR(20)	-	部門代碼
 	@GroupName NVARCHAR(50)	-	部門名稱
 **
@@ -39,7 +41,7 @@
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-22 00:40:39    Daniel Chou	    first release
+** 2022-03-22 23:44:28    Daniel Chou	    first release
 *****************************************************************/
 ALTER PROCEDURE [agdSp].[uspGroupGet] (
 	@SeqNo INT
@@ -52,7 +54,8 @@ SET @ErrorMsg = N''
 BEGIN
 	BEGIN TRY
 		SELECT
-			f.GroupId
+			f.SeqNo
+			,f.GroupId
 			,f.GroupName
 			,u.UserName AS UpdatorName
 		FROM agdSet.tbGroup AS f
