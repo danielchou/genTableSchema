@@ -1,12 +1,12 @@
 CREATE TABLE [agdSet].[tbFunc](
 	[SeqNo] [int] IDENTITY(1,1) NOT NULL,
-	[FuncId] [nvarchar(20)]  NOT NULL,
-	[FuncName] [nvarchar(100)]  NOT NULL,
+	[FuncId] [varchar(20)]  NOT NULL,
+	[FuncName] [nvarchar(50)]  NOT NULL,
 	[FuncPath] [nvarchar(20)]  NOT NULL,
 	[FuncIcon] [nvarchar(20)]  NOT NULL,
 	[IsEnable] [bit]  NOT NULL,
-	[Creator] [nvarchar(20)]  NOT NULL,
-	[Updator] [nvarchar(20)]  NOT NULL,
+	[Creator] [varchar(20)]  NOT NULL,
+	[Updator] [varchar(20)]  NOT NULL,
 	[CreateDT] [datetime2(7)]  NOT NULL,
 	[UpdateDT] [datetime2(7)]  NOT NULL,
 
@@ -26,11 +26,11 @@ EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'功能ID' ,@le
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'功能名稱' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbFunc', @level2type=N'COLUMN',@level2name=N'FuncName'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'功能路徑' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbFunc', @level2type=N'COLUMN',@level2name=N'FuncPath'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'功能路由' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbFunc', @level2type=N'COLUMN',@level2name=N'FuncPath'
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'功能圖示' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbFunc', @level2type=N'COLUMN',@level2name=N'FuncIcon'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N''ALL':全部, '1':啟用, '0':停用' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbFunc', @level2type=N'COLUMN',@level2name=N'IsEnable'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'是否啟用?' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbFunc', @level2type=N'COLUMN',@level2name=N'IsEnable'
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'建立者' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbFunc', @level2type=N'COLUMN',@level2name=N'Creator'
 GO

@@ -1,10 +1,19 @@
 /****************************************************************
-** Name: [agdSp].[usp{tb}Get]
-** Desc: {tbDscr}查詢
+** Name: [agdSp].[uspFuncGet]
+** Desc: 系統功能查詢
 **
 ** Return values: 0 成功
 ** Return Recordset: 
-{pt_getSelectAll}
+**  SeqNo	 - 流水號
+**  FuncId	 - 功能ID
+**  FuncName	 - 功能名稱
+**  FuncPath	 - 功能路由
+**  FuncIcon	 - 功能圖示
+**  IsEnable	 - 是否啟用?
+**  Creator	 - 建立者
+**  Updator	 - 異動者
+**  CreateDT	 - 建立時間
+**  UpdateDT	 - 異動時間
 **	UpdatorName - 更新者名稱
 **
 ** Called by: 
@@ -13,7 +22,9 @@
 ** Parameters:
 **	Input
 ** -----------
-	{pt_input}
+	@SeqNo	INT - 流水號
+	@FuncId	VARCHAR(20) - 功能ID
+	@FuncName	NVARCHAR(50) - 功能名稱
 **
 **   Output
 ** -----------
@@ -25,9 +36,11 @@
 		,@SeqNo INT
 		,@ErrorMsg NVARCHAR(100)
 
-	{pt_existSetValue}
+	SET @SeqNo = 1
+	SET @FuncId = 1
+	SET @FuncName = '代碼設定'
 
-	EXEC @return_value = [agdSp].[usp{tb}Get] @SeqNo = @SeqNo
+	EXEC @return_value = [agdSp].[uspFuncGet] @SeqNo = @SeqNo
 		,@ErrorMsg = @ErrorMsg OUTPUT
 
 	SELECT @return_value AS 'Return Value'
@@ -38,9 +51,9 @@
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** {pt_DateTime}    Daniel Chou	    first release
+** 2022-03-28 11:27:22    Daniel Chou	    first release
 *****************************************************************/
-CREATE PROCEDURE [agdSp].[usp{tb}Get] (
+CREATE PROCEDURE [agdSp].[uspFuncGet] (
 	@SeqNo INT
 	,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
 	)
@@ -51,9 +64,11 @@ SET @ErrorMsg = N''
 BEGIN
 	BEGIN TRY
 		SELECT
-			{pt_fCol}
+			f.SeqNo
+			,f.FuncId
+			,f.FuncName
 			,u.UserName AS UpdatorName
-		FROM agdSet.tb{tb} AS f
+		FROM agdSet.tbFunc AS f
 		JOIN agdSet.tbUser AS u ON u.UserId = f.Updator
 		WHERE f.SeqNo = @SeqNo;
 	END TRY

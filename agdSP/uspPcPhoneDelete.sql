@@ -1,10 +1,10 @@
 /****************************************************************
-** Name: [agdSp].[usp{tb}Exists]
-** Desc: {tbDscr}查詢是否重複
+** Name: [agdSp].[uspPcPhoneDelete]
+** Desc: 電腦電話刪除
 **
 ** Return values: 0 成功
 ** Return Recordset: 
-**	Total		:資料總筆數
+**	NA
 **
 ** Called by: 
 **	AGD WebApi
@@ -12,49 +12,45 @@
 ** Parameters:
 **	Input
 ** -----------
-	{pt_input}
+	@SeqNo INT - 部門序號
 **
 **   Output
 ** -----------
 	@ErrorMsg NVARCHAR(100) - 錯誤回傳訊息
 ** 
-** Example: 
+** Example:
 ** -----------
-DECLARE @return_value INT
-    ,{pt_Declare}
-    ,@ErrorMsg NVARCHAR(100)
+	DECLARE @return_value INT
+		,@SeqNo INT
+		,@ErrorMsg NVARCHAR(100)
 
-    {pt_existSetValue}
+	SET @SeqNo = 25
 
-EXEC @return_value = [agdSp].[usp{tb}Exists] 
-    {pt_Exec}
-    ,@ErrorMsg = @ErrorMsg OUTPUT
+	EXEC @return_value = [agdSp].[uspPcPhoneDelete] @SeqNo = @SeqNo
+		,@ErrorMsg = @ErrorMsg OUTPUT
 
-SELECT @return_value AS 'Return Value'
-    ,@ErrorMsg AS N'@ErrorMsg'
+	SELECT @return_value AS 'Return Value'
+		,@ErrorMsg AS N'@ErrorMsg'
 **
 *****************************************************************
 ** Change History
 *****************************************************************
-** Date:            Author:         Description:
+** Date:		Author:			Description:
 ** ---------- ------- ------------------------------------
-** {pt_DateTime}    Daniel Chou     first release
+** 2022-03-28 11:27:24 Jerry Yang		first release
 *****************************************************************/
-CREATE PROCEDURE [agdSp].[usp{tb}Exists]
-    {pt_Declare}
-    ,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
+CREATE PROCEDURE [agdSp].[uspPcPhoneDelete] (
+	@SeqNo INT
+	,@ErrorMsg NVARCHAR(100) = NULL OUTPUT
+	)
 AS
 SET NOCOUNT ON
 SET @ErrorMsg = N''
 
 BEGIN
 	BEGIN TRY
-		SELECT COUNT(SeqNo) AS Total
-		FROM agdSet.tb{tb}
-		WHERE SeqNo != @SeqNo
-			AND ( 
-                {pt_fColOr}
-            );
+		DELETE agdSet.tbPcPhone
+		WHERE SeqNo = @SeqNo;
 	END TRY
 
 	BEGIN CATCH

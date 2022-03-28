@@ -1,10 +1,18 @@
 /****************************************************************
-** Name: [agdSp].[usp{tb}Get]
-** Desc: {tbDscr}查詢
+** Name: [agdSp].[uspCodeGet]
+** Desc: 系統代碼查詢
 **
 ** Return values: 0 成功
 ** Return Recordset: 
-{pt_getSelectAll}
+**  SeqNo	 - 流水號
+**  CodeType	 - 代碼分類
+**  CodeId	 - 系統代碼檔代碼
+**  CodeName	 - 系統代碼檔名稱
+**  IsEnable	 - 是否啟用?
+**  Creator	 - 建立者
+**  Updator	 - 異動者
+**  CreateDT	 - 建立時間
+**  UpdateDT	 - 異動時間
 **	UpdatorName - 更新者名稱
 **
 ** Called by: 
@@ -13,7 +21,10 @@
 ** Parameters:
 **	Input
 ** -----------
-	{pt_input}
+	@SeqNo	INT - 流水號
+	@CodeType	NVARCHAR(20) - 代碼分類
+	@CodeId	VARCHAR(20) - 系統代碼檔代碼
+	@CodeName	NVARCHAR(50) - 系統代碼檔名稱
 **
 **   Output
 ** -----------
@@ -25,9 +36,12 @@
 		,@SeqNo INT
 		,@ErrorMsg NVARCHAR(100)
 
-	{pt_existSetValue}
+	SET @SeqNo = 1
+	SET @CodeType = 'aux'
+	SET @CodeId = 'B02'
+	SET @CodeName = '休息'
 
-	EXEC @return_value = [agdSp].[usp{tb}Get] @SeqNo = @SeqNo
+	EXEC @return_value = [agdSp].[uspCodeGet] @SeqNo = @SeqNo
 		,@ErrorMsg = @ErrorMsg OUTPUT
 
 	SELECT @return_value AS 'Return Value'
@@ -38,9 +52,9 @@
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** {pt_DateTime}    Daniel Chou	    first release
+** 2022-03-28 11:27:24    Daniel Chou	    first release
 *****************************************************************/
-CREATE PROCEDURE [agdSp].[usp{tb}Get] (
+CREATE PROCEDURE [agdSp].[uspCodeGet] (
 	@SeqNo INT
 	,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
 	)
@@ -51,9 +65,12 @@ SET @ErrorMsg = N''
 BEGIN
 	BEGIN TRY
 		SELECT
-			{pt_fCol}
+			f.SeqNo
+			,f.CodeType
+			,f.CodeId
+			,f.CodeName
 			,u.UserName AS UpdatorName
-		FROM agdSet.tb{tb} AS f
+		FROM agdSet.tbCode AS f
 		JOIN agdSet.tbUser AS u ON u.UserId = f.Updator
 		WHERE f.SeqNo = @SeqNo;
 	END TRY

@@ -39,7 +39,7 @@
 ** ---------- ------- ------------------------------------
 ** {pt_DateTime} Jerry Yang		first release
 *****************************************************************/
-ALTER PROCEDURE [agdSp].[usp{tb}Delete] (
+CREATE PROCEDURE [agdSp].[usp{tb}Delete] (
 	@SeqNo INT
 	,@ErrorMsg NVARCHAR(100) = NULL OUTPUT
 	)

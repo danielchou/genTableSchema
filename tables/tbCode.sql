@@ -1,11 +1,11 @@
 CREATE TABLE [agdSet].[tbCode](
 	[SeqNo] [int] IDENTITY(1,1) NOT NULL,
 	[CodeType] [nvarchar(20)]  NOT NULL,
-	[CodeId] [nvarchar(20)]  NOT NULL,
-	[CodeName] [nvarchar(100)]  NOT NULL,
+	[CodeId] [varchar(20)]  NOT NULL,
+	[CodeName] [nvarchar(50)]  NOT NULL,
 	[IsEnable] [bit]  NOT NULL,
-	[Creator] [nvarchar(20)]  NOT NULL,
-	[Updator] [nvarchar(20)]  NOT NULL,
+	[Creator] [varchar(20)]  NOT NULL,
+	[Updator] [varchar(20)]  NOT NULL,
 	[CreateDT] [datetime2(7)]  NOT NULL,
 	[UpdateDT] [datetime2(7)]  NOT NULL,
 
@@ -23,11 +23,11 @@ EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'流水號' ,@l
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'代碼分類' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbCode', @level2type=N'COLUMN',@level2name=N'CodeType'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'代碼' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbCode', @level2type=N'COLUMN',@level2name=N'CodeId'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'系統代碼檔代碼' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbCode', @level2type=N'COLUMN',@level2name=N'CodeId'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'代碼名稱' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbCode', @level2type=N'COLUMN',@level2name=N'CodeName'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'系統代碼檔名稱' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbCode', @level2type=N'COLUMN',@level2name=N'CodeName'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N''ALL':全部, '1':啟用, '0':停用' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbCode', @level2type=N'COLUMN',@level2name=N'IsEnable'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'是否啟用?' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbCode', @level2type=N'COLUMN',@level2name=N'IsEnable'
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'建立者' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbCode', @level2type=N'COLUMN',@level2name=N'Creator'
 GO

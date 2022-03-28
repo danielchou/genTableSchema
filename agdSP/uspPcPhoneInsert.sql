@@ -1,6 +1,6 @@
 /****************************************************************
-** Name: [agdSp].[usp{tb}Insert]
-** Desc: {tbDscr}新增
+** Name: [agdSp].[uspPcPhoneInsert]
+** Desc: 電腦電話新增
 **
 ** Return values: 0 成功
 ** Return Recordset: 
@@ -12,7 +12,11 @@
 ** Parameters:
 **	Input
 ** -----------
-	{pt_input}
+	@ExtCode	NVARCHAR(20) - 分機號碼
+	@ComputerName	NVARCHAR(50) - 電腦名稱
+	@ComputerIP	NVARCHAR(50) - 電腦IP
+	@Memo	NVARCHAR(600) - 備註
+	@IsEnable	BIT - 是否啟用?
 	@Creator NVARCHAR(20) - 建立者
 **
 **   Output
@@ -22,15 +26,27 @@
 ** Example: 
 ** -----------
 DECLARE @return_value INT
-	,{pt_Declare}
+	,@ExtCode NVARCHAR(20)
+	,@ComputerName NVARCHAR(50)
+	,@ComputerIP NVARCHAR(50)
+	,@Memo NVARCHAR(600)
+	,@IsEnable BIT
 	,@Creator VARCHAR(20)
 	,@ErrorMsg NVARCHAR(100);
 
-	{pt_insertSetVal}
+	SET @ExtCode = '1111'
+	SET @ComputerName = 'CP0001'
+	SET @ComputerIP = '1.1.1.1'
+	SET @Memo = 'memo1'
+	SET @IsEnable = 1
 	SET @Creator = 'admin'
 
-EXEC @return_value = [agdSp].[usp{tb}Insert] 
-	 {pt_Exec}
+EXEC @return_value = [agdSp].[uspPcPhoneInsert] 
+	 @ExtCode = @ExtCode
+	,@ComputerName = @ComputerName
+	,@ComputerIP = @ComputerIP
+	,@Memo = @Memo
+	,@IsEnable = @IsEnable
 	,@Creator = @Creator
 	,@ErrorMsg = @ErrorMsg OUTPUT
 
@@ -42,10 +58,14 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** {pt_DateTime}    Daniel Chou	    first release
+** 2022-03-28 11:27:24    Daniel Chou	    first release
 *****************************************************************/
-CREATE PROCEDURE [agdSp].[usp{tb}Insert] (
-	{pt_Declare}    
+CREATE PROCEDURE [agdSp].[uspPcPhoneInsert] (
+	@ExtCode NVARCHAR(20)
+	,@ComputerName NVARCHAR(50)
+	,@ComputerIP NVARCHAR(50)
+	,@Memo NVARCHAR(600)
+	,@IsEnable BIT    
 	,@Creator VARCHAR(20)
 	,@ErrorMsg NVARCHAR(100) = NULL OUTPUT
 	)
@@ -55,15 +75,23 @@ SET @ErrorMsg = N''
 
 BEGIN
 	BEGIN TRY
-	INSERT INTO [agdSet].[tb{tb}] (
-			{pt_insertCols}
+	INSERT INTO [agdSet].[tbPcPhone] (
+			ExtCode
+			,ComputerName
+			,ComputerIP
+			,Memo
+			,IsEnable
 			,CreateDT
 			,Creator
 			,UpdateDT
 			,Updator
         )
 		VALUES (
-			{pt_insertVals}
+			@ExtCode
+			,@ComputerName
+			,@ComputerIP
+			,@Memo
+			,@IsEnable
 			,GETDATE()
 			,@Creator
 			,GETDATE()

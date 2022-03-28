@@ -1,6 +1,6 @@
 /****************************************************************
-** Name: [agdSp].[usp{tb}Exists]
-** Desc: {tbDscr}查詢是否重複
+** Name: [agdSp].[uspRoleExists]
+** Desc: 角色查詢是否重複
 **
 ** Return values: 0 成功
 ** Return Recordset: 
@@ -12,7 +12,9 @@
 ** Parameters:
 **	Input
 ** -----------
-	{pt_input}
+	@SeqNo	INT - 流水號
+	@RoleId	VARCHAR(20) - 角色代碼
+	@RoleName	NVARCHAR(50) - 角色名稱
 **
 **   Output
 ** -----------
@@ -21,13 +23,19 @@
 ** Example: 
 ** -----------
 DECLARE @return_value INT
-    ,{pt_Declare}
+    ,@SeqNo INT
+	,@RoleId VARCHAR(20)
+	,@RoleName NVARCHAR(50)
     ,@ErrorMsg NVARCHAR(100)
 
-    {pt_existSetValue}
+    SET @SeqNo = 1
+	SET @RoleId = 1
+	SET @RoleName = 'admin'
 
-EXEC @return_value = [agdSp].[usp{tb}Exists] 
-    {pt_Exec}
+EXEC @return_value = [agdSp].[uspRoleExists] 
+    @SeqNo = @SeqNo
+	,@RoleId = @RoleId
+	,@RoleName = @RoleName
     ,@ErrorMsg = @ErrorMsg OUTPUT
 
 SELECT @return_value AS 'Return Value'
@@ -38,10 +46,12 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** {pt_DateTime}    Daniel Chou     first release
+** 2022-03-28 11:27:23    Daniel Chou     first release
 *****************************************************************/
-CREATE PROCEDURE [agdSp].[usp{tb}Exists]
-    {pt_Declare}
+CREATE PROCEDURE [agdSp].[uspRoleExists]
+    @SeqNo INT
+	,@RoleId VARCHAR(20)
+	,@RoleName NVARCHAR(50)
     ,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
 AS
 SET NOCOUNT ON
@@ -50,10 +60,11 @@ SET @ErrorMsg = N''
 BEGIN
 	BEGIN TRY
 		SELECT COUNT(SeqNo) AS Total
-		FROM agdSet.tb{tb}
+		FROM agdSet.tbRole
 		WHERE SeqNo != @SeqNo
 			AND ( 
-                {pt_fColOr}
+                RoleId = @RoleId OR
+				RoleName = @RoleName
             );
 	END TRY
 

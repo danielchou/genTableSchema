@@ -1,6 +1,6 @@
 /****************************************************************
-** Name: [agdSp].[usp{tb}Insert]
-** Desc: {tbDscr}新增
+** Name: [agdSp].[uspRoleInsert]
+** Desc: 角色新增
 **
 ** Return values: 0 成功
 ** Return Recordset: 
@@ -12,7 +12,9 @@
 ** Parameters:
 **	Input
 ** -----------
-	{pt_input}
+	@RoleId	VARCHAR(20) - 角色代碼
+	@RoleName	NVARCHAR(50) - 角色名稱
+	@IsEnable	BIT - 是否啟用?
 	@Creator NVARCHAR(20) - 建立者
 **
 **   Output
@@ -22,15 +24,21 @@
 ** Example: 
 ** -----------
 DECLARE @return_value INT
-	,{pt_Declare}
+	,@RoleId VARCHAR(20)
+	,@RoleName NVARCHAR(50)
+	,@IsEnable BIT
 	,@Creator VARCHAR(20)
 	,@ErrorMsg NVARCHAR(100);
 
-	{pt_insertSetVal}
+	SET @RoleId = 'R01'
+	SET @RoleName = 'admin'
+	SET @IsEnable = 1
 	SET @Creator = 'admin'
 
-EXEC @return_value = [agdSp].[usp{tb}Insert] 
-	 {pt_Exec}
+EXEC @return_value = [agdSp].[uspRoleInsert] 
+	 @RoleId = @RoleId
+	,@RoleName = @RoleName
+	,@IsEnable = @IsEnable
 	,@Creator = @Creator
 	,@ErrorMsg = @ErrorMsg OUTPUT
 
@@ -42,10 +50,12 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** {pt_DateTime}    Daniel Chou	    first release
+** 2022-03-28 11:27:24    Daniel Chou	    first release
 *****************************************************************/
-CREATE PROCEDURE [agdSp].[usp{tb}Insert] (
-	{pt_Declare}    
+CREATE PROCEDURE [agdSp].[uspRoleInsert] (
+	@RoleId VARCHAR(20)
+	,@RoleName NVARCHAR(50)
+	,@IsEnable BIT    
 	,@Creator VARCHAR(20)
 	,@ErrorMsg NVARCHAR(100) = NULL OUTPUT
 	)
@@ -55,15 +65,19 @@ SET @ErrorMsg = N''
 
 BEGIN
 	BEGIN TRY
-	INSERT INTO [agdSet].[tb{tb}] (
-			{pt_insertCols}
+	INSERT INTO [agdSet].[tbRole] (
+			RoleId
+			,RoleName
+			,IsEnable
 			,CreateDT
 			,Creator
 			,UpdateDT
 			,Updator
         )
 		VALUES (
-			{pt_insertVals}
+			@RoleId
+			,@RoleName
+			,@IsEnable
 			,GETDATE()
 			,@Creator
 			,GETDATE()
