@@ -99,7 +99,7 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-28 12:29:47    Daniel Chou     first release
+** 2022-03-28 14:45:42    Daniel Chou     first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[uspUserQuery] (
 	@UserId VARCHAR(20)

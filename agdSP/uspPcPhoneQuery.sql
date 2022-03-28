@@ -5,15 +5,15 @@
 ** Return values: 0 成功
 ** Return Recordset: 
 **  SeqNo	 - 流水號
-**  ExtCode	 - 分機號碼
-**  ComputerName	 - 電腦名稱
-**  ComputerIP	 - 電腦IP
-**  Memo	 - 備註
-**  IsEnable	 - 是否啟用?
-**  Creator	 - 建立者
-**  Updator	 - 異動者
-**  CreateDT	 - 建立時間
-**  UpdateDT	 - 異動時間
+**  extCode	 - 分機號碼
+**  computerName	 - 電腦名稱
+**  computerIP	 - 電腦IP
+**  memo	 - 備註
+**  isEnable	 - 是否啟用?
+**  creator	 - 建立者
+**  updator	 - 異動者
+**  createDT	 - 建立時間
+**  updateDT	 - 異動時間
 **	UpdatorName - 更新者名稱
 **  Total INT - 資料總筆數
 **
@@ -23,11 +23,7 @@
 ** Parameters:
 **	Input
 ** -----------
-    @ExtCode	NVARCHAR(20) - 分機號碼
-	@ComputerName	NVARCHAR(50) - 電腦名稱
-	@ComputerIP	NVARCHAR(50) - 電腦IP
-	@Memo	NVARCHAR(600) - 備註
-	@IsEnable	BIT - 是否啟用?
+    
 	@Page INT - 頁數
 	@RowsPerPage INT - 每頁筆數
 	@SortColumn NVARCHAR(30) - 排序欄位
@@ -40,29 +36,17 @@
 ** Example:
 ** -----------
 DECLARE @return_value INT
-	,@ExtCode NVARCHAR(20)
-	,@ComputerName NVARCHAR(50)
-	,@ComputerIP NVARCHAR(50)
-	,@Memo NVARCHAR(600)
-	,@IsEnable BIT
+	,
 	,@Page INT = 1
 	,@RowsPerPage INT = 20
 	,@SortColumn NVARCHAR(30) = 'CreateDT'
 	,@SortOrder VARCHAR(10) = 'ASC'
 	,@ErrorMsg NVARCHAR(100)
 
-	SET @ExtCode = '1111'
-	SET @ComputerName = 'CP0001'
-	SET @ComputerIP = '1.1.1.1'
-	SET @Memo = 'memo1'
-	SET @IsEnable = 'ALL'
+	
 
 EXEC @return_value = agdSp.uspPcPhoneQuery
-	@ExtCode = @ExtCode
-	,@ComputerName = @ComputerName
-	,@ComputerIP = @ComputerIP
-	,@Memo = @Memo
-	,@IsEnable = @IsEnable
+	
 	,@Page = @Page
 	,@RowsPerPage = @RowsPerPage
 	,@SortColumn = @SortColumn
@@ -77,14 +61,10 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-28 12:29:50    Daniel Chou     first release
+** 2022-03-28 14:45:46    Daniel Chou     first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[uspPcPhoneQuery] (
-	@ExtCode NVARCHAR(20)
-	,@ComputerName NVARCHAR(50)
-	,@ComputerIP NVARCHAR(50)
-	,@Memo NVARCHAR(600)
-	,@IsEnable BIT
+	
 	,@Page INT = 1
 	,@RowsPerPage INT = 20
 	,@SortColumn NVARCHAR(30) = 'CreateDT'
@@ -98,11 +78,7 @@ SET @ErrorMsg = N''
 BEGIN
 	BEGIN TRY
 		SELECT
-            f.ExtCode
-			,f.ComputerName
-			,f.ComputerIP
-			,f.Memo
-			,f.IsEnable
+            
 			,f.CreateDT
 			,f.Creator
 			,f.UpdateDT
@@ -112,25 +88,30 @@ BEGIN
 		FROM agdSet.tbPcPhone AS f
 		JOIN agdSet.tbUser AS u ON u.UserId = f.Updator
 		------- WHERE 查詢條件 -------
-		WHERE  f.ExtCode LIKE CASE WHEN @ExtCode = '' THEN f.ExtCode ELSE '%' + @ExtCode + '%' END
-				AND f.ComputerName LIKE CASE WHEN @ComputerName = '' THEN f.ComputerName ELSE '%' + @ComputerName + '%' END
-				AND f.ComputerIP LIKE CASE WHEN @ComputerIP = '' THEN f.ComputerIP ELSE '%' + @ComputerIP + '%' END
-				AND f.Memo LIKE CASE WHEN @Memo = '' THEN f.Memo ELSE '%' + @Memo + '%' END
+		WHERE  f.extCode LIKE CASE WHEN @extCode = '' THEN f.extCode ELSE '%' + @extCode + '%' END
+				AND f.computerName LIKE CASE WHEN @computerName = '' THEN f.computerName ELSE '%' + @computerName + '%' END
+				AND f.computerIP LIKE CASE WHEN @computerIP = '' THEN f.computerIP ELSE '%' + @computerIP + '%' END
+				AND f.memo LIKE CASE WHEN @memo = '' THEN f.memo ELSE '%' + @memo + '%' END
+				AND f.isEnable LIKE CASE WHEN @isEnable = '' THEN f.isEnable ELSE '%' + @isEnable + '%' END
+				AND f.creator LIKE CASE WHEN @creator = '' THEN f.creator ELSE '%' + @creator + '%' END
+				AND f.updator LIKE CASE WHEN @updator = '' THEN f.updator ELSE '%' + @updator + '%' END
+				AND f.createDT LIKE CASE WHEN @createDT = '' THEN f.createDT ELSE '%' + @createDT + '%' END
+				AND f.updateDT LIKE CASE WHEN @updateDT = '' THEN f.updateDT ELSE '%' + @updateDT + '%' END
 				AND f.IsEnable = CASE WHEN @IsEnable = 'ALL' THEN f.IsEnable ELSE CASE WHEN @IsEnable = '1' THEN 1 ELSE 0 END END
 		------- Sort 排序條件 -------
 		ORDER BY 
 				CASE WHEN @SortColumn = 'SeqNo' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
 				CASE WHEN @SortColumn = 'SeqNo' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
-				CASE WHEN @SortColumn = 'ExtCode' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
-				CASE WHEN @SortColumn = 'ExtCode' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
-				CASE WHEN @SortColumn = 'ComputerName' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
-				CASE WHEN @SortColumn = 'ComputerName' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
-				CASE WHEN @SortColumn = 'ComputerIP' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
-				CASE WHEN @SortColumn = 'ComputerIP' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
-				CASE WHEN @SortColumn = 'Memo' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
-				CASE WHEN @SortColumn = 'Memo' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
-				CASE WHEN @SortColumn = 'UpdateDT' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
-				CASE WHEN @SortColumn = 'UpdateDT' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC
+				CASE WHEN @SortColumn = 'extCode' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
+				CASE WHEN @SortColumn = 'extCode' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
+				CASE WHEN @SortColumn = 'computerName' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
+				CASE WHEN @SortColumn = 'computerName' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
+				CASE WHEN @SortColumn = 'computerIP' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
+				CASE WHEN @SortColumn = 'computerIP' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
+				CASE WHEN @SortColumn = 'memo' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
+				CASE WHEN @SortColumn = 'memo' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
+				CASE WHEN @SortColumn = 'updateDT' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
+				CASE WHEN @SortColumn = 'updateDT' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC
 		------- Page 分頁條件 -------
 		OFFSET @RowsPerPage * (@page - 1) ROWS
 

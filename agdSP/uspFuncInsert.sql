@@ -58,7 +58,7 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-28 12:29:48    Daniel Chou	    first release
+** 2022-03-28 14:45:43    Daniel Chou	    first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[uspFuncInsert] (
 	@FuncId VARCHAR(20)

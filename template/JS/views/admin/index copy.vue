@@ -61,7 +61,7 @@ import { ref, reactive, onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useStore } from 'vuex';
 import dayjs from 'dayjs';
-import pcPhone from '@admin-store/$pt_table_name'; // COPYDANIEL: batch copy  TYPE2 TYPE3
+import pcPhone from '@admin-store/pc-phone'; // COPYDANIEL: batch copy  TYPE2 TYPE3
 
 import { useQuasar } from 'quasar';
 import { useSuccessNotify } from '@composables/use-notify';
@@ -138,7 +138,7 @@ const columns = [
 ];
 
 export default {
-  name: '$pt_TableName', // COPYDANIEL: 大 CamelCase TYPE1
+  name: 'PcPhone', // COPYDANIEL: 大 CamelCase TYPE1
 
   components: {
     TableList,
@@ -158,10 +158,10 @@ export default {
      ********************************************************************
      */
     const store = useStore();
-    const moduleName = '$pt_tableName'; // COPYDANIEL: store module name, same as line 63. TYPE2
-    !store.hasModule(`${moduleName}`) && store.registerModule(`${moduleName}`, $pt_tableName); // COPYDANIEL: same as line 63. TYPE2
+    const moduleName = 'pcPhone'; // COPYDANIEL: store module name, same as line 63. TYPE2
+    !store.hasModule(`${moduleName}`) && store.registerModule(`${moduleName}`, pcPhone); // COPYDANIEL: same as line 63. TYPE2
 
-    const $$q = useQuasar();
+    const $q = useQuasar();
     const rows = ref([]);
     const isCreate = ref(true);
     const isOpened = ref(false);
@@ -232,7 +232,7 @@ export default {
     };
 
     const onActionDelete = (rows) => {
-      useConfirmDialog($$q).onOk(() => {
+      useConfirmDialog($q).onOk(() => {
         fetchDelete(rows.seqNo); // COPYDANIEL: primary key
       });
     };
@@ -285,7 +285,7 @@ export default {
 
     const fetchCreate = (postData) => {
       return store.dispatch(`${moduleName}/fetchCreate`, postData).then(() => {
-        useSuccessNotify($$q, `新增成功!`);
+        useSuccessNotify($q, `新增成功!`);
         isOpened.value = false;
         onClearFormData();
       });
@@ -293,7 +293,7 @@ export default {
 
     const fetchUpdate = (postData) => {
       return store.dispatch(`${moduleName}/fetchUpdate`, postData).then(() => {
-        useSuccessNotify($$q, `更新成功!`);
+        useSuccessNotify($q, `更新成功!`);
         isOpened.value = false;
         onClearFormData();
       });
@@ -301,7 +301,7 @@ export default {
 
     const fetchDelete = (id) => {
       return store.dispatch(`${moduleName}/fetchDelete`, id).then(() => {
-        useSuccessNotify($$q, `刪除成功`);
+        useSuccessNotify($q, `刪除成功`);
         if (
           pagination.value.rowsNumber % pagination.value.rowsPerPage === 1 &&
           pagination.value.page > 1

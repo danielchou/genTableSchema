@@ -5,15 +5,15 @@
 ** Return values: 0 成功
 ** Return Recordset: 
 **  SeqNo	 - 流水號
-**  ExtCode	 - 分機號碼
-**  ComputerName	 - 電腦名稱
-**  ComputerIP	 - 電腦IP
-**  Memo	 - 備註
-**  IsEnable	 - 是否啟用?
-**  Creator	 - 建立者
-**  Updator	 - 異動者
-**  CreateDT	 - 建立時間
-**  UpdateDT	 - 異動時間
+**  extCode	 - 分機號碼
+**  computerName	 - 電腦名稱
+**  computerIP	 - 電腦IP
+**  memo	 - 備註
+**  isEnable	 - 是否啟用?
+**  creator	 - 建立者
+**  updator	 - 異動者
+**  createDT	 - 建立時間
+**  updateDT	 - 異動時間
 **	UpdatorName - 更新者名稱
 **
 ** Called by: 
@@ -23,8 +23,6 @@
 **	Input
 ** -----------
 	@SeqNo	INT - 流水號
-	@ExtCode	NVARCHAR(20) - 分機號碼
-	@ComputerIP	NVARCHAR(50) - 電腦IP
 **
 **   Output
 ** -----------
@@ -37,8 +35,6 @@
 		,@ErrorMsg NVARCHAR(100)
 
 	SET @SeqNo = '1'
-	SET @ExtCode = '1111'
-	SET @ComputerIP = '1111'
 
 	EXEC @return_value = [agdSp].[uspPcPhoneGet] @SeqNo = @SeqNo
 		,@ErrorMsg = @ErrorMsg OUTPUT
@@ -51,7 +47,7 @@
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-28 12:29:50    Daniel Chou	    first release
+** 2022-03-28 14:45:46    Daniel Chou	    first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[uspPcPhoneGet] (
 	@SeqNo INT
@@ -65,8 +61,6 @@ BEGIN
 	BEGIN TRY
 		SELECT
 			f.SeqNo
-			,f.ExtCode
-			,f.ComputerIP
 			,u.UserName AS UpdatorName
 		FROM agdSet.tbPcPhone AS f
 		JOIN agdSet.tbUser AS u ON u.UserId = f.Updator

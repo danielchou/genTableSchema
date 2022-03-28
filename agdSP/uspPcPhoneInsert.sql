@@ -12,11 +12,7 @@
 ** Parameters:
 **	Input
 ** -----------
-	@ExtCode	NVARCHAR(20) - 分機號碼
-	@ComputerName	NVARCHAR(50) - 電腦名稱
-	@ComputerIP	NVARCHAR(50) - 電腦IP
-	@Memo	NVARCHAR(600) - 備註
-	@IsEnable	BIT - 是否啟用?
+	
 	@Creator NVARCHAR(20) - 建立者
 **
 **   Output
@@ -26,27 +22,15 @@
 ** Example: 
 ** -----------
 DECLARE @return_value INT
-	,@ExtCode NVARCHAR(20)
-	,@ComputerName NVARCHAR(50)
-	,@ComputerIP NVARCHAR(50)
-	,@Memo NVARCHAR(600)
-	,@IsEnable BIT
+	,
 	,@Creator VARCHAR(20)
 	,@ErrorMsg NVARCHAR(100);
 
-	SET @ExtCode = '1111'
-	SET @ComputerName = 'CP0001'
-	SET @ComputerIP = '1.1.1.1'
-	SET @Memo = 'memo1'
-	SET @IsEnable = 1
+	
 	SET @Creator = 'admin'
 
 EXEC @return_value = [agdSp].[uspPcPhoneInsert] 
-	 @ExtCode = @ExtCode
-	,@ComputerName = @ComputerName
-	,@ComputerIP = @ComputerIP
-	,@Memo = @Memo
-	,@IsEnable = @IsEnable
+	 
 	,@Creator = @Creator
 	,@ErrorMsg = @ErrorMsg OUTPUT
 
@@ -58,14 +42,10 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-28 12:29:50    Daniel Chou	    first release
+** 2022-03-28 14:45:46    Daniel Chou	    first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[uspPcPhoneInsert] (
-	@ExtCode NVARCHAR(20)
-	,@ComputerName NVARCHAR(50)
-	,@ComputerIP NVARCHAR(50)
-	,@Memo NVARCHAR(600)
-	,@IsEnable BIT    
+	    
 	,@Creator VARCHAR(20)
 	,@ErrorMsg NVARCHAR(100) = NULL OUTPUT
 	)
@@ -76,22 +56,30 @@ SET @ErrorMsg = N''
 BEGIN
 	BEGIN TRY
 	INSERT INTO [agdSet].[tbPcPhone] (
-			ExtCode
-			,ComputerName
-			,ComputerIP
-			,Memo
-			,IsEnable
+			extCode
+			,computerName
+			,computerIP
+			,memo
+			,isEnable
+			,creator
+			,updator
+			,createDT
+			,updateDT
 			,CreateDT
 			,Creator
 			,UpdateDT
 			,Updator
         )
 		VALUES (
-			@ExtCode
-			,@ComputerName
-			,@ComputerIP
-			,@Memo
-			,@IsEnable
+			@extCode
+			,@computerName
+			,@computerIP
+			,@memo
+			,@isEnable
+			,@creator
+			,@updator
+			,@createDT
+			,@updateDT
 			,GETDATE()
 			,@Creator
 			,GETDATE()
