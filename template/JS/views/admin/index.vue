@@ -87,41 +87,7 @@ import EditForm from './edit-form';
  */
 
 const columns = [
-  {
-    name: 'seqNo', // COPYDANIEL: Table schema column name
-    label: 'Seq No.', //COPYDANIEL: desc
-    align: 'left', // COPYDANIEL: integer right
-    field: 'seqNo', // COPYDANIEL: Table schema column name
-    sortable: true,
-  },
-  {
-    name: 'computerName',
-    label: '電腦名稱',
-    align: 'left',
-    field: 'computerName',
-    sortable: true,
-  },
-  {
-    name: 'computerIp',
-    label: 'IP 位址',
-    align: 'left',
-    field: 'computerIp',
-    sortable: true,
-  },
-  {
-    name: 'extCode',
-    label: '分機號碼',
-    align: 'left',
-    field: 'extCode',
-    sortable: true,
-  },
-  {
-    name: 'memo',
-    label: '備註',
-    align: 'left',
-    field: 'memo',
-    sortable: true,
-  },
+  $pt_orderByCols
   {
     name: 'udpateDt',
     label: '異動時間',
@@ -159,7 +125,7 @@ export default {
      */
     const store = useStore();
     const moduleName = '$pt_tableName'; // COPYDANIEL: store module name, same as line 63. TYPE2
-    !store.hasModule(`${moduleName}`) && store.registerModule(`${moduleName}`, $pt_tableName); // COPYDANIEL: same as line 63. TYPE2
+    !store.hasModule(`$${moduleName}`) && store.registerModule(`$${moduleName}`, $pt_tableName); // COPYDANIEL: same as line 63. TYPE2
 
     const $$q = useQuasar();
     const rows = ref([]);
@@ -173,16 +139,7 @@ export default {
 
     // COPYDANIEL: 查詢欄位下拉
     const filterItemOptions = [
-      {
-        label: '電腦名稱',
-        value: 'computerName', // COPYDANIEL: search table schema name
-        placeholder: '請輸入電腦名稱',
-      },
-      {
-        label: '電話分機',
-        value: 'extCode', // COPYDANIEL: search table schema name
-        placeholder: '請輸入電話分機',
-      },
+      $pt_filterItem
     ];
 
     const isEnableOptions = [
@@ -284,7 +241,7 @@ export default {
      */
 
     const fetchCreate = (postData) => {
-      return store.dispatch(`${moduleName}/fetchCreate`, postData).then(() => {
+      return store.dispatch(`$${moduleName}/fetchCreate`, postData).then(() => {
         useSuccessNotify($$q, `新增成功!`);
         isOpened.value = false;
         onClearFormData();
@@ -292,7 +249,7 @@ export default {
     };
 
     const fetchUpdate = (postData) => {
-      return store.dispatch(`${moduleName}/fetchUpdate`, postData).then(() => {
+      return store.dispatch(`$${moduleName}/fetchUpdate`, postData).then(() => {
         useSuccessNotify($$q, `更新成功!`);
         isOpened.value = false;
         onClearFormData();
@@ -300,7 +257,7 @@ export default {
     };
 
     const fetchDelete = (id) => {
-      return store.dispatch(`${moduleName}/fetchDelete`, id).then(() => {
+      return store.dispatch(`$${moduleName}/fetchDelete`, id).then(() => {
         useSuccessNotify($$q, `刪除成功`);
         if (
           pagination.value.rowsNumber % pagination.value.rowsPerPage === 1 &&
@@ -313,7 +270,7 @@ export default {
     };
 
     const fetchItem = (id) => {
-      return store.dispatch(`${moduleName}/fetchItemById`, id);
+      return store.dispatch(`$${moduleName}/fetchItemById`, id);
     };
 
     const fetchItems = (reset) => {
@@ -329,9 +286,9 @@ export default {
         sortOrder: pagination.value.descending ? 'DESC' : 'ASC',
       };
       return store
-        .dispatch(`${moduleName}/fetchItems`, queryFilter)
+        .dispatch(`$${moduleName}/fetchItems`, queryFilter)
         .then((res) => {
-          rows.value = store.getters[`${moduleName}/getItems`];
+          rows.value = store.getters[`$${moduleName}/getItems`];
           pagination.value.rowsNumber = res.total;
           return res;
         })
