@@ -102,10 +102,10 @@ const columns = [
 		sortable: true,
 },
 {
-		name: 'computerIP',
+		name: 'computerIp',
 		label: 'IP 位址',
 		align: 'left',
-		field: 'computerIP',
+		field: 'computerIp',
 		sortable: true,
 },
 {

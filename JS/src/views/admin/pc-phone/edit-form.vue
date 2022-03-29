@@ -10,7 +10,51 @@
 
         
         <q-card-section style="max-height: 50vh" class="scroll">
-          //$pt_EditForm_q_input
+          
+        <div class="row q-col-gutter-md">
+            <q-input
+                class="col"
+                type="text"
+                v-model.trim="formData.computerName"
+                label="電腦名稱"
+                lazy-rules
+                :rules="[useRequiredInput, (val) => useMaxLength(val, 50)]"
+            />
+            <q-input
+                class="col"
+                type="text"
+                v-model.trim="formData.computerIp"
+                label="IP 位址"
+                lazy-rules
+                :rules="[useRequiredInput, (val) => useMaxLength(val, 50)]"
+            />
+            
+        </div>
+        
+        <div class="row q-col-gutter-md">
+            <q-input
+                class="col"
+                type="text"
+                v-model.trim="formData.extCode"
+                label="電話分機"
+                lazy-rules
+                :rules="[useRequiredInput, (val) => useMaxLength(val, 20)]"
+            />
+            
+        </div>
+        
+        <div class="row q-col-gutter-md">
+            <q-input
+                class="col"
+                type="text"
+                v-model.trim="formData.memo"
+                label="備註"
+                lazy-rules
+                :rules="[useRequiredInput, (val) => useMaxLength(val, 600)]"
+            />
+            
+        </div>
+        
           <!-- COPYDANIEL: 固定的，免套 -->
           <div class="row q-col-gutter-md" v-show="!isCreate">
             <q-input
@@ -76,7 +120,12 @@ export default {
 
     // COPYDANIEL: Table Schema
     const formData = ref({
-  //$pt_editForm_formData
+  		seqNo: 0,
+			computerName: '',
+			computerIp: '',
+			extCode: '',
+			memo: '',
+			isEnable: true,
       updateDt: '',
       updator: '',
     });
