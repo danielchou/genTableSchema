@@ -88,45 +88,38 @@ import EditForm from './edit-form';
 
 const columns = [
   {
-		name: 'SeqNo',
+		name: 'seqNo',
 		label: 'Seq No.',
 		align: 'right',
-		field: 'SeqNo',
+		field: 'seqNo',
 		sortable: true,
 },
 {
-		name: 'ComputerName',
+		name: 'computerName',
 		label: '電腦名稱',
 		align: 'left',
-		field: 'ComputerName',
+		field: 'computerName',
 		sortable: true,
 },
 {
-		name: 'ComputerIp',
+		name: 'computerIp',
 		label: 'IP 位址',
 		align: 'left',
-		field: 'ComputerIp',
+		field: 'computerIp',
 		sortable: true,
 },
 {
-		name: 'ExtCode',
+		name: 'extCode',
 		label: '電話分機',
 		align: 'left',
-		field: 'ExtCode',
+		field: 'extCode',
 		sortable: true,
 },
 {
-		name: 'Memo',
+		name: 'memo',
 		label: '備註',
 		align: 'left',
-		field: 'Memo',
-		sortable: true,
-},
-{
-		name: 'UpdateDt',
-		label: '異動時間',
-		align: 'left',
-		field: 'UpdateDt',
+		field: 'memo',
 		sortable: true,
 },
   {
@@ -182,12 +175,12 @@ export default {
     const filterItemOptions = [
       {
 		 label: '電腦名稱',
-		 value: 'ComputerName',
+		 value: 'computerName',
 		 placeholder: '請輸入電腦名稱',
 },
 {
 		 label: '電話分機',
-		 value: 'ExtCode',
+		 value: 'extCode',
 		 placeholder: '請輸入電話分機',
 },
     ];

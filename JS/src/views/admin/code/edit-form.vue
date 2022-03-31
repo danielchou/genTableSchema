@@ -11,45 +11,47 @@
         
         <q-card-section style="max-height: 50vh" class="scroll">
           
-          <div class="row q-col-gutter-md">
-            <!-- COPYDANIEL: 一個 q-input 為一組 -->
-            <q-input
-              class="col"
-              type="text"
-              v-model.trim="formData.computerName"
-              label="電腦名稱"
-              lazy-rules
-              :rules="[useRequiredInput, (val) => useMaxLength(val, 20)]"
-            />
-            <q-input
-              class="col"
-              type="text"
-              v-model.trim="formData.computerIp"
-              label="IP 位址"
-              lazy-rules
-              :rules="[useRequiredInput, (val) => useMaxLength(val, 20)]"
-            />
-          </div>
-          <div class="row q-col-gutter-md">
-            <q-input
-              class="col"
-              type="text"
-              v-model.trim="formData.extCode"
-              label="分機號碼"
-              lazy-rules
-              :rules="[useRequiredInput, (val) => useMaxLength(val, 20)]"
-            />
-          </div>
-          <div class="row q-col-gutter-md">
-            <q-input
-              class="col"
-              type="text"
-              v-model.trim="formData.memo"
-              label="備註"
-              lazy-rules
-              :rules="[useRequiredInput, (val) => useMaxLength(val, 20)]"
-            />
-          </div>
+            <div class="row q-col-gutter-md">
+                
+                <q-input
+                    class="col"
+                    type="text"
+                    v-model.trim="formData.codeType"
+                    label="代碼分類"
+                    lazy-rules
+                    :rules="[useRequiredInput, (val) => useMaxLength(val, 20)]"
+                />
+                <q-input
+                    class="col"
+                    type="text"
+                    v-model.trim="formData.codeId"
+                    label="系統代碼檔代碼"
+                    lazy-rules
+                    :rules="[useRequiredInput, (val) => useMaxLength(val, 20)]"
+                />
+            </div>
+            <div class="row q-col-gutter-md">
+                
+                <q-input
+                    class="col"
+                    type="text"
+                    v-model.trim="formData.codeName"
+                    label="系統代碼檔名稱"
+                    lazy-rules
+                    :rules="[useRequiredInput, (val) => useMaxLength(val, 50)]"
+                />
+            </div>
+            <div class="row q-col-gutter-md">
+                
+                <q-input
+                    class="col"
+                    type="text"
+                    v-model.trim="formData.isEnable"
+                    label="是否啟用?"
+                    lazy-rules
+                    :rules="[useRequiredInput, (val) => useMaxLength(val, )]"
+                />
+            </div>
           <!-- COPYDANIEL: 固定的，免套 -->
           <div class="row q-col-gutter-md" v-show="!isCreate">
             <q-input
@@ -115,12 +117,11 @@ export default {
 
     // COPYDANIEL: Table Schema
     const formData = ref({
-      seqNo: 0,
-      computerName: '',
-      computerIp: '',
-			extCode: '',
-      memo: '',
-      isEnable: true,
+  		SeqNo: 0,
+			codeType: '',
+			codeId: '',
+			codeName: '',
+			isEnable: true,
       updateDt: '',
       updator: '',
     });

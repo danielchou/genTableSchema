@@ -1,6 +1,6 @@
 import axios from '@boot/axios';
 
-const apiUrlPrefix = '/api///$pt_TableName'; // COPYDANIEL: CamelCase TYPE1
+const apiUrlPrefix = '/api/Code'; // COPYDANIEL: CamelCase TYPE1
 
 export const fetchItems = ({ rootGetters, commit }, data) => {
   /**

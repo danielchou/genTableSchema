@@ -1,0 +1,102 @@
+﻿using ESUN.AGD.WebApi.Application.$pt_TableName;
+using ESUN.AGD.WebApi.Application.$pt_TableName.Contract;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
+namespace ESUN.AGD.WebApi.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class $pt_TableName$controller : Controller
+    {
+
+        private readonly I$pt_TableName$service _$pt_TableName$service;
+
+        public $pt_TableName$controller(I$pt_TableName$service $pt_TableName$service)
+        {
+            _$pt_TableName$service = $pt_TableName$service;
+        }
+
+        /// <summary>
+        /// 依序號取得$TbDscr設定
+        /// </summary>
+        /// <param>
+$pt_controller_PKCmmParas
+        /// </param>
+        /// <returns>
+$pt_controller_getReturns
+        /// updatorName - 更新者名稱
+        /// </returns>
+        [Authorize]
+        [HttpGet("{seqNo}")]
+        public async ValueTask<IActionResult> Get$pt_TableName($pt_controller_PKInput)
+        {
+            return Ok(await _$pt_TableName$service.Get$pt_TableName($pt_controller_PKServiceInput));
+        }
+
+        /// <summary>
+        /// 搜尋$TbDscr設定 
+        /// </summary>
+        /// <param name="request">
+$pt_controller_Query_Paras
+        /// page             - int        - 分頁
+        /// rowsPerPage      - int        - 每頁筆數
+        /// sortColumn       - string     - 排序欄位
+        /// sortOrder        - bool       - 排序順序
+        /// </param>
+        /// <returns>
+$pt_controller_getReturns
+        /// updatorName - 更新者名稱
+        /// </returns>        
+        [Authorize]
+        [HttpGet("query")]
+        public async ValueTask<IActionResult> Query$pt_TableName([FromQuery] $pt_TableName$queryRequest request)
+        {
+            return Ok(await _$pt_TableName$service.Query$pt_TableName(request));
+        }
+
+        /// <summary>
+        /// 新增$TbDscr設定 
+        /// </summary>
+        /// <param name="request">
+$pt_controller_Insert_Paras
+        /// </param>
+        /// <returns>
+        /// </returns>        
+        [Authorize]
+        [HttpPost]
+        public async ValueTask<IActionResult> Insert$pt_TableName($pt_TableName$insertRequest request)
+        {
+            return Ok(await _$pt_TableName$service.Insert$pt_TableName(request));
+        }
+
+        /// <summary>
+        /// 更新$TbDscr設定
+        /// </summary>
+        /// <param name="request">
+$pt_controller_Update_Paras
+        /// </param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpPut]
+        public async ValueTask<IActionResult> Update$pt_TableName($pt_TableName$updateRequest request)
+        {
+            return Ok(await _$pt_TableName$service.Update$pt_TableName(request));
+        }
+
+        /// <summary>
+        /// 刪除$TbDscr設定
+        /// </summary>
+        /// <param>
+$pt_controller_PKCmmParas
+        /// </param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpDelete]
+        public async ValueTask<IActionResult> Detele$pt_TableName($pt_controller_PKInput)
+        {
+            return Ok(await _$pt_TableName$service.Delete$pt_TableName($pt_controller_PKServiceInput));
+        }
+
+    }
+}

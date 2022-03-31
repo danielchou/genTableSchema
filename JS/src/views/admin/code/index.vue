@@ -61,7 +61,7 @@ import { ref, reactive, onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useStore } from 'vuex';
 import dayjs from 'dayjs';
-import pcPhone from '@admin-store/pc-phone'; // COPYDANIEL: batch copy  TYPE2 TYPE3
+import pcPhone from '@admin-store/code'; // COPYDANIEL: batch copy  TYPE2 TYPE3
 
 import { useQuasar } from 'quasar';
 import { useSuccessNotify } from '@composables/use-notify';
@@ -88,45 +88,31 @@ import EditForm from './edit-form';
 
 const columns = [
   {
-		name: 'SeqNo',
-		label: 'Seq No.',
-		align: 'right',
-		field: 'SeqNo',
+		name: 'codeType',
+		label: '代碼分類',
+		align: 'left',
+		field: 'codeType',
 		sortable: true,
 },
 {
-		name: 'ComputerName',
-		label: '電腦名稱',
+		name: 'codeId',
+		label: '系統代碼檔代碼',
 		align: 'left',
-		field: 'ComputerName',
+		field: 'codeId',
 		sortable: true,
 },
 {
-		name: 'ComputerIp',
-		label: 'IP 位址',
+		name: 'codeName',
+		label: '系統代碼檔名稱',
 		align: 'left',
-		field: 'ComputerIp',
+		field: 'codeName',
 		sortable: true,
 },
 {
-		name: 'ExtCode',
-		label: '電話分機',
+		name: 'creator',
+		label: '建立者',
 		align: 'left',
-		field: 'ExtCode',
-		sortable: true,
-},
-{
-		name: 'Memo',
-		label: '備註',
-		align: 'left',
-		field: 'Memo',
-		sortable: true,
-},
-{
-		name: 'UpdateDt',
-		label: '異動時間',
-		align: 'left',
-		field: 'UpdateDt',
+		field: 'creator',
 		sortable: true,
 },
   {
@@ -145,7 +131,7 @@ const columns = [
 ];
 
 export default {
-  name: 'PcPhone', // COPYDANIEL: 大 CamelCase TYPE1
+  name: 'Code', // COPYDANIEL: 大 CamelCase TYPE1
 
   components: {
     TableList,
@@ -165,8 +151,8 @@ export default {
      ********************************************************************
      */
     const store = useStore();
-    const moduleName = 'pcPhone'; // COPYDANIEL: store module name, same as line 63. TYPE2
-    !store.hasModule(`${moduleName}`) && store.registerModule(`${moduleName}`, pcPhone); // COPYDANIEL: same as line 63. TYPE2
+    const moduleName = 'code'; // COPYDANIEL: store module name, same as line 63. TYPE2
+    !store.hasModule(`${moduleName}`) && store.registerModule(`${moduleName}`, code); // COPYDANIEL: same as line 63. TYPE2
 
     const $q = useQuasar();
     const rows = ref([]);
@@ -181,14 +167,14 @@ export default {
     // COPYDANIEL: 查詢欄位下拉
     const filterItemOptions = [
       {
-		 label: '電腦名稱',
-		 value: 'ComputerName',
-		 placeholder: '請輸入電腦名稱',
+		 label: '代碼分類',
+		 value: 'codeType',
+		 placeholder: '請輸入代碼分類',
 },
 {
-		 label: '電話分機',
-		 value: 'ExtCode',
-		 placeholder: '請輸入電話分機',
+		 label: '系統代碼檔名稱',
+		 value: 'codeName',
+		 placeholder: '請輸入系統代碼檔名稱',
 },
     ];
 
