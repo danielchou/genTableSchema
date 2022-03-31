@@ -1,62 +1,80 @@
 ﻿using ESUN.AGD.WebApi.Application.Auth;
-using ESUN.AGD.WebApi.Application.$pt_TableName.Contract;
+using ESUN.AGD.WebApi.Application.PcPhone.Contract;
 using ESUN.AGD.DataAccess.DataService.DataAccess;
 
 
-namespace ESUN.AGD.WebApi.Application.$pt_TableName
+namespace ESUN.AGD.WebApi.Application.PcPhone
 {
-    public class $pt_TableName$service : I$pt_TableName$service
+    public class PcPhoneService : IPcPhoneService
     {
 
         private readonly IDataAccessService _dataAccessService;
         private readonly IGetTokenService _getTokenService;
         
 
-        public $pt_TableName$service(IDataAccessService dataAccessService   
+        public PcPhoneService(IDataAccessService dataAccessService
                                     , IGetTokenService getTokenService)
         {
             _dataAccessService = dataAccessService;
             _getTokenService = getTokenService;
         }
 
-        public async ValueTask<BasicResponse<$pt_TableName$response>> Get$pt_TableName($pt_InputPK)
+        public async ValueTask<BasicResponse<PcPhoneResponse>> GetPcPhone(int seqNo)
         {
             var data = await _dataAccessService
-                .LoadSingData<Tb$pt_TableName, object>(storeProcedure: "agdSp.usp$pt_TableName$get", new { seqNo = seqNo, });
-            if (data == null) return new BasicResponse<$pt_TableName$response>()
+                .LoadSingData<TbPcPhone, object>(storeProcedure: "agdSp.uspPcPhoneGet", new { seqNo = seqNo, });
+            if (data == null) return new BasicResponse<PcPhoneResponse>()
             { resultCode = "9999", resultDescription = "查無資料", data = null };
-            var result = new $pt_TableName$response
+            var result = new PcPhoneResponse
             {
-$pt_data2Json
+                seqNo = data.SeqNo,
+                computerName = data.ComputerName,
+                computerIp = data.ComputerIp,
+                extCode = data.ExtCode,
+                memo = data.Memo,
+                isEnable = data.IsEnable,
+                creator = data.Creator,
+                updator = data.Updator,
+				createDt = data.CreateDt,
+				updateDt = data.UpdateDt,
                 updatorName = data.UpdatorName
             };
-            return new BasicResponse<$pt_TableName$response>()
+            return new BasicResponse<PcPhoneResponse>()
             { resultCode = "0000", resultDescription = "查詢成功", data = result };
         }
 
-        public async ValueTask<BasicResponse<List<$pt_TableName$response>>> Query$pt_TableName($pt_TableName$queryRequest request)
+        public async ValueTask<BasicResponse<List<PcPhoneResponse>>> QueryPcPhone(PcPhoneQueryRequest request)
         {
 
             if (string.IsNullOrEmpty(request.extCode)) { request.extCode = string.Empty; }            
             if (string.IsNullOrEmpty(request.computerName)) { request.computerName = string.Empty; }            
 
             var data = await _dataAccessService
-                .LoadData<Tb$pt_TableName, object>(storeProcedure: "agdSp.usp$pt_TableName$query", request);
-            if (data.Count()==0) return new BasicResponse<List<$pt_TableName$response>>()
+                .LoadData<TbPcPhone, object>(storeProcedure: "agdSp.uspPcPhoneQuery", request);
+            if (data.Count()==0) return new BasicResponse<List<PcPhoneResponse>>()
             { resultCode = "0000", resultDescription = "查無資料", data = null };
 
-            var result = data.Select(item => new $pt_TableName$response
+            var result = data.Select(item => new PcPhoneResponse
             {
-$pt_item2Json            
-                updatorName = item.UpdatorName   
+                seqNo = item.SeqNo,
+                computerName = item.ComputerName,
+				computerIp = item.ComputerIp,
+                extCode = item.ExtCode,
+                memo = item.Memo,
+                isEnable = item.IsEnable,
+                creator = item.Creator,              
+                updator = item.Updator,               
+				createDt = item.CreateDt,
+				updateDt = item.UpdateDt,            
+                updatorName = item.UpdatorName
             }).ToList();
             int totalCount = data.FirstOrDefault().Total;
 
-            return new BasicResponse<List<$pt_TableName$response>>()
+            return new BasicResponse<List<PcPhoneResponse>>()
             { resultCode = "0000", resultDescription = "查詢成功", data = result, total=totalCount };
         }
 
-        public async ValueTask<BasicResponse<bool>> Insert$pt_TableName($pt_TableName$insertRequest request)
+        public async ValueTask<BasicResponse<bool>> InsertPcPhone(PcPhoneInsertRequest request)
         {
            
             var creator = _getTokenService.userId ?? "";
@@ -68,7 +86,7 @@ $pt_item2Json
             request.creator = creator;
 
             var data = await _dataAccessService
-                .OpreatData(storeProcedure: "agdSp.usp$pt_TableName$insert", request);
+                .OpreatData(storeProcedure: "agdSp.uspPcPhoneInsert", request);
 
             if (data == 0) return new BasicResponse<bool>() 
             { resultCode = "9999", resultDescription = "新增失敗", data = false };
@@ -76,9 +94,9 @@ $pt_item2Json
             { resultCode = "0000", resultDescription = "新增成功", data = true };
         }
 
-        public async ValueTask<BasicResponse<bool>> Update$pt_TableName($pt_TableName$updateRequest request)
+        public async ValueTask<BasicResponse<bool>> UpdatePcPhone(PcPhoneUpdateRequest request)
         {
-            var updator = _getTokenService.userId ?? "";
+                        var updator = _getTokenService.userId ?? "";
 
             var exists = await Exists(request.seqNo, request.extCode, request.computerIp);
             if (exists.data == true) return new BasicResponse<bool>()
@@ -88,7 +106,7 @@ $pt_item2Json
             request.updator = updator;            
 
             var data = await _dataAccessService
-                .OpreatData(storeProcedure: "agdSp.usp$pt_TableName$update", request);
+                .OpreatData(storeProcedure: "agdSp.uspPcPhoneUpdate", request);
 
             if (data == 0) return new BasicResponse<bool>() 
             { resultCode = "9999", resultDescription = "更新失敗", data = false };
@@ -96,10 +114,10 @@ $pt_item2Json
             { resultCode = "0000", resultDescription = "更新成功", data = true };
         }
 
-        public async ValueTask<BasicResponse<bool>> Delete$pt_TableName($pt_InputPK)
+        public async ValueTask<BasicResponse<bool>> DeletePcPhone(int seqNo)
         {
             var data = await _dataAccessService
-                   .OpreatData(storeProcedure: "agdSp.usp$pt_TableName$delete", new { seqNo = seqNo });
+                   .OpreatData(storeProcedure: "agdSp.uspPcPhoneDelete", new { seqNo = seqNo });
 
             if (data == 0) return new BasicResponse<bool>() 
             { resultCode = "9999", resultDescription = "刪除失敗", data = false };
@@ -107,12 +125,14 @@ $pt_item2Json
             { resultCode = "0000", resultDescription = "刪除成功", data = true };
         }
 
-        public async ValueTask<BasicResponse<bool>> Exists($pt_InputIsExist)
+        public async ValueTask<BasicResponse<bool>> Exists(int seqNo, string extCode, string computerIp)
         {
             var exist = await _dataAccessService
-                .LoadSingData<int, object>(storeProcedure: "agdSp.usp$pt_TableName$exists", new
+                .LoadSingData<int, object>(storeProcedure: "agdSp.uspPcPhoneExists", new
                 {
-$pt_json2Data               
+                    SeqNo = seqNo,
+					ComputerIp = computerIp,
+                    ExtCode = extCode,
                 });
 
             if (exist == 0) return new BasicResponse<bool>()

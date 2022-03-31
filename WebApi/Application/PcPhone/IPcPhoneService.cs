@@ -1,27 +1,14 @@
-﻿using ESUN.AGD.WebApi.Application.PcPhone;
-using ESUN.AGD.WebApi.Application.PcPhone.Contract;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using ESUN.AGD.WebApi.Application.PcPhone.Contract;
 
-namespace ESUN.AGD.WebApi.Controllers
+namespace ESUN.AGD.WebApi.Application.PcPhone
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class PcPhoneController : Controller
+    public interface IPcPhoneService
     {
-
-        private readonly IPcPhoneService _PcPhoneService;
-
-        public PcPhoneController(IPcPhoneService PcPhoneService)
-        {
-            _PcPhoneService = PcPhoneService;
-        }
-
         /// <summary>
         /// 依序號取得電腦電話設定
         /// </summary>
         /// <param>
-		/// SeqNo            - int        - Seq No.
+        /// seqNo - 電腦電話序號
         /// </param>
         /// <returns>
 		/// SeqNo            - int        - Seq No.
@@ -36,12 +23,7 @@ namespace ESUN.AGD.WebApi.Controllers
 		/// UpdateDt         - DateTime   - 異動時間
         /// updatorName - 更新者名稱
         /// </returns>
-        [Authorize]
-        [HttpGet("{seqNo}")]
-        public async ValueTask<IActionResult> GetPcPhone(int seqNo)
-        {
-            return Ok(await _PcPhoneService.GetPcPhone(SeqNo));
-        }
+        ValueTask<BasicResponse<PcPhoneResponse>> GetPcPhone(int seqNo);
 
         /// <summary>
         /// 搜尋電腦電話設定 
@@ -68,14 +50,9 @@ namespace ESUN.AGD.WebApi.Controllers
 		/// Updator          - string     - 更新者
 		/// CreateDt         - DateTime   - 建立時間
 		/// UpdateDt         - DateTime   - 異動時間
-        /// updatorName - 更新者名稱
-        /// </returns>        
-        [Authorize]
-        [HttpGet("query")]
-        public async ValueTask<IActionResult> QueryPcPhone([FromQuery] PcPhoneQueryRequest request)
-        {
-            return Ok(await _PcPhoneService.QueryPcPhone(request));
-        }
+        /// updatorName      - string     - 更新者名稱
+        /// </returns> 
+        ValueTask<BasicResponse<List<PcPhoneResponse>>> QueryPcPhone(PcPhoneQueryRequest request);
 
         /// <summary>
         /// 新增電腦電話設定 
@@ -88,13 +65,8 @@ namespace ESUN.AGD.WebApi.Controllers
 		/// IsEnable         - bool       - 是否啟用?
         /// </param>
         /// <returns>
-        /// </returns>        
-        [Authorize]
-        [HttpPost]
-        public async ValueTask<IActionResult> InsertPcPhone(PcPhoneInsertRequest request)
-        {
-            return Ok(await _PcPhoneService.InsertPcPhone(request));
-        }
+        /// </returns>
+        ValueTask<BasicResponse<bool>> InsertPcPhone(PcPhoneInsertRequest request);
 
         /// <summary>
         /// 更新電腦電話設定
@@ -109,12 +81,7 @@ namespace ESUN.AGD.WebApi.Controllers
 		/// Updator          - string     - 更新者
         /// </param>
         /// <returns></returns>
-        [Authorize]
-        [HttpPut]
-        public async ValueTask<IActionResult> UpdatePcPhone(PcPhoneUpdateRequest request)
-        {
-            return Ok(await _PcPhoneService.UpdatePcPhone(request));
-        }
+        ValueTask<BasicResponse<bool>> UpdatePcPhone(PcPhoneUpdateRequest request);
 
         /// <summary>
         /// 刪除電腦電話設定
@@ -123,12 +90,18 @@ namespace ESUN.AGD.WebApi.Controllers
 		/// SeqNo            - int        - Seq No.
         /// </param>
         /// <returns></returns>
-        [Authorize]
-        [HttpDelete]
-        public async ValueTask<IActionResult> DetelePcPhone(int seqNo)
-        {
-            return Ok(await _PcPhoneService.DeletePcPhone(SeqNo));
-        }
+        ValueTask<BasicResponse<bool>> DeletePcPhone(int seqNo);
+
+        /// <summary>
+        /// 檢查電腦電話是否存在
+        /// </summary>
+        /// <param>
+		/// SeqNo            - int        - Seq No.
+		/// ComputerIp       - string     - IP 位址
+		/// ExtCode          - string     - 電話分
+        /// </param>
+        /// <returns></returns>
+        ValueTask<BasicResponse<bool>> Exists(int seqNo,string computerIp,string extCode);
 
     }
 }

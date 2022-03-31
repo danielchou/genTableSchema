@@ -21,31 +21,31 @@ namespace ESUN.AGD.WebApi.Controllers
         /// 依序號取得$TbDscr設定
         /// </summary>
         /// <param>
-$pt_controller_PKCmmParas
+$pt_ColDscr_ParasPK
         /// </param>
         /// <returns>
-$pt_controller_getReturns
+$pt_ColDscr_GetReturnAll
         /// updatorName - 更新者名稱
         /// </returns>
         [Authorize]
         [HttpGet("{seqNo}")]
-        public async ValueTask<IActionResult> Get$pt_TableName($pt_controller_PKInput)
+        public async ValueTask<IActionResult> Get$pt_TableName($pt_InputPK)
         {
-            return Ok(await _$pt_TableName$service.Get$pt_TableName($pt_controller_PKServiceInput));
+            return Ok(await _$pt_TableName$service.Get$pt_TableName($pt_InputServicePK));
         }
 
         /// <summary>
         /// 搜尋$TbDscr設定 
         /// </summary>
         /// <param name="request">
-$pt_controller_Query_Paras
+$pt_ColDscr_QueryParas
         /// page             - int        - 分頁
         /// rowsPerPage      - int        - 每頁筆數
         /// sortColumn       - string     - 排序欄位
         /// sortOrder        - bool       - 排序順序
         /// </param>
         /// <returns>
-$pt_controller_getReturns
+$pt_ColDscr_GetReturnAll
         /// updatorName - 更新者名稱
         /// </returns>        
         [Authorize]
@@ -59,7 +59,7 @@ $pt_controller_getReturns
         /// 新增$TbDscr設定 
         /// </summary>
         /// <param name="request">
-$pt_controller_Insert_Paras
+$pt_ColDscr_InsertParas
         /// </param>
         /// <returns>
         /// </returns>        
@@ -74,7 +74,7 @@ $pt_controller_Insert_Paras
         /// 更新$TbDscr設定
         /// </summary>
         /// <param name="request">
-$pt_controller_Update_Paras
+$pt_colDscr_UpdateParas
         /// </param>
         /// <returns></returns>
         [Authorize]
@@ -88,14 +88,14 @@ $pt_controller_Update_Paras
         /// 刪除$TbDscr設定
         /// </summary>
         /// <param>
-$pt_controller_PKCmmParas
+$pt_ColDscr_ParasPK
         /// </param>
         /// <returns></returns>
         [Authorize]
         [HttpDelete]
-        public async ValueTask<IActionResult> Detele$pt_TableName($pt_controller_PKInput)
+        public async ValueTask<IActionResult> Detele$pt_TableName($pt_InputPK)
         {
-            return Ok(await _$pt_TableName$service.Delete$pt_TableName($pt_controller_PKServiceInput));
+            return Ok(await _$pt_TableName$service.Delete$pt_TableName($pt_InputServicePK));
         }
 
     }
