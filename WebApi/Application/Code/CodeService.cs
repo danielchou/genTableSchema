@@ -27,7 +27,7 @@ namespace ESUN.AGD.WebApi.Application.Code
             { resultCode = "9999", resultDescription = "查無資料", data = null };
             var result = new CodeResponse
             {
-				seqNo = data.seqNo,
+				seqNo = data.SeqNo,
 				codeType = data.CodeType,
 				codeId = data.CodeId,
 				codeName = data.CodeName,
@@ -55,7 +55,7 @@ namespace ESUN.AGD.WebApi.Application.Code
 
             var result = data.Select(item => new CodeResponse
             {
-				seqNo = item.seqNo,
+				seqNo = item.SeqNo,
 				codeType = item.CodeType,
 				codeId = item.CodeId,
 				codeName = item.CodeName,
@@ -128,7 +128,7 @@ namespace ESUN.AGD.WebApi.Application.Code
             var exist = await _dataAccessService
                 .LoadSingData<int, object>(storeProcedure: "agdSp.uspCodeExists", new
                 {
-					seqNo = seqNo,
+					SeqNo = seqNo,
 					CodeType = codeType,
 					CodeId = codeId,
 					CodeName = codeName,               

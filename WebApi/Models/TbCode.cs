@@ -6,7 +6,7 @@
         /// <summary>
         /// 流水號
         /// </summary>
-        public int seqNo { get; set; } 
+        public int SeqNo { get; set; } 
         /// <summary>
         /// 代碼分類
         /// </summary>

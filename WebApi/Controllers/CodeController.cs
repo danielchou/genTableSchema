@@ -39,7 +39,7 @@ namespace ESUN.AGD.WebApi.Controllers
         [HttpGet("{seqNo}")]
         public async ValueTask<IActionResult> GetCode(int seqNo)
         {
-            return Ok(await _CodeService.GetCode(seqNo));
+            return Ok(await _CodeService.GetCode(SeqNo));
         }
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace ESUN.AGD.WebApi.Controllers
         [HttpDelete]
         public async ValueTask<IActionResult> DeteleCode(int seqNo)
         {
-            return Ok(await _CodeService.DeleteCode(seqNo));
+            return Ok(await _CodeService.DeleteCode(SeqNo));
         }
 
     }

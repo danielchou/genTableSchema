@@ -117,7 +117,7 @@ export default {
 
     // COPYDANIEL: Table Schema
     const formData = ref({
-  		seqNo: 0,
+  		SeqNo: 0,
 			CodeType: '',
 			CodeId: '',
 			CodeName: '',
