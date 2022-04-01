@@ -1,9 +1,9 @@
-﻿namespace ESUN.AGD.WebApi.Application.$pt_TableName.Contract
+﻿namespace ESUN.AGD.WebApi.Application.PcPhone.Contract
 {
     /// <summary>
     /// 電腦電話新增請求
     /// </summary>
-    public class $pt_TableNam$insertRequest:CommonInsertRequest
+    public class PcPhoneInsertRequest:CommonInsertRequest
     {
         /// <summary>
         /// 分機號碼

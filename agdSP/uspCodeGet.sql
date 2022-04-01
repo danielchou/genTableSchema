@@ -4,15 +4,15 @@
 **
 ** Return values: 0 成功
 ** Return Recordset: 
-**  SeqNo	 - 流水號
-**  codeType	 - 代碼分類
-**  codeId	 - 系統代碼檔代碼
-**  codeName	 - 系統代碼檔名稱
-**  isEnable	 - 是否啟用?
-**  creator	 - 建立者
-**  updator	 - 異動者
-**  createDT	 - 建立時間
-**  updateDT	 - 異動時間
+**  seqNo	 - 流水號
+**  CodeType	 - 代碼分類
+**  CodeId	 - 系統代碼檔代碼
+**  CodeName	 - 系統代碼檔名稱
+**  IsEnable	 - 是否啟用?
+**  Creator	 - 建立者
+**  Updator	 - 異動者
+**  CreateDt	 - 建立時間
+**  UpdateDt	 - 異動時間
 **	UpdatorName - 更新者名稱
 **
 ** Called by: 
@@ -21,7 +21,9 @@
 ** Parameters:
 **	Input
 ** -----------
-	@SeqNo	INT - 流水號
+	@CodeType	NVARCHAR(20) - 代碼分類
+	@CodeId	VARCHAR(20) - 系統代碼檔代碼
+	@CodeName	NVARCHAR(50) - 系統代碼檔名稱
 **
 **   Output
 ** -----------
@@ -33,7 +35,9 @@
 		,@SeqNo INT
 		,@ErrorMsg NVARCHAR(100)
 
-	SET @SeqNo = 1
+	SET @CodeType = 'aux'
+	SET @CodeId = 'B02'
+	SET @CodeName = '休息'
 
 	EXEC @return_value = [agdSp].[uspCodeGet] @SeqNo = @SeqNo
 		,@ErrorMsg = @ErrorMsg OUTPUT
@@ -46,7 +50,7 @@
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-28 14:45:45    Daniel Chou	    first release
+** 2022-04-01 13:51:29    Daniel Chou	    first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[uspCodeGet] (
 	@SeqNo INT
@@ -59,7 +63,9 @@ SET @ErrorMsg = N''
 BEGIN
 	BEGIN TRY
 		SELECT
-			f.SeqNo
+			f.CodeType
+			,f.CodeId
+			,f.CodeName
 			,u.UserName AS UpdatorName
 		FROM agdSet.tbCode AS f
 		JOIN agdSet.tbUser AS u ON u.UserId = f.Updator

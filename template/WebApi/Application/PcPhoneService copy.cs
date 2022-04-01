@@ -13,16 +13,18 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
         
 
         public PcPhoneService(IDataAccessService dataAccessService
+                                    
                                     , IGetTokenService getTokenService)
         {
             _dataAccessService = dataAccessService;
+            
             _getTokenService = getTokenService;
         }
 
         public async ValueTask<BasicResponse<PcPhoneResponse>> GetPcPhone(int seqNo)
         {
             var data = await _dataAccessService
-                .LoadSingData<TbPcPhone, object>(storeProcedure: "agdSp.uspPcPhoneGet", new { seqNo = seqNo, });
+                .LoadSingData<TbPcPhone, object>(storeProcedure: "agdSp.uspPcPhoneGet", new { seqNo = seqNo,  });
             if (data == null) return new BasicResponse<PcPhoneResponse>()
             { resultCode = "9999", resultDescription = "查無資料", data = null };
             var result = new PcPhoneResponse
@@ -33,17 +35,19 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
                 extCode = data.ExtCode,
                 memo = data.Memo,
                 isEnable = data.IsEnable,
+                createDt = data.CreateDt,
                 creator = data.Creator,
+                updateDt = data.UpdateDt,
                 updator = data.Updator,
-				createDt = data.CreateDt,
-				updateDt = data.UpdateDt,
+             
                 updatorName = data.UpdatorName
             };
             return new BasicResponse<PcPhoneResponse>()
             { resultCode = "0000", resultDescription = "查詢成功", data = result };
+     
         }
 
-        public async ValueTask<BasicResponse<List<PcPhoneResponse>>> QueryPcPhone(PcPhoneQueryRequest request)
+        public async ValueTask<BasicResponse<IEnumerable<PcPhoneResponse>>> QueryPcPhone(PcPhoneQueryRequest request)
         {
 
             if (string.IsNullOrEmpty(request.extCode)) { request.extCode = string.Empty; }            
@@ -51,26 +55,27 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
 
             var data = await _dataAccessService
                 .LoadData<TbPcPhone, object>(storeProcedure: "agdSp.uspPcPhoneQuery", request);
-            if (data.Count()==0) return new BasicResponse<List<PcPhoneResponse>>()
+            if (data.Count()==0) return new BasicResponse<IEnumerable<PcPhoneResponse>>()
             { resultCode = "0000", resultDescription = "查無資料", data = null };
 
             var result = data.Select(item => new PcPhoneResponse
             {
                 seqNo = item.SeqNo,
+                computerIp = item.ComputerIp,
                 computerName = item.ComputerName,
-				computerIp = item.ComputerIp,
                 extCode = item.ExtCode,
                 memo = item.Memo,
                 isEnable = item.IsEnable,
+                createDt = item.CreateDt,
                 creator = item.Creator,              
+                updateDt = item.UpdateDt,
                 updator = item.Updator,               
-				createDt = item.CreateDt,
-				updateDt = item.UpdateDt,            
                 updatorName = item.UpdatorName
+                
             }).ToList();
             int totalCount = data.FirstOrDefault().Total;
 
-            return new BasicResponse<List<PcPhoneResponse>>()
+            return new BasicResponse<IEnumerable<PcPhoneResponse>>()
             { resultCode = "0000", resultDescription = "查詢成功", data = result, total=totalCount };
         }
 
@@ -86,7 +91,7 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
             request.creator = creator;
 
             var data = await _dataAccessService
-                .OpreatData(storeProcedure: "agdSp.uspPcPhoneInsert", request);
+                .SaveData(storeProcedure: "agdSp.uspPcPhoneInsert", request);
 
             if (data == 0) return new BasicResponse<bool>() 
             { resultCode = "9999", resultDescription = "新增失敗", data = false };
@@ -106,7 +111,7 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
             request.updator = updator;            
 
             var data = await _dataAccessService
-                .OpreatData(storeProcedure: "agdSp.uspPcPhoneUpdate", request);
+                .SaveData(storeProcedure: "agdSp.uspPcPhoneUpdate", request);
 
             if (data == 0) return new BasicResponse<bool>() 
             { resultCode = "9999", resultDescription = "更新失敗", data = false };
@@ -117,7 +122,7 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
         public async ValueTask<BasicResponse<bool>> DeletePcPhone(int seqNo)
         {
             var data = await _dataAccessService
-                   .OpreatData(storeProcedure: "agdSp.uspPcPhoneDelete", new { seqNo = seqNo });
+                   .SaveData(storeProcedure: "agdSp.uspPcPhoneDelete", new { seqNo = seqNo });
 
             if (data == 0) return new BasicResponse<bool>() 
             { resultCode = "9999", resultDescription = "刪除失敗", data = false };
@@ -131,8 +136,8 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
                 .LoadSingData<int, object>(storeProcedure: "agdSp.uspPcPhoneExists", new
                 {
                     SeqNo = seqNo,
-					ComputerIp = computerIp,
                     ExtCode = extCode,
+                    ComputerIp = computerIp                  
                 });
 
             if (exist == 0) return new BasicResponse<bool>()

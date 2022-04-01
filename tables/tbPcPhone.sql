@@ -1,14 +1,14 @@
 CREATE TABLE [agdSet].[tbPcPhone](
 	[SeqNo] [int] IDENTITY(1,1) NOT NULL,
-	[extCode] [nvarchar(20)]  NOT NULL,
-	[computerName] [nvarchar(50)]  NOT NULL,
-	[computerIP] [nvarchar(50)]  NOT NULL,
-	[memo] [nvarchar(600)]  NOT NULL,
-	[isEnable] [bit]  NOT NULL,
-	[creator] [varchar(20)]  NOT NULL,
-	[updator] [varchar(20)]  NOT NULL,
-	[createDT] [datetime2(7)]  NOT NULL,
-	[updateDT] [datetime2(7)]  NOT NULL,
+	[ComputerName] [nvarchar(20)]  NOT NULL,
+	[ComputerIp] [nvarchar(20)]  NOT NULL,
+	[ExtCode] [nvarchar(20)]  NOT NULL,
+	[Memo] [nvarchar(600)]  NOT NULL,
+	[IsEnable] [bit]  NOT NULL,
+	[Creator] [varchar(20)]  NOT NULL,
+	[Updator] [varchar(20)]  NOT NULL,
+	[CreateDt] [datetime2(7)]  NOT NULL,
+	[UpdateDt] [datetime2(7)]  NOT NULL,
 
  CONSTRAINT [PK_tbPcPhone] PRIMARY KEY CLUSTERED 
 (
@@ -20,23 +20,23 @@ GO
 ALTER TABLE [agdSet].[tbPcPhone] ADD  CONSTRAINT [DF_tbPcPhone_Creator]  DEFAULT ((1)) FOR [Creator]
 GO
 
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'流水號' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'SeqNo'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Seq No.' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'SeqNo'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'分機號碼' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'extCode'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'電腦名稱' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'ComputerName'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'電腦名稱' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'computerName'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'IP 位址' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'ComputerIp'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'電腦IP' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'computerIP'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'電話分機' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'ExtCode'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'備註' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'memo'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'備註' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'Memo'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'是否啟用?' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'isEnable'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'是否啟用?' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'IsEnable'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'建立者' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'creator'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'建立者' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'Creator'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'異動者' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'updator'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'更新者' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'Updator'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'建立時間' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'createDT'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'建立時間' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'CreateDt'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'異動時間' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'updateDT'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'異動時間' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'UpdateDt'
 GO

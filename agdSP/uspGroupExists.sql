@@ -46,7 +46,7 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-28 14:45:43    Daniel Chou     first release
+** 2022-04-01 13:51:27    Daniel Chou     first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[uspGroupExists]
     @SeqNo INT

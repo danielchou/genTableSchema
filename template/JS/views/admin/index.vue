@@ -61,7 +61,7 @@ import { ref, reactive, onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useStore } from 'vuex';
 import dayjs from 'dayjs';
-import pcPhone from '@admin-store/$pt_table_name'; // COPYDANIEL: batch copy  TYPE2 TYPE3
+import $pt_tableName from '@admin-store/$pt_table_name';
 
 import { useQuasar } from 'quasar';
 import { useSuccessNotify } from '@composables/use-notify';
@@ -87,16 +87,8 @@ import EditForm from './edit-form';
  */
 
 const columns = [
-  $pt_orderByCols
+  $pt_indexVue_Columns
   {
-    name: 'udpateDt',
-    label: '異動時間',
-    align: 'left',
-    field: (row) => dayjs(row.updateDt).format('YYYY-MM-DD HH:mm:ss'), // COPYDANIEL: row.updateDt
-    sortable: true,
-  },
-  {
-    // COPYDANIEL: 固定的免套
     name: 'actions',
     align: 'center',
     label: '動作',
@@ -104,7 +96,7 @@ const columns = [
 ];
 
 export default {
-  name: '$pt_TableName', // COPYDANIEL: 大 CamelCase TYPE1
+  name: '$pt_TableName',
 
   components: {
     TableList,
@@ -124,8 +116,8 @@ export default {
      ********************************************************************
      */
     const store = useStore();
-    const moduleName = '$pt_tableName'; // COPYDANIEL: store module name, same as line 63. TYPE2
-    !store.hasModule(`$${moduleName}`) && store.registerModule(`$${moduleName}`, $pt_tableName); // COPYDANIEL: same as line 63. TYPE2
+    const moduleName = '$pt_tableName';
+    !store.hasModule(`$${moduleName}`) && store.registerModule(`$${moduleName}`, $pt_tableName);
 
     const $$q = useQuasar();
     const rows = ref([]);
@@ -137,7 +129,6 @@ export default {
     const defaultSortBy = pagination.value.sortBy;
     const rowsPerPageOptions = computed(() => store.getters['app/getRowsPerPageOptions']);
 
-    // COPYDANIEL: 查詢欄位下拉
     const filterItemOptions = [
       $pt_filterItem
     ];
@@ -190,7 +181,7 @@ export default {
 
     const onActionDelete = (rows) => {
       useConfirmDialog($$q).onOk(() => {
-        fetchDelete(rows.seqNo); // COPYDANIEL: primary key
+        fetchDelete(rows.seqNo);
       });
     };
 

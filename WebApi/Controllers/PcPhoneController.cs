@@ -21,19 +21,19 @@ namespace ESUN.AGD.WebApi.Controllers
         /// 依序號取得電腦電話設定
         /// </summary>
         /// <param>
-		/// SeqNo            - int        - Seq No.
+		/// seqNo            - int        - Seq No.
         /// </param>
         /// <returns>
-		/// SeqNo            - int        - Seq No.
-		/// ComputerName     - string     - 電腦名稱
-		/// ComputerIp       - string     - IP 位址
-		/// ExtCode          - string     - 電話分機
-		/// Memo             - string     - 備註
-		/// IsEnable         - bool       - 是否啟用?
-		/// Creator          - string     - 建立者
-		/// Updator          - string     - 更新者
-		/// CreateDt         - DateTime   - 建立時間
-		/// UpdateDt         - DateTime   - 異動時間
+		/// seqNo            - int        - Seq No.
+		/// computerName     - string     - 電腦名稱
+		/// computerIp       - string     - IP 位址
+		/// extCode          - string     - 電話分機
+		/// memo             - string     - 備註
+		/// isEnable         - bool       - 是否啟用?
+		/// creator          - string     - 建立者
+		/// updator          - string     - 更新者
+		/// createDt         - DateTime   - 建立時間
+		/// updateDt         - DateTime   - 異動時間
         /// updatorName - 更新者名稱
         /// </returns>
         [Authorize]
@@ -47,27 +47,27 @@ namespace ESUN.AGD.WebApi.Controllers
         /// 搜尋電腦電話設定 
         /// </summary>
         /// <param name="request">
-		/// ComputerName     - string     - 電腦名稱
-		/// ComputerIp       - string     - IP 位址
-		/// ExtCode          - string     - 電話分機
-		/// Memo             - string     - 備註
-		/// IsEnable         - bool       - 是否啟用?
+		/// computerName     - string     - 電腦名稱
+		/// computerIp       - string     - IP 位址
+		/// extCode          - string     - 電話分機
+		/// memo             - string     - 備註
+		/// isEnable         - bool       - 是否啟用?
         /// page             - int        - 分頁
         /// rowsPerPage      - int        - 每頁筆數
         /// sortColumn       - string     - 排序欄位
         /// sortOrder        - bool       - 排序順序
         /// </param>
         /// <returns>
-		/// SeqNo            - int        - Seq No.
-		/// ComputerName     - string     - 電腦名稱
-		/// ComputerIp       - string     - IP 位址
-		/// ExtCode          - string     - 電話分機
-		/// Memo             - string     - 備註
-		/// IsEnable         - bool       - 是否啟用?
-		/// Creator          - string     - 建立者
-		/// Updator          - string     - 更新者
-		/// CreateDt         - DateTime   - 建立時間
-		/// UpdateDt         - DateTime   - 異動時間
+		/// seqNo            - int        - Seq No.
+		/// computerName     - string     - 電腦名稱
+		/// computerIp       - string     - IP 位址
+		/// extCode          - string     - 電話分機
+		/// memo             - string     - 備註
+		/// isEnable         - bool       - 是否啟用?
+		/// creator          - string     - 建立者
+		/// updator          - string     - 更新者
+		/// createDt         - DateTime   - 建立時間
+		/// updateDt         - DateTime   - 異動時間
         /// updatorName - 更新者名稱
         /// </returns>        
         [Authorize]
@@ -81,11 +81,11 @@ namespace ESUN.AGD.WebApi.Controllers
         /// 新增電腦電話設定 
         /// </summary>
         /// <param name="request">
-		/// ComputerName     - string     - 電腦名稱
-		/// ComputerIp       - string     - IP 位址
-		/// ExtCode          - string     - 電話分機
-		/// Memo             - string     - 備註
-		/// IsEnable         - bool       - 是否啟用?
+		/// computerName     - string     - 電腦名稱
+		/// computerIp       - string     - IP 位址
+		/// extCode          - string     - 電話分機
+		/// memo             - string     - 備註
+		/// isEnable         - bool       - 是否啟用?
         /// </param>
         /// <returns>
         /// </returns>        
@@ -100,13 +100,12 @@ namespace ESUN.AGD.WebApi.Controllers
         /// 更新電腦電話設定
         /// </summary>
         /// <param name="request">
-		/// SeqNo            - int        - Seq No.
-		/// ComputerName     - string     - 電腦名稱
-		/// ComputerIp       - string     - IP 位址
-		/// ExtCode          - string     - 電話分機
-		/// Memo             - string     - 備註
-		/// IsEnable         - bool       - 是否啟用?
-		/// Updator          - string     - 更新者
+		/// seqNo            - int        - Seq No.
+		/// computerName     - string     - 電腦名稱
+		/// computerIp       - string     - IP 位址
+		/// extCode          - string     - 電話分機
+		/// memo             - string     - 備註
+		/// isEnable         - bool       - 是否啟用?
         /// </param>
         /// <returns></returns>
         [Authorize]
@@ -120,7 +119,7 @@ namespace ESUN.AGD.WebApi.Controllers
         /// 刪除電腦電話設定
         /// </summary>
         /// <param>
-		/// SeqNo            - int        - Seq No.
+		/// seqNo            - int        - Seq No.
         /// </param>
         /// <returns></returns>
         [Authorize]

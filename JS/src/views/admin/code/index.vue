@@ -61,7 +61,7 @@ import { ref, reactive, onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useStore } from 'vuex';
 import dayjs from 'dayjs';
-import pcPhone from '@admin-store/code'; // COPYDANIEL: batch copy  TYPE2 TYPE3
+import code from '@admin-store/code';
 
 import { useQuasar } from 'quasar';
 import { useSuccessNotify } from '@composables/use-notify';
@@ -88,42 +88,34 @@ import EditForm from './edit-form';
 
 const columns = [
   {
-		name: 'codeType',
-		label: '代碼分類',
-		align: 'left',
-		field: 'codeType',
-		sortable: true,
+		 name: 'codeType',
+		 label: '代碼分類',
+		 align: 'left',
+		 field: 'codeType',
+		 sortable: true,
 },
 {
-		name: 'codeId',
-		label: '系統代碼檔代碼',
-		align: 'left',
-		field: 'codeId',
-		sortable: true,
+		 name: 'codeId',
+		 label: '系統代碼檔代碼',
+		 align: 'left',
+		 field: 'codeId',
+		 sortable: true,
 },
 {
-		name: 'codeName',
-		label: '系統代碼檔名稱',
-		align: 'left',
-		field: 'codeName',
-		sortable: true,
+		 name: 'codeName',
+		 label: '系統代碼檔名稱',
+		 align: 'left',
+		 field: 'codeName',
+		 sortable: true,
 },
 {
-		name: 'creator',
-		label: '建立者',
-		align: 'left',
-		field: 'creator',
-		sortable: true,
+		 name: 'creator',
+		 label: '建立者',
+		 align: 'left',
+		 field: 'creator',
+		 sortable: true,
 },
   {
-    name: 'udpateDt',
-    label: '異動時間',
-    align: 'left',
-    field: (row) => dayjs(row.updateDt).format('YYYY-MM-DD HH:mm:ss'), // COPYDANIEL: row.updateDt
-    sortable: true,
-  },
-  {
-    // COPYDANIEL: 固定的免套
     name: 'actions',
     align: 'center',
     label: '動作',
@@ -131,7 +123,7 @@ const columns = [
 ];
 
 export default {
-  name: 'Code', // COPYDANIEL: 大 CamelCase TYPE1
+  name: 'Code',
 
   components: {
     TableList,
@@ -151,8 +143,8 @@ export default {
      ********************************************************************
      */
     const store = useStore();
-    const moduleName = 'code'; // COPYDANIEL: store module name, same as line 63. TYPE2
-    !store.hasModule(`${moduleName}`) && store.registerModule(`${moduleName}`, code); // COPYDANIEL: same as line 63. TYPE2
+    const moduleName = 'code';
+    !store.hasModule(`${moduleName}`) && store.registerModule(`${moduleName}`, code);
 
     const $q = useQuasar();
     const rows = ref([]);
@@ -164,16 +156,15 @@ export default {
     const defaultSortBy = pagination.value.sortBy;
     const rowsPerPageOptions = computed(() => store.getters['app/getRowsPerPageOptions']);
 
-    // COPYDANIEL: 查詢欄位下拉
     const filterItemOptions = [
       {
 		 label: '代碼分類',
-		 value: 'codeType',
+		 value: 'CodeType',
 		 placeholder: '請輸入代碼分類',
 },
 {
 		 label: '系統代碼檔名稱',
-		 value: 'codeName',
+		 value: 'CodeName',
 		 placeholder: '請輸入系統代碼檔名稱',
 },
     ];
@@ -226,7 +217,7 @@ export default {
 
     const onActionDelete = (rows) => {
       useConfirmDialog($q).onOk(() => {
-        fetchDelete(rows.seqNo); // COPYDANIEL: primary key
+        fetchDelete(rows.seqNo);
       });
     };
 

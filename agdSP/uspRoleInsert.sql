@@ -50,7 +50,7 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-28 14:45:45    Daniel Chou	    first release
+** 2022-04-01 13:51:29    Daniel Chou	    first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[uspRoleInsert] (
 	@RoleId VARCHAR(20)
@@ -69,6 +69,8 @@ BEGIN
 			RoleId
 			,RoleName
 			,IsEnable
+			,CreateDt
+			,UpdateDt
 			,CreateDT
 			,Creator
 			,UpdateDT
@@ -78,6 +80,8 @@ BEGIN
 			@RoleId
 			,@RoleName
 			,@IsEnable
+			,@CreateDt
+			,@UpdateDt
 			,GETDATE()
 			,@Creator
 			,GETDATE()

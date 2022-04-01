@@ -18,8 +18,8 @@
 **  CreateDT	 - 建立時間
 **  Creator	 - 建立者
 **  Updator	 - 異動者
-**  CreateDT	 - 建立時間
-**  UpdateDT	 - 異動時間
+**  CreateDt	 - 建立時間
+**  UpdateDt	 - 異動時間
 **	UpdatorName - 更新者名稱
 **  Total INT - 資料總筆數
 **
@@ -99,7 +99,7 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-28 14:45:42    Daniel Chou     first release
+** 2022-04-01 13:51:26    Daniel Chou     first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[uspUserQuery] (
 	@UserId VARCHAR(20)
@@ -151,6 +151,8 @@ BEGIN
 				AND f.MobilePhone LIKE CASE WHEN @MobilePhone = '' THEN f.MobilePhone ELSE '%' + @MobilePhone + '%' END
 				AND f.Email LIKE CASE WHEN @Email = '' THEN f.Email ELSE '%' + @Email + '%' END
 				AND f.IsAdmin LIKE CASE WHEN @IsAdmin = '' THEN f.IsAdmin ELSE '%' + @IsAdmin + '%' END
+				AND f.CreateDt LIKE CASE WHEN @CreateDt = '' THEN f.CreateDt ELSE '%' + @CreateDt + '%' END
+				AND f.UpdateDt LIKE CASE WHEN @UpdateDt = '' THEN f.UpdateDt ELSE '%' + @UpdateDt + '%' END
 				AND f.IsEnable = CASE WHEN @IsEnable = 'ALL' THEN f.IsEnable ELSE CASE WHEN @IsEnable = '1' THEN 1 ELSE 0 END END
 		------- Sort 排序條件 -------
 		ORDER BY 
@@ -166,8 +168,8 @@ BEGIN
 				CASE WHEN @SortColumn = 'MobilePhone' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
 				CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
 				CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
-				CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
-				CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC
+				CASE WHEN @SortColumn = 'CreateDt' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
+				CASE WHEN @SortColumn = 'CreateDt' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC
 		------- Page 分頁條件 -------
 		OFFSET @RowsPerPage * (@page - 1) ROWS
 

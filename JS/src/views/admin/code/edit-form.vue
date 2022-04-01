@@ -16,7 +16,7 @@
                 <q-input
                     class="col"
                     type="text"
-                    v-model.trim="formData.codeType"
+                    v-model.trim="formData.CodeType"
                     label="代碼分類"
                     lazy-rules
                     :rules="[useRequiredInput, (val) => useMaxLength(val, 20)]"
@@ -24,7 +24,7 @@
                 <q-input
                     class="col"
                     type="text"
-                    v-model.trim="formData.codeId"
+                    v-model.trim="formData.CodeId"
                     label="系統代碼檔代碼"
                     lazy-rules
                     :rules="[useRequiredInput, (val) => useMaxLength(val, 20)]"
@@ -35,7 +35,7 @@
                 <q-input
                     class="col"
                     type="text"
-                    v-model.trim="formData.codeName"
+                    v-model.trim="formData.CodeName"
                     label="系統代碼檔名稱"
                     lazy-rules
                     :rules="[useRequiredInput, (val) => useMaxLength(val, 50)]"
@@ -46,7 +46,7 @@
                 <q-input
                     class="col"
                     type="text"
-                    v-model.trim="formData.isEnable"
+                    v-model.trim="formData.IsEnable"
                     label="是否啟用?"
                     lazy-rules
                     :rules="[useRequiredInput, (val) => useMaxLength(val, )]"
@@ -117,11 +117,15 @@ export default {
 
     // COPYDANIEL: Table Schema
     const formData = ref({
-  		SeqNo: 0,
-			codeType: '',
-			codeId: '',
-			codeName: '',
-			isEnable: true,
+  		seqNo: 0,
+			CodeType: '',
+			CodeId: '',
+			CodeName: '',
+			IsEnable: true,
+			Creator: '',
+			Updator: '',
+			CreateDt: '',
+			UpdateDt: '',
       updateDt: '',
       updator: '',
     });

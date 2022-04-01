@@ -13,8 +13,8 @@ CREATE TABLE [agdSet].[tbUser](
 	[CreateDT] [datetime2(7)]  NOT NULL,
 	[Creator] [varchar(20)]  NOT NULL,
 	[Updator] [varchar(20)]  NOT NULL,
-	[CreateDT] [datetime2(7)]  NOT NULL,
-	[UpdateDT] [datetime2(7)]  NOT NULL,
+	[CreateDt] [datetime2(7)]  NOT NULL,
+	[UpdateDt] [datetime2(7)]  NOT NULL,
 
  CONSTRAINT [PK_tbUser] PRIMARY KEY CLUSTERED 
 (
@@ -54,7 +54,7 @@ EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'建立者' ,@l
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'異動者' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbUser', @level2type=N'COLUMN',@level2name=N'Updator'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'建立時間' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbUser', @level2type=N'COLUMN',@level2name=N'CreateDT'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'建立時間' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbUser', @level2type=N'COLUMN',@level2name=N'CreateDt'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'異動時間' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbUser', @level2type=N'COLUMN',@level2name=N'UpdateDT'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'異動時間' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbUser', @level2type=N'COLUMN',@level2name=N'UpdateDt'
 GO

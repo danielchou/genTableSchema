@@ -50,7 +50,7 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-28 14:45:45    Daniel Chou	    first release
+** 2022-04-01 13:51:29    Daniel Chou	    first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[uspRoleUpdate] (
 	@SeqNo INT
@@ -69,6 +69,8 @@ BEGIN
 		SET RoleId = @RoleId
 			,RoleName = @RoleName
 			,IsEnable = @IsEnable
+			,CreateDt = @CreateDt
+			,UpdateDt = @UpdateDt
             ,UpdateDT = GETDATE()
 			,Updator = @Updator
 		WHERE SeqNo = @SeqNo;

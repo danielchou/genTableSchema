@@ -12,7 +12,8 @@
 ** Parameters:
 **	Input
 ** -----------
-	@SeqNo	INT - 流水號
+	@SeqNo	INT - Seq No.
+	@ExtCode	NVARCHAR(20) - 電話分機
 **
 **   Output
 ** -----------
@@ -22,12 +23,15 @@
 ** -----------
 DECLARE @return_value INT
     ,@SeqNo INT
+	,@ExtCode NVARCHAR(20)
     ,@ErrorMsg NVARCHAR(100)
 
     SET @SeqNo = '1'
+	SET @ExtCode = '1111'
 
 EXEC @return_value = [agdSp].[uspPcPhoneExists] 
     @SeqNo = @SeqNo
+	,@ExtCode = @ExtCode
     ,@ErrorMsg = @ErrorMsg OUTPUT
 
 SELECT @return_value AS 'Return Value'
@@ -38,10 +42,11 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-28 14:45:46    Daniel Chou     first release
+** 2022-04-01 13:51:30    Daniel Chou     first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[uspPcPhoneExists]
     @SeqNo INT
+	,@ExtCode NVARCHAR(20)
     ,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
 AS
 SET NOCOUNT ON
@@ -53,7 +58,7 @@ BEGIN
 		FROM agdSet.tbPcPhone
 		WHERE SeqNo != @SeqNo
 			AND ( 
-                
+                ExtCode = @ExtCode
             );
 	END TRY
 

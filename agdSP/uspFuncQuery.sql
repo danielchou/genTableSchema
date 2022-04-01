@@ -12,8 +12,8 @@
 **  IsEnable	 - 是否啟用?
 **  Creator	 - 建立者
 **  Updator	 - 異動者
-**  CreateDT	 - 建立時間
-**  UpdateDT	 - 異動時間
+**  CreateDt	 - 建立時間
+**  UpdateDt	 - 異動時間
 **	UpdatorName - 更新者名稱
 **  Total INT - 資料總筆數
 **
@@ -77,7 +77,7 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-28 14:45:43    Daniel Chou     first release
+** 2022-04-01 13:51:27    Daniel Chou     first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[uspFuncQuery] (
 	@FuncId VARCHAR(20)
@@ -116,6 +116,8 @@ BEGIN
 				AND f.FuncName LIKE CASE WHEN @FuncName = '' THEN f.FuncName ELSE '%' + @FuncName + '%' END
 				AND f.FuncPath LIKE CASE WHEN @FuncPath = '' THEN f.FuncPath ELSE '%' + @FuncPath + '%' END
 				AND f.FuncIcon LIKE CASE WHEN @FuncIcon = '' THEN f.FuncIcon ELSE '%' + @FuncIcon + '%' END
+				AND f.CreateDt LIKE CASE WHEN @CreateDt = '' THEN f.CreateDt ELSE '%' + @CreateDt + '%' END
+				AND f.UpdateDt LIKE CASE WHEN @UpdateDt = '' THEN f.UpdateDt ELSE '%' + @UpdateDt + '%' END
 				AND f.IsEnable = CASE WHEN @IsEnable = 'ALL' THEN f.IsEnable ELSE CASE WHEN @IsEnable = '1' THEN 1 ELSE 0 END END
 		------- Sort 排序條件 -------
 		ORDER BY 
@@ -123,8 +125,8 @@ BEGIN
 				CASE WHEN @SortColumn = 'FuncId' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
 				CASE WHEN @SortColumn = 'FuncName' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
 				CASE WHEN @SortColumn = 'FuncName' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
-				CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
-				CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC
+				CASE WHEN @SortColumn = 'CreateDt' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
+				CASE WHEN @SortColumn = 'CreateDt' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC
 		------- Page 分頁條件 -------
 		OFFSET @RowsPerPage * (@page - 1) ROWS
 

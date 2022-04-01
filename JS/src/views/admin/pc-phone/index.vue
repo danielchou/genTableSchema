@@ -61,7 +61,7 @@ import { ref, reactive, onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useStore } from 'vuex';
 import dayjs from 'dayjs';
-import pcPhone from '@admin-store/pc-phone'; // COPYDANIEL: batch copy  TYPE2 TYPE3
+import pcPhone from '@admin-store/pc-phone';
 
 import { useQuasar } from 'quasar';
 import { useSuccessNotify } from '@composables/use-notify';
@@ -88,56 +88,48 @@ import EditForm from './edit-form';
 
 const columns = [
   {
-		name: 'SeqNo',
-		label: 'Seq No.',
-		align: 'right',
-		field: 'SeqNo',
-		sortable: true,
+		 name: 'seqNo',
+		 label: 'Seq No.',
+		 align: 'right',
+		 field: 'seqNo',
+		 sortable: true,
 },
 {
-		name: 'ComputerName',
-		label: '電腦名稱',
-		align: 'left',
-		field: 'ComputerName',
-		sortable: true,
+		 name: 'computerName',
+		 label: '電腦名稱',
+		 align: 'left',
+		 field: 'computerName',
+		 sortable: true,
 },
 {
-		name: 'ComputerIp',
-		label: 'IP 位址',
-		align: 'left',
-		field: 'ComputerIp',
-		sortable: true,
+		 name: 'computerIp',
+		 label: 'IP 位址',
+		 align: 'left',
+		 field: 'computerIp',
+		 sortable: true,
 },
 {
-		name: 'ExtCode',
-		label: '電話分機',
-		align: 'left',
-		field: 'ExtCode',
-		sortable: true,
+		 name: 'extCode',
+		 label: '電話分機',
+		 align: 'left',
+		 field: 'extCode',
+		 sortable: true,
 },
 {
-		name: 'Memo',
-		label: '備註',
-		align: 'left',
-		field: 'Memo',
-		sortable: true,
+		 name: 'memo',
+		 label: '備註',
+		 align: 'left',
+		 field: 'memo',
+		 sortable: true,
 },
 {
-		name: 'UpdateDt',
-		label: '異動時間',
-		align: 'left',
-		field: 'UpdateDt',
-		sortable: true,
+		 name: 'updateDt',
+		 label: '異動時間',
+		 align: 'left',
+		 field: (row) => dayjs(row.updateDt).format('YYYY-MM-DD HH:mm:ss'),
+		 sortable: true,
 },
   {
-    name: 'udpateDt',
-    label: '異動時間',
-    align: 'left',
-    field: (row) => dayjs(row.updateDt).format('YYYY-MM-DD HH:mm:ss'), // COPYDANIEL: row.updateDt
-    sortable: true,
-  },
-  {
-    // COPYDANIEL: 固定的免套
     name: 'actions',
     align: 'center',
     label: '動作',
@@ -145,7 +137,7 @@ const columns = [
 ];
 
 export default {
-  name: 'PcPhone', // COPYDANIEL: 大 CamelCase TYPE1
+  name: 'PcPhone',
 
   components: {
     TableList,
@@ -165,8 +157,8 @@ export default {
      ********************************************************************
      */
     const store = useStore();
-    const moduleName = 'pcPhone'; // COPYDANIEL: store module name, same as line 63. TYPE2
-    !store.hasModule(`${moduleName}`) && store.registerModule(`${moduleName}`, pcPhone); // COPYDANIEL: same as line 63. TYPE2
+    const moduleName = 'pcPhone';
+    !store.hasModule(`${moduleName}`) && store.registerModule(`${moduleName}`, pcPhone);
 
     const $q = useQuasar();
     const rows = ref([]);
@@ -178,7 +170,6 @@ export default {
     const defaultSortBy = pagination.value.sortBy;
     const rowsPerPageOptions = computed(() => store.getters['app/getRowsPerPageOptions']);
 
-    // COPYDANIEL: 查詢欄位下拉
     const filterItemOptions = [
       {
 		 label: '電腦名稱',
@@ -240,7 +231,7 @@ export default {
 
     const onActionDelete = (rows) => {
       useConfirmDialog($q).onOk(() => {
-        fetchDelete(rows.seqNo); // COPYDANIEL: primary key
+        fetchDelete(rows.seqNo);
       });
     };
 

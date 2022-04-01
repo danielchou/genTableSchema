@@ -54,7 +54,7 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-28 14:45:44    Daniel Chou	    first release
+** 2022-04-01 13:51:28    Daniel Chou	    first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[uspGroupUpdate] (
 	@SeqNo INT
@@ -74,6 +74,8 @@ BEGIN
 		SET GroupId = @GroupId
 			,GroupName = @GroupName
 			,IsEnable = @IsEnable
+			,CreateDt = @CreateDt
+			,UpdateDt = @UpdateDt
             ,UpdateDT = GETDATE()
 			,Updator = @Updator
 		WHERE SeqNo = @SeqNo;

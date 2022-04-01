@@ -12,8 +12,8 @@
 **  IsEnable	 - 是否啟用?
 **  Creator	 - 建立者
 **  Updator	 - 異動者
-**  CreateDT	 - 建立時間
-**  UpdateDT	 - 異動時間
+**  CreateDt	 - 建立時間
+**  UpdateDt	 - 異動時間
 **	UpdatorName - 更新者名稱
 **
 ** Called by: 
@@ -51,7 +51,7 @@
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-28 14:45:43    Daniel Chou	    first release
+** 2022-04-01 13:51:27    Daniel Chou	    first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[uspFuncGet] (
 	@SeqNo INT

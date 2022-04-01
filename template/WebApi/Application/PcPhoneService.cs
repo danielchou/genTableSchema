@@ -1,4 +1,4 @@
-﻿using ESUN.AGD.WebApi.Application.Auth;
+using ESUN.AGD.WebApi.Application.Auth;
 using ESUN.AGD.WebApi.Application.$pt_TableName.Contract;
 using ESUN.AGD.DataAccess.DataService.DataAccess;
 

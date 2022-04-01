@@ -78,7 +78,7 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-28 14:45:42    Daniel Chou	    first release
+** 2022-04-01 13:51:26    Daniel Chou	    first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[uspUserInsert] (
 	@UserId VARCHAR(20)
@@ -111,6 +111,8 @@ BEGIN
 			,Email
 			,IsAdmin
 			,IsEnable
+			,CreateDt
+			,UpdateDt
 			,CreateDT
 			,Creator
 			,UpdateDT
@@ -127,6 +129,8 @@ BEGIN
 			,@Email
 			,@IsAdmin
 			,@IsEnable
+			,@CreateDt
+			,@UpdateDt
 			,GETDATE()
 			,@Creator
 			,GETDATE()

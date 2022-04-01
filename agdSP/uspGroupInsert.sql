@@ -50,7 +50,7 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-03-28 14:45:44    Daniel Chou	    first release
+** 2022-04-01 13:51:28    Daniel Chou	    first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[uspGroupInsert] (
 	@GroupId VARCHAR(20)
@@ -69,6 +69,8 @@ BEGIN
 			GroupId
 			,GroupName
 			,IsEnable
+			,CreateDt
+			,UpdateDt
 			,CreateDT
 			,Creator
 			,UpdateDT
@@ -78,6 +80,8 @@ BEGIN
 			@GroupId
 			,@GroupName
 			,@IsEnable
+			,@CreateDt
+			,@UpdateDt
 			,GETDATE()
 			,@Creator
 			,GETDATE()
