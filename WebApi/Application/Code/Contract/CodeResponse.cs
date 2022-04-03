@@ -1,9 +1,9 @@
 ﻿namespace ESUN.AGD.WebApi.Application.Code.Contract
 {
     /// <summary>
-    /// 電腦電話新增請求
+    /// 系統代碼回傳結果
     /// </summary>
-    public class CodeInsertRequest:CommonInsertRequest
+    public class  CodeResponse : CommonResponse
     {
         
         /// <summary>

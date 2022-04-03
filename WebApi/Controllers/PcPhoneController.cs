@@ -26,7 +26,7 @@ namespace ESUN.AGD.WebApi.Controllers
         /// <returns>
 		/// seqNo            - int        - Seq No.
 		/// computerName     - string     - 電腦名稱
-		/// computerIp       - string     - IP 位址
+		/// computerIp       - string     - 電腦IP
 		/// extCode          - string     - 電話分機
 		/// memo             - string     - 備註
 		/// isEnable         - bool       - 是否啟用?
@@ -48,7 +48,7 @@ namespace ESUN.AGD.WebApi.Controllers
         /// </summary>
         /// <param name="request">
 		/// computerName     - string     - 電腦名稱
-		/// computerIp       - string     - IP 位址
+		/// computerIp       - string     - 電腦IP
 		/// extCode          - string     - 電話分機
 		/// memo             - string     - 備註
 		/// isEnable         - bool       - 是否啟用?
@@ -60,7 +60,7 @@ namespace ESUN.AGD.WebApi.Controllers
         /// <returns>
 		/// seqNo            - int        - Seq No.
 		/// computerName     - string     - 電腦名稱
-		/// computerIp       - string     - IP 位址
+		/// computerIp       - string     - 電腦IP
 		/// extCode          - string     - 電話分機
 		/// memo             - string     - 備註
 		/// isEnable         - bool       - 是否啟用?
@@ -82,7 +82,7 @@ namespace ESUN.AGD.WebApi.Controllers
         /// </summary>
         /// <param name="request">
 		/// computerName     - string     - 電腦名稱
-		/// computerIp       - string     - IP 位址
+		/// computerIp       - string     - 電腦IP
 		/// extCode          - string     - 電話分機
 		/// memo             - string     - 備註
 		/// isEnable         - bool       - 是否啟用?
@@ -102,7 +102,7 @@ namespace ESUN.AGD.WebApi.Controllers
         /// <param name="request">
 		/// seqNo            - int        - Seq No.
 		/// computerName     - string     - 電腦名稱
-		/// computerIp       - string     - IP 位址
+		/// computerIp       - string     - 電腦IP
 		/// extCode          - string     - 電話分機
 		/// memo             - string     - 備註
 		/// isEnable         - bool       - 是否啟用?

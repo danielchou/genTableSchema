@@ -20,6 +20,7 @@ export const fetchItems = ({ rootGetters, commit }, data) => {
     commit('setItems', res.data || []);
     return res;
   });
+
   return response;
 };
 

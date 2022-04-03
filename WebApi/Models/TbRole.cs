@@ -1,28 +1,20 @@
 ﻿namespace ESUN.AGD.WebApi.Models
 {
-    public partial class TbPcPhone : CommonModel
+    public partial class TbRole : CommonModel
     {
         
         /// <summary>
-        /// Seq No.
+        /// 流水號
         /// </summary>
         public int SeqNo { get; set; } 
         /// <summary>
-        /// 電腦名稱
+        /// 角色代碼
         /// </summary>
-        public string ComputerName { get; set; }  = null!;
+        public string RoleId { get; set; }  = null!;
         /// <summary>
-        /// 電腦IP
+        /// 角色名稱
         /// </summary>
-        public string ComputerIp { get; set; }  = null!;
-        /// <summary>
-        /// 電話分機
-        /// </summary>
-        public string ExtCode { get; set; }  = null!;
-        /// <summary>
-        /// 備註
-        /// </summary>
-        public string? Memo { get; set; } 
+        public string RoleName { get; set; }  = null!;
         /// <summary>
         /// 是否啟用?
         /// </summary>
@@ -32,9 +24,9 @@
         /// </summary>
         public string Creator { get; set; }  = null!;
         /// <summary>
-        /// 更新者
+        /// 異動者
         /// </summary>
-        public string? Updator { get; set; } 
+        public string Updator { get; set; }  = null!;
         /// <summary>
         /// 建立時間
         /// </summary>
@@ -42,7 +34,7 @@
         /// <summary>
         /// 異動時間
         /// </summary>
-        public DateTime? UpdateDt { get; set; } 
+        public DateTime UpdateDt { get; set; } 
     }
 }
 

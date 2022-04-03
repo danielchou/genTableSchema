@@ -1,26 +1,33 @@
 ﻿namespace ESUN.AGD.WebApi.Application.Code.Contract
 {
     /// <summary>
-    /// 電腦電話新增請求
+    /// 系統代碼更新請求
     /// </summary>
-    public class CodeInsertRequest:CommonInsertRequest
+    public class CodeUpdateRequest : CommonUpdateRequest
     {
-        
-        /// <summary>
+		/// <summary>
+        /// 流水號
+        /// </summary>
+        public int seqNo { get; set; }
+		/// <summary>
         /// 代碼分類
         /// </summary>
         public string codeType { get; set; }
-        /// <summary>
+		/// <summary>
         /// 系統代碼檔代碼
         /// </summary>
         public string codeId { get; set; }
-        /// <summary>
+		/// <summary>
         /// 系統代碼檔名稱
         /// </summary>
         public string codeName { get; set; }
-        /// <summary>
+		/// <summary>
         /// 是否啟用?
         /// </summary>
         public bool isEnable { get; set; }
+		/// <summary>
+        /// 異動者
+        /// </summary>
+        public string updator { get; set; }
     }
 }

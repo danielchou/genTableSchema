@@ -12,8 +12,7 @@ namespace ESUN.AGD.WebApi.Application.$pt_TableName
         private readonly IGetTokenService _getTokenService;
         
 
-        public $pt_TableName$service(IDataAccessService dataAccessService   
-                                    , IGetTokenService getTokenService)
+        public $pt_TableName$service(IDataAccessService dataAccessService , IGetTokenService getTokenService)
         {
             _dataAccessService = dataAccessService;
             _getTokenService = getTokenService;
@@ -23,13 +22,16 @@ namespace ESUN.AGD.WebApi.Application.$pt_TableName
         {
             var data = await _dataAccessService
                 .LoadSingData<Tb$pt_TableName, object>(storeProcedure: "agdSp.usp$pt_TableName$get", new { seqNo = seqNo, });
+            
             if (data == null) return new BasicResponse<$pt_TableName$response>()
             { resultCode = "9999", resultDescription = "查無資料", data = null };
+            
             var result = new $pt_TableName$response
             {
 $pt_data2Json
                 updatorName = data.UpdatorName
             };
+            
             return new BasicResponse<$pt_TableName$response>()
             { resultCode = "0000", resultDescription = "查詢成功", data = result };
         }
@@ -50,6 +52,7 @@ $pt_data2Json
 $pt_item2Json            
                 updatorName = item.UpdatorName   
             }).ToList();
+
             int totalCount = data.FirstOrDefault().Total;
 
             return new BasicResponse<List<$pt_TableName$response>>()
@@ -62,6 +65,7 @@ $pt_item2Json
             var creator = _getTokenService.userId ?? "";
 
             var exists = await Exists(0, request.extCode, request.computerIp);
+            
             if (exists.data == true) return new BasicResponse<bool>()
             { resultCode = "9999", resultDescription = "資料重複，請重新設定", data=false };
                         
@@ -72,6 +76,7 @@ $pt_item2Json
 
             if (data == 0) return new BasicResponse<bool>() 
             { resultCode = "9999", resultDescription = "新增失敗", data = false };
+            
             return new BasicResponse<bool>() 
             { resultCode = "0000", resultDescription = "新增成功", data = true };
         }
@@ -81,9 +86,9 @@ $pt_item2Json
             var updator = _getTokenService.userId ?? "";
 
             var exists = await Exists(request.seqNo, request.extCode, request.computerIp);
+            
             if (exists.data == true) return new BasicResponse<bool>()
             { resultCode = "9999", resultDescription = "資料重複，請重新設定", data = false };
-
 
             request.updator = updator;            
 
@@ -92,6 +97,7 @@ $pt_item2Json
 
             if (data == 0) return new BasicResponse<bool>() 
             { resultCode = "9999", resultDescription = "更新失敗", data = false };
+            
             return new BasicResponse<bool>() 
             { resultCode = "0000", resultDescription = "更新成功", data = true };
         }
@@ -99,10 +105,11 @@ $pt_item2Json
         public async ValueTask<BasicResponse<bool>> Delete$pt_TableName($pt_InputPK)
         {
             var data = await _dataAccessService
-                   .OpreatData(storeProcedure: "agdSp.usp$pt_TableName$delete", new { seqNo = seqNo });
+                .OpreatData(storeProcedure: "agdSp.usp$pt_TableName$delete", new { seqNo = seqNo });
 
             if (data == 0) return new BasicResponse<bool>() 
             { resultCode = "9999", resultDescription = "刪除失敗", data = false };
+            
             return new BasicResponse<bool>() 
             { resultCode = "0000", resultDescription = "刪除成功", data = true };
         }

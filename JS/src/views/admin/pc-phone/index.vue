@@ -103,7 +103,7 @@ const columns = [
 },
 {
 		 name: 'computerIp',
-		 label: 'IP 位址',
+		 label: '電腦IP',
 		 align: 'left',
 		 field: 'computerIp',
 		 sortable: true,

@@ -13,7 +13,7 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
         /// <returns>
 		/// seqNo            - int        - Seq No.
 		/// computerName     - string     - 電腦名稱
-		/// computerIp       - string     - IP 位址
+		/// computerIp       - string     - 電腦IP
 		/// extCode          - string     - 電話分機
 		/// memo             - string     - 備註
 		/// isEnable         - bool       - 是否啟用?
@@ -30,7 +30,7 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
         /// </summary>
         /// <param name="request">
 		/// computerName     - string     - 電腦名稱
-		/// computerIp       - string     - IP 位址
+		/// computerIp       - string     - 電腦IP
 		/// extCode          - string     - 電話分機
 		/// memo             - string     - 備註
 		/// isEnable         - bool       - 是否啟用?
@@ -42,7 +42,7 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
         /// <returns>
 		/// seqNo            - int        - Seq No.
 		/// computerName     - string     - 電腦名稱
-		/// computerIp       - string     - IP 位址
+		/// computerIp       - string     - 電腦IP
 		/// extCode          - string     - 電話分機
 		/// memo             - string     - 備註
 		/// isEnable         - bool       - 是否啟用?
@@ -59,7 +59,7 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
         /// </summary>
         /// <param name="request">
 		/// computerName     - string     - 電腦名稱
-		/// computerIp       - string     - IP 位址
+		/// computerIp       - string     - 電腦IP
 		/// extCode          - string     - 電話分機
 		/// memo             - string     - 備註
 		/// isEnable         - bool       - 是否啟用?
@@ -74,7 +74,7 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
         /// <param name="request">
 		/// seqNo            - int        - Seq No.
 		/// computerName     - string     - 電腦名稱
-		/// computerIp       - string     - IP 位址
+		/// computerIp       - string     - 電腦IP
 		/// extCode          - string     - 電話分機
 		/// memo             - string     - 備註
 		/// isEnable         - bool       - 是否啟用?
@@ -96,7 +96,7 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
         /// </summary>
         /// <param>
 		/// seqNo            - int        - Seq No.
-		/// computerIp       - string     - IP 位址
+		/// computerIp       - string     - 電腦IP
 		/// extCode          - string     - 電話分
         /// </param>
         /// <returns></returns>

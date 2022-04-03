@@ -1,5 +1,5 @@
-﻿using ESUN.AGD.WebApi.Application.PcPhone;
-using ESUN.AGD.WebApi.Application.PcPhone.Contract;
+﻿using ESUN.AGD.WebApi.Application.$pt_TableName;
+using ESUN.AGD.WebApi.Application.$pt_TableName.Contract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,129 +7,95 @@ namespace ESUN.AGD.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PcPhoneController : Controller
+    public class $pt_TableName$controller : Controller
     {
 
-        private readonly IPcPhoneService _PcPhoneService;
+        private readonly I$pt_TableName$service _$pt_TableName$service;
 
-        public PcPhoneController(IPcPhoneService PcPhoneService)
+        public $pt_TableName$controller(I$pt_TableName$service $pt_TableName$service)
         {
-            _PcPhoneService = PcPhoneService;
+            _$pt_TableName$service = $pt_TableName$service;
         }
 
         /// <summary>
-        /// 依序號取得電腦電話設定
+        /// 依序號取得$TbDscr設定
         /// </summary>
         /// <param>
-        /// seqNo - 電腦電話序號
+$pt_ColDscr_ParasPK
         /// </param>
         /// <returns>
-        /// seqNo - 電腦電話序號
-        /// extCde - 分機號碼
-        /// computerName - 電腦名稱
-        /// computerIp - 電腦IP
-        /// memo - 備註
-        /// isEnable - 是否啟用
-        /// createDt - 建立日期
-        /// creator - 建立者
-        /// createIP - 建立IP
-        /// updateDt - 更新日期
-        /// updator - 更新者
-        /// updateIP - 更新IP
+$pt_ColDscr_GetReturnAll
         /// updatorName - 更新者名稱
         /// </returns>
         [Authorize]
         [HttpGet("{seqNo}")]
-        public async ValueTask<IActionResult> GetPcPhone(int seqNo)
+        public async ValueTask<IActionResult> Get$pt_TableName($pt_InputPK)
         {
-            return Ok(await _PcPhoneService.GetPcPhone(seqNo));
+            return Ok(await _$pt_TableName$service.Get$pt_TableName($pt_InputServicePK));
         }
 
         /// <summary>
-        /// 搜尋電腦電話設定 
+        /// 搜尋$TbDscr設定 
         /// </summary>
         /// <param name="request">
-        /// extCode = 分機號碼
-        /// computerName - 電腦名稱
-        /// page - 分頁
-        /// rowsPerPage - 每頁筆數
-        /// sortColumn - 排序欄位
-        /// sortOrder - 排序順序
+$pt_ColDscr_QueryParas
+        /// page             - int        - 分頁
+        /// rowsPerPage      - int        - 每頁筆數
+        /// sortColumn       - string     - 排序欄位
+        /// sortOrder        - bool       - 排序順序
         /// </param>
         /// <returns>
-        /// seqNo - 電腦電話序號
-        /// extCde - 分機號碼
-        /// computerName - 電腦名稱
-        /// computerIp - 電腦IP
-        /// memo - 備註
-        /// isEnable - 是否啟用
-        /// createDt - 建立日期
-        /// creator - 建立者
-        /// createIP - 建立IP
-        /// updateDt - 更新日期
-        /// updator - 更新者
-        /// updateIP - 更新IP
+$pt_ColDscr_GetReturnAll
         /// updatorName - 更新者名稱
         /// </returns>        
         [Authorize]
         [HttpGet("query")]
-        public async ValueTask<IActionResult> QueryPcPhone([FromQuery] PcPhoneQueryRequest request)
+        public async ValueTask<IActionResult> Query$pt_TableName([FromQuery] $pt_TableName$queryRequest request)
         {
-            return Ok(await _PcPhoneService.QueryPcPhone(request));
+            return Ok(await _$pt_TableName$service.Query$pt_TableName(request));
         }
 
         /// <summary>
-        /// 新增電腦電話設定 
+        /// 新增$TbDscr設定 
         /// </summary>
         /// <param name="request">
-        /// seqNo - 電腦電話序號
-        /// extCde - 分機號碼
-        /// computerName - 電腦名稱
-        /// computerIp - 電腦IP
-        /// memo - 備註
-        /// isEnable - 是否啟用
+$pt_ColDscr_InsertParas
         /// </param>
         /// <returns>
         /// </returns>        
         [Authorize]
         [HttpPost]
-        public async ValueTask<IActionResult> InsertPcPhone(PcPhoneInsertRequest request)
+        public async ValueTask<IActionResult> Insert$pt_TableName($pt_TableName$insertRequest request)
         {
-            return Ok(await _PcPhoneService.InsertPcPhone(request));
+            return Ok(await _$pt_TableName$service.Insert$pt_TableName(request));
         }
 
         /// <summary>
-        /// 更新電腦電話設定
+        /// 更新$TbDscr設定
         /// </summary>
         /// <param name="request">
-        /// extCde - 分機號碼
-        /// computerName - 電腦名稱
-        /// computerIp - 電腦IP
-        /// memo - 備註
-        /// isEnable - 是否啟用
+$pt_colDscr_UpdateParas
         /// </param>
-        /// <returns>
-        /// </returns>
+        /// <returns></returns>
         [Authorize]
         [HttpPut]
-        public async ValueTask<IActionResult> UpdatePcPhone(PcPhoneUpdateRequest request)
+        public async ValueTask<IActionResult> Update$pt_TableName($pt_TableName$updateRequest request)
         {
-            return Ok(await _PcPhoneService.UpdatePcPhone(request));
+            return Ok(await _$pt_TableName$service.Update$pt_TableName(request));
         }
 
         /// <summary>
-        /// 刪除電腦電話設定
+        /// 刪除$TbDscr設定
         /// </summary>
         /// <param>
-        /// seqNo - 電腦電話序號
+$pt_ColDscr_ParasPK
         /// </param>
-        /// <returns>
-        /// </returns>
+        /// <returns></returns>
         [Authorize]
         [HttpDelete]
-        public async ValueTask<IActionResult> DetelePcPhone(int seqNo)
+        public async ValueTask<IActionResult> Detele$pt_TableName($pt_InputPK)
         {
-            return Ok(await _PcPhoneService.DeletePcPhone(seqNo));
+            return Ok(await _$pt_TableName$service.Delete$pt_TableName($pt_InputServicePK));
         }
 
     }

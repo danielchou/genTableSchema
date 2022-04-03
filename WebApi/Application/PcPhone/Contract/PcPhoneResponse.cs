@@ -1,9 +1,9 @@
 ﻿namespace ESUN.AGD.WebApi.Application.PcPhone.Contract
 {
     /// <summary>
-    /// 電腦電話新增請求
+    /// 電腦電話回傳結果
     /// </summary>
-    public class PcPhoneInsertRequest:CommonInsertRequest
+    public class  PcPhoneResponse : CommonResponse
     {
         
         /// <summary>

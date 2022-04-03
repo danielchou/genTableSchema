@@ -1,19 +1,12 @@
 ﻿
 
-namespace ESUN.AGD.WebApi.Application.PcPhone.Contract
+namespace ESUN.AGD.WebApi.Application.$pt_TableName.Contract
 {
     /// <summary>
     /// 進階查詢查詢請求
     /// </summary>
-    public class PcPhoneQueryRequest : CommonQuery
+    public class $pt_TableName$queryRequest : CommonQuery
     {
-        /// <summary>
-        /// 分機號碼
-        /// </summary>
-        public string? extCode { get; set; }
-        /// <summary>
-        /// 電腦名稱
-        /// </summary>
-        public string? computerName { get; set; }      
+$pt_queryRequest
     }
 }

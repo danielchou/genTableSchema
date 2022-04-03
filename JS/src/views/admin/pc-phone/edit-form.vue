@@ -19,15 +19,15 @@
                     v-model.trim="formData.ComputerName"
                     label="電腦名稱"
                     lazy-rules
-                    :rules="[useRequiredInput, (val) => useMaxLength(val, 20)]"
+                    :rules="[useRequiredInput, (val) => useMaxLength(val, 25)]"
                 />
                 <q-input
                     class="col"
                     type="text"
                     v-model.trim="formData.ComputerIp"
-                    label="IP 位址"
+                    label="電腦IP"
                     lazy-rules
-                    :rules="[useRequiredInput, (val) => useMaxLength(val, 20)]"
+                    :rules="[useRequiredInput, (val) => useMaxLength(val, 23)]"
                 />
             </div>
             <div class="row q-col-gutter-md">
@@ -38,7 +38,7 @@
                     v-model.trim="formData.ExtCode"
                     label="電話分機"
                     lazy-rules
-                    :rules="[useRequiredInput, (val) => useMaxLength(val, 20)]"
+                    :rules="[useRequiredInput, (val) => useMaxLength(val, 10)]"
                 />
             </div>
             <div class="row q-col-gutter-md">
