@@ -12,12 +12,13 @@
 ** Parameters:
 **	Input
 ** -----------
-    @SeqNo	INT - Seq No.
-	@ComputerName	NVARCHAR(20) - 電腦名稱
-	@ExtCode	NVARCHAR(20) - 電話分機
-	@Memo	NVARCHAR(600) - 備註
-	@IsEnable	BIT - 是否啟用?
-	@Updator	VARCHAR(20) - 更新者
+    @SeqNo           INT          - Seq No.
+	@ExtCode         NVARCHAR(10) - 電話分機
+	@ComputerName    NVARCHAR(25) - 電腦名稱
+	@ComputerIp      NVARCHAR(23) - 電腦IP
+	@Memo            NVARCHAR(600) - 備註
+	@IsEnable        BIT          - 是否啟用?
+	@Updator NVARCHAR(20) - 建立者
 **
 **   Output
 ** -----------
@@ -27,26 +28,29 @@
 ** -----------
 DECLARE @return_value INT
     ,@SeqNo INT
-	,@ComputerName NVARCHAR(20)
-	,@ExtCode NVARCHAR(20)
+	,@ExtCode NVARCHAR(10)
+	,@ComputerName NVARCHAR(25)
+	,@ComputerIp NVARCHAR(23)
 	,@Memo NVARCHAR(600)
 	,@IsEnable BIT
-	,@Updator VARCHAR(20)
+	,@Updator NVARCHAR(20)
     ,@ErrorMsg NVARCHAR(100)
 
     SET @SeqNo = 1
-	SET @ComputerName = 'CP0001'
 	SET @ExtCode = '1111'
+	SET @ComputerName = 'CP0001'
+	SET @ComputerIp = '1.1.1.1'
 	SET @Memo = 'memo1'
-	SET @IsEnable = 1
+	SET @IsEnable = '1'
 	SET @Updator = 'admin'
 
 EXEC @return_value = [agdSp].[uspPcPhoneUpdate]
     @SeqNo = @SeqNo
-	,@ComputerName = @ComputerName
-	,@ExtCode = @ExtCode
-	,@Memo = @Memo
-	,@IsEnable = @IsEnable
+		,@ExtCode = @ExtCode
+		,@ComputerName = @ComputerName
+		,@ComputerIp = @ComputerIp
+		,@Memo = @Memo
+		,@IsEnable = @IsEnable
 	,@Updator = @Updator
     ,@ErrorMsg = @ErrorMsg OUTPUT
 
@@ -58,15 +62,16 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-04-01 13:51:31    Daniel Chou	    first release
+** 2022/04/07 15:31:25    Daniel Chou	    first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[uspPcPhoneUpdate] (
 	@SeqNo INT
-	,@ComputerName NVARCHAR(20)
-	,@ExtCode NVARCHAR(20)
+	,@ExtCode NVARCHAR(10)
+	,@ComputerName NVARCHAR(25)
+	,@ComputerIp NVARCHAR(23)
 	,@Memo NVARCHAR(600)
 	,@IsEnable BIT
-	,@Updator VARCHAR(20)
+	,@Updator NVARCHAR(20)
 	,@ErrorMsg NVARCHAR(100) = NULL OUTPUT
 	)
 AS
@@ -76,14 +81,12 @@ SET @ErrorMsg = N''
 BEGIN
 	BEGIN TRY
 		UPDATE agdSet.tbPcPhone
-		SET ComputerName = @ComputerName
+		SET ExtCode = @ExtCode
+			,ComputerName = @ComputerName
 			,ComputerIp = @ComputerIp
-			,ExtCode = @ExtCode
 			,Memo = @Memo
 			,IsEnable = @IsEnable
-			,CreateDt = @CreateDt
-			,UpdateDt = @UpdateDt
-            ,UpdateDT = GETDATE()
+            ,UpdateDt = GETDATE()
 			,Updator = @Updator
 		WHERE SeqNo = @SeqNo;
 	END TRY

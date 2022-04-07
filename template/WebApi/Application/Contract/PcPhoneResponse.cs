@@ -5,6 +5,6 @@
     /// </summary>
     public class  $pt_TableName$response : CommonResponse
     {
-        $pt_apiModels_insertRequest
+$pt_apiModels_insertRequest
     }
 }

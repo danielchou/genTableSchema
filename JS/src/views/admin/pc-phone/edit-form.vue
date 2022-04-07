@@ -12,47 +12,43 @@
         <q-card-section style="max-height: 50vh" class="scroll">
           
             <div class="row q-col-gutter-md">
-                
-                <q-input
-                    class="col"
-                    type="text"
-                    v-model.trim="formData.ComputerName"
-                    label="電腦名稱"
-                    lazy-rules
-                    :rules="[useRequiredInput, (val) => useMaxLength(val, 25)]"
-                />
-                <q-input
-                    class="col"
-                    type="text"
-                    v-model.trim="formData.ComputerIp"
-                    label="電腦IP"
-                    lazy-rules
-                    :rules="[useRequiredInput, (val) => useMaxLength(val, 23)]"
-                />
+            <q-input
+                class="col"
+                type="text"
+                v-model.trim="formData.computerName"
+                label="電腦名稱"
+                lazy-rules
+                :rules="[useRequiredInput, (val) => useMaxLength(val, 25)]"
+            />
+            <q-input
+                class="col"
+                type="text"
+                v-model.trim="formData.computerIp"
+                label="電腦IP"
+                lazy-rules
+                :rules="[useRequiredInput, (val) => useMaxLength(val, 23)]"
+            />
             </div>
             <div class="row q-col-gutter-md">
-                
-                <q-input
-                    class="col"
-                    type="text"
-                    v-model.trim="formData.ExtCode"
-                    label="電話分機"
-                    lazy-rules
-                    :rules="[useRequiredInput, (val) => useMaxLength(val, 10)]"
-                />
+            <q-input
+                class="col"
+                type="text"
+                v-model.trim="formData.extCode"
+                label="電話分機"
+                lazy-rules
+                :rules="[useRequiredInput, (val) => useMaxLength(val, 10)]"
+            />
             </div>
             <div class="row q-col-gutter-md">
-                
-                <q-input
-                    class="col"
-                    type="text"
-                    v-model.trim="formData.Memo"
-                    label="備註"
-                    lazy-rules
-                    :rules="[useRequiredInput, (val) => useMaxLength(val, 600)]"
-                />
+            <q-input
+                class="col"
+                type="text"
+                v-model.trim="formData.memo"
+                label="備註"
+                lazy-rules
+                :rules="[useRequiredInput, (val) => useMaxLength(val, 600)]"
+            />
             </div>
-          <!-- COPYDANIEL: 固定的，免套 -->
           <div class="row q-col-gutter-md" v-show="!isCreate">
             <q-input
               class="col"
@@ -115,20 +111,15 @@ export default {
     const valueChangeFlag = ref(false);
     const $q = useQuasar();
 
-    // COPYDANIEL: Table Schema
     const formData = ref({
-  		SeqNo: 0,
-			ComputerName: '',
-			ComputerIp: '',
-			ExtCode: '',
-			Memo: '',
-			IsEnable: true,
-			Creator: '',
-			Updator: '',
-			CreateDt: '',
-			UpdateDt: '',
-      updateDt: '',
-      updator: '',
+      	seqNo: 0,
+		extCode: '',
+		computerName: '',
+		computerIp: '',
+		memo: '',
+		isEnable: true,
+        updateDt: '',
+        updator: '',
     });
 
     watch(

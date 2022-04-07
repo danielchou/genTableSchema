@@ -1,14 +1,13 @@
 CREATE TABLE [agdSet].[tbCode](
-	[seqNo] [int] IDENTITY(1,1) NOT NULL,
-	[CodeType] [nvarchar(20)]  NOT NULL,
-	[CodeId] [varchar(20)]  NOT NULL,
-	[CodeName] [nvarchar(50)]  NOT NULL,
-	[IsEnable] [bit]  NOT NULL,
-	[Creator] [varchar(20)]  NOT NULL,
-	[Updator] [varchar(20)]  NOT NULL,
-	[CreateDt] [datetime2(7)]  NOT NULL,
-	[UpdateDt] [datetime2(7)]  NOT NULL,
-
+	[SeqNo] [INT] IDENTITY(1,1) NOT NULL
+	[CodeType] [NVARCHAR(20)]  NOT NULL
+	[CodeId] [VARCHAR(20)]  NOT NULL
+	[CodeName] [NVARCHAR(50)]  NOT NULL
+	[IsEnable] [BIT]  NOT NULL
+	[Creator] [VARCHAR(20)]  NOT NULL
+	[Updator] [VARCHAR(20)]  NOT NULL
+	[CreateDt] [DATETIME2]  NOT NULL
+	[UpdateDt] [DATETIME2]  NOT NULL
  CONSTRAINT [PK_tbCode] PRIMARY KEY CLUSTERED 
 (
 	[SeqNo] ASC
@@ -19,7 +18,7 @@ GO
 ALTER TABLE [agdSet].[tbCode] ADD  CONSTRAINT [DF_tbCode_Creator]  DEFAULT ((1)) FOR [Creator]
 GO
 
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'流水號' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbCode', @level2type=N'COLUMN',@level2name=N'seqNo'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'流水號' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbCode', @level2type=N'COLUMN',@level2name=N'SeqNo'
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'代碼分類' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbCode', @level2type=N'COLUMN',@level2name=N'CodeType'
 GO

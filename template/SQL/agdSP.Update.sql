@@ -1,6 +1,6 @@
 /****************************************************************
-** Name: [agdSp].[usp{tb}Update]
-** Desc: {tbDscr}更新
+** Name: [agdSp].[usp$pt_tableName$pt_update]
+** Desc: $pt_tbDscr更新
 **
 ** Return values: 0 成功
 ** Return Recordset: 
@@ -12,7 +12,8 @@
 ** Parameters:
 **	Input
 ** -----------
-    {pt_input}
+    $pt_input
+	@Updator NVARCHAR(20) - 建立者
 **
 **   Output
 ** -----------
@@ -21,13 +22,16 @@
 ** Example:
 ** -----------
 DECLARE @return_value INT
-    ,{pt_Declare}
+    ,$pt_Declare
+	,@Updator NVARCHAR(20)
     ,@ErrorMsg NVARCHAR(100)
 
-    {pt_updateSetVal}
+    $pt_updateSetVal
+	SET @Updator = 'admin'
 
-EXEC @return_value = [agdSp].[usp{tb}Update]
-    {pt_Exec}
+EXEC @return_value = [agdSp].[usp$pt_tableName$pt_update]
+    $pt_Exec
+	,@Updator = @Updator
     ,@ErrorMsg = @ErrorMsg OUTPUT
 
 SELECT @return_value AS 'Return Value'
@@ -38,10 +42,11 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** {pt_DateTime}    Daniel Chou	    first release
+** $pt_DateTime    Daniel Chou	    first release
 *****************************************************************/
-CREATE PROCEDURE [agdSp].[usp{tb}Update] (
-	{pt_Declare}
+CREATE PROCEDURE [agdSp].[usp$pt_tableName$pt_update] (
+	$pt_Declare
+	,@Updator NVARCHAR(20)
 	,@ErrorMsg NVARCHAR(100) = NULL OUTPUT
 	)
 AS
@@ -50,9 +55,9 @@ SET @ErrorMsg = N''
 
 BEGIN
 	BEGIN TRY
-		UPDATE agdSet.tb{tb}
-		SET {pt_UpdateSet}
-            ,UpdateDT = GETDATE()
+		UPDATE agdSet.tb$pt_tableName
+		SET $pt_UpdateSet
+            ,UpdateDt = GETDATE()
 			,Updator = @Updator
 		WHERE SeqNo = @SeqNo;
 	END TRY

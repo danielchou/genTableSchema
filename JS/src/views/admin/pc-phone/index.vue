@@ -41,7 +41,7 @@
         label="是否啟用"
       />
       <q-btn class="q-mr-md" color="secondary" label="查詢" @click="onFilter" />
-      <q-btn class="q-mr-md" color="secondary" label="匯出" />
+      <q-btn class="q-mr-md" color="secondary" label="匯出" @click="onExportReport" />
       <q-btn class="q-mr-md" color="secondary" label="清空條件" @click="onClearFilter" />
     </template>
   </table-list>
@@ -87,48 +87,48 @@ import EditForm from './edit-form';
  */
 
 const columns = [
-  {
+  	{
 		 name: 'seqNo',
 		 label: 'Seq No.',
 		 align: 'right',
 		 field: 'seqNo',
 		 sortable: true,
-},
-{
-		 name: 'computerName',
-		 label: '電腦名稱',
-		 align: 'left',
-		 field: 'computerName',
-		 sortable: true,
-},
-{
-		 name: 'computerIp',
-		 label: '電腦IP',
-		 align: 'left',
-		 field: 'computerIp',
-		 sortable: true,
-},
-{
+	},
+	{
 		 name: 'extCode',
 		 label: '電話分機',
 		 align: 'left',
 		 field: 'extCode',
 		 sortable: true,
-},
-{
+	},
+	{
+		 name: 'computerName',
+		 label: '電腦名稱',
+		 align: 'left',
+		 field: 'computerName',
+		 sortable: true,
+	},
+	{
+		 name: 'computerIp',
+		 label: '電腦IP',
+		 align: 'left',
+		 field: 'computerIp',
+		 sortable: true,
+	},
+	{
 		 name: 'memo',
 		 label: '備註',
 		 align: 'left',
 		 field: 'memo',
 		 sortable: true,
-},
-{
+	},
+	{
 		 name: 'updateDt',
 		 label: '異動時間',
 		 align: 'left',
 		 field: (row) => dayjs(row.updateDt).format('YYYY-MM-DD HH:mm:ss'),
 		 sortable: true,
-},
+	},
   {
     name: 'actions',
     align: 'center',
@@ -172,14 +172,14 @@ export default {
 
     const filterItemOptions = [
       {
-		 label: '電腦名稱',
-		 value: 'ComputerName',
-		 placeholder: '請輸入電腦名稱',
-},
-{
 		 label: '電話分機',
 		 value: 'ExtCode',
 		 placeholder: '請輸入電話分機',
+},
+{
+		 label: '電腦名稱',
+		 value: 'ComputerName',
+		 placeholder: '請輸入電腦名稱',
 },
     ];
 
@@ -255,6 +255,10 @@ export default {
     const onFilter = () => {
       pagination.value.sortBy = 'createDt';
       fetchItems(true);
+    };
+
+    const onExportReport = () => {
+      fetchExportReport();
     };
 
     const onClearFilter = () => {
@@ -338,6 +342,25 @@ export default {
         });
     };
 
+    const fetchExportReport = () => {
+      const filterValues = Object.values(filterItemOptions).reduce(
+        (accu, curr) => ({
+          ...accu,
+          [curr.value]: filter.filterItem.value === curr.value ? filter.filterValue : '',
+        }),
+        {}
+      );
+      const jsonData = {
+        ...filterValues,
+        isEnable: filter.isEnable.value,
+        page: 1,
+        rowsPerPage: 100000,
+        sortColumn: pagination.value.sortBy || defaultSortBy,
+        sortOrder: pagination.value.descending ? 'DESC' : 'ASC',
+      };
+      return store.dispatch(`${moduleName}/fetchExportReport`, { jsonData });
+    };
+
     /**
      ********************************************************************
      * 以下區塊為 Vue Life Cycle 區塊
@@ -367,6 +390,7 @@ export default {
       onClearFormData,
       onPaginationRequest,
       onFilter,
+      onExportReport,
       onClearFilter,
     };
   },

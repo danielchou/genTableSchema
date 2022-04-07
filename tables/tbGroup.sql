@@ -1,13 +1,12 @@
 CREATE TABLE [agdSet].[tbGroup](
-	[SeqNo] [int] IDENTITY(1,1) NOT NULL,
-	[GroupId] [varchar(20)]  NOT NULL,
-	[GroupName] [nvarchar(50)]  NOT NULL,
-	[IsEnable] [bit]  NOT NULL,
-	[Creator] [varchar(20)]  NOT NULL,
-	[Updator] [varchar(20)]  NOT NULL,
-	[CreateDt] [datetime2(7)]  NOT NULL,
-	[UpdateDt] [datetime2(7)]  NOT NULL,
-
+	[SeqNo] [INT] IDENTITY(1,1) NOT NULL
+	[GroupId] [VARCHAR(20)]  NOT NULL
+	[GroupName] [NVARCHAR(50)]  NOT NULL
+	[IsEnable] [BIT]  NOT NULL
+	[Creator] [VARCHAR(20)]  NOT NULL
+	[Updator] [VARCHAR(20)]  NOT NULL
+	[CreateDt] [DATETIME2]  NOT NULL
+	[UpdateDt] [DATETIME2]  NOT NULL
  CONSTRAINT [PK_tbGroup] PRIMARY KEY CLUSTERED 
 (
 	[SeqNo] ASC

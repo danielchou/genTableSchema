@@ -21,17 +21,17 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
         public async ValueTask<BasicResponse<PcPhoneResponse>> GetPcPhone(int seqNo)
         {
             var data = await _dataAccessService
-                .LoadSingData<TbPcPhone, object>(storeProcedure: "agdSp.uspPcPhoneGet", new { seqNo = seqNo, });
+                .LoadSingleData<TbPcPhone, object>(storeProcedure: "agdSp.uspPcPhoneGet", new { seqNo = seqNo, });
             
             if (data == null) return new BasicResponse<PcPhoneResponse>()
-            { resultCode = "9999", resultDescription = "查無資料", data = null };
+            { resultCode = "U999", resultDescription = "查無資料", data = null };
             
             var result = new PcPhoneResponse
             {
 				seqNo = data.SeqNo,
+				extCode = data.ExtCode,
 				computerName = data.ComputerName,
 				computerIp = data.ComputerIp,
-				extCode = data.ExtCode,
 				memo = data.Memo,
 				isEnable = data.IsEnable,
 				creator = data.Creator,
@@ -42,7 +42,7 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
             };
             
             return new BasicResponse<PcPhoneResponse>()
-            { resultCode = "0000", resultDescription = "查詢成功", data = result };
+            { resultCode = "U200", resultDescription = "查詢成功", data = result };
         }
 
         public async ValueTask<BasicResponse<List<PcPhoneResponse>>> QueryPcPhone(PcPhoneQueryRequest request)
@@ -53,15 +53,16 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
 
             var data = await _dataAccessService
                 .LoadData<TbPcPhone, object>(storeProcedure: "agdSp.uspPcPhoneQuery", request);
+                
             if (data.Count()==0) return new BasicResponse<List<PcPhoneResponse>>()
-            { resultCode = "0000", resultDescription = "查無資料", data = null };
+            { resultCode = "U200", resultDescription = "查無資料", data = null };
 
             var result = data.Select(item => new PcPhoneResponse
             {
 				seqNo = item.SeqNo,
+				extCode = item.ExtCode,
 				computerName = item.ComputerName,
 				computerIp = item.ComputerIp,
-				extCode = item.ExtCode,
 				memo = item.Memo,
 				isEnable = item.IsEnable,
 				creator = item.Creator,
@@ -74,29 +75,28 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
             int totalCount = data.FirstOrDefault().Total;
 
             return new BasicResponse<List<PcPhoneResponse>>()
-            { resultCode = "0000", resultDescription = "查詢成功", data = result, total=totalCount };
+            { resultCode = "U200", resultDescription = "查詢成功", data = result, total=totalCount };
         }
 
         public async ValueTask<BasicResponse<bool>> InsertPcPhone(PcPhoneInsertRequest request)
         {
-           
             var creator = _getTokenService.userId ?? "";
 
             var exists = await Exists(0, request.extCode, request.computerIp);
             
             if (exists.data == true) return new BasicResponse<bool>()
-            { resultCode = "9999", resultDescription = "資料重複，請重新設定", data=false };
+            { resultCode = "U999", resultDescription = "資料重複，請重新設定", data=false };
                         
             request.creator = creator;
 
             var data = await _dataAccessService
-                .OpreatData(storeProcedure: "agdSp.uspPcPhoneInsert", request);
+                .OperateData(storeProcedure: "agdSp.uspPcPhoneInsert", request);
 
             if (data == 0) return new BasicResponse<bool>() 
-            { resultCode = "9999", resultDescription = "新增失敗", data = false };
+            { resultCode = "U999", resultDescription = "新增失敗", data = false };
             
             return new BasicResponse<bool>() 
-            { resultCode = "0000", resultDescription = "新增成功", data = true };
+            { resultCode = "U200", resultDescription = "新增成功", data = true };
         }
 
         public async ValueTask<BasicResponse<bool>> UpdatePcPhone(PcPhoneUpdateRequest request)
@@ -106,47 +106,47 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
             var exists = await Exists(request.seqNo, request.extCode, request.computerIp);
             
             if (exists.data == true) return new BasicResponse<bool>()
-            { resultCode = "9999", resultDescription = "資料重複，請重新設定", data = false };
+            { resultCode = "U999", resultDescription = "資料重複，請重新設定", data = false };
 
             request.updator = updator;            
 
             var data = await _dataAccessService
-                .OpreatData(storeProcedure: "agdSp.uspPcPhoneUpdate", request);
+                .OperateData(storeProcedure: "agdSp.uspPcPhoneUpdate", request);
 
             if (data == 0) return new BasicResponse<bool>() 
-            { resultCode = "9999", resultDescription = "更新失敗", data = false };
+            { resultCode = "U999", resultDescription = "更新失敗", data = false };
             
             return new BasicResponse<bool>() 
-            { resultCode = "0000", resultDescription = "更新成功", data = true };
+            { resultCode = "U200", resultDescription = "更新成功", data = true };
         }
 
         public async ValueTask<BasicResponse<bool>> DeletePcPhone(int seqNo)
         {
             var data = await _dataAccessService
-                .OpreatData(storeProcedure: "agdSp.uspPcPhoneDelete", new { seqNo = seqNo });
+                .OperateData(storeProcedure: "agdSp.uspPcPhoneDelete", new { seqNo = seqNo });
 
             if (data == 0) return new BasicResponse<bool>() 
-            { resultCode = "9999", resultDescription = "刪除失敗", data = false };
+            { resultCode = "U999", resultDescription = "刪除失敗", data = false };
             
             return new BasicResponse<bool>() 
-            { resultCode = "0000", resultDescription = "刪除成功", data = true };
+            { resultCode = "U200", resultDescription = "刪除成功", data = true };
         }
 
-        public async ValueTask<BasicResponse<bool>> Exists(int seqNo,string computerIp,string extCode)
+        public async ValueTask<BasicResponse<bool>> Exists(int seqNo,string extCode,string computerIp)
         {
-            var exist = await _dataAccessService
-                .LoadSingData<int, object>(storeProcedure: "agdSp.uspPcPhoneExists", new
+            var data = await _dataAccessService
+                .LoadSingleData<int, object>(storeProcedure: "agdSp.uspPcPhoneExists", new
                 {
 					SeqNo = seqNo,
-					ComputerIp = computerIp,
-					ExtCode = extCode,               
+					ExtCode = extCode,
+					ComputerIp = computerIp,               
                 });
 
-            if (exist == 0) return new BasicResponse<bool>()
-            { resultCode = "9999", resultDescription = "資料重複", data = false };
+            if (data == 0) return new BasicResponse<bool>()
+            { resultCode = "U999", resultDescription = "資料重複", data = false };
 
             return new BasicResponse<bool>()
-            { resultCode = "0000", resultDescription = "資料正常", data = true };
+            { resultCode = "U200", resultDescription = "資料正常", data = true };
         }
     }
 }

@@ -1,6 +1,6 @@
 /****************************************************************
-** Name: [agdSp].[usp{tb}Exists]
-** Desc: {tbDscr}查詢是否重複
+** Name: [agdSp].[usp$pt_tableName$pt_exists]
+** Desc: $pt_tbDscr查詢是否重複
 **
 ** Return values: 0 成功
 ** Return Recordset: 
@@ -12,7 +12,7 @@
 ** Parameters:
 **	Input
 ** -----------
-	{pt_input}
+	$pt_input
 **
 **   Output
 ** -----------
@@ -21,14 +21,14 @@
 ** Example: 
 ** -----------
 DECLARE @return_value INT
-    ,{pt_Declare}
+    ,$pt_Declare
     ,@ErrorMsg NVARCHAR(100)
 
-    {pt_existSetValue}
+    $pt_existSetValue
 
-EXEC @return_value = [agdSp].[usp{tb}Exists] 
-    {pt_Exec}
-    ,@ErrorMsg = @ErrorMsg OUTPUT
+	EXEC @return_value = [agdSp].[usp$pt_tableName$pt_exists] 
+    	$pt_Exec
+    	,@ErrorMsg = @ErrorMsg OUTPUT
 
 SELECT @return_value AS 'Return Value'
     ,@ErrorMsg AS N'@ErrorMsg'
@@ -38,11 +38,11 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** {pt_DateTime}    Daniel Chou     first release
+** $pt_DateTime    Daniel Chou     first release
 *****************************************************************/
-CREATE PROCEDURE [agdSp].[usp{tb}Exists]
-    {pt_Declare}
-    ,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
+CREATE PROCEDURE [agdSp].[usp$pt_tableName$pt_exists]
+    $pt_Declare
+    ,@ErrorMsg NVARCHAR(100) = NULL OUTPUT
 AS
 SET NOCOUNT ON
 SET @ErrorMsg = N''
@@ -50,10 +50,10 @@ SET @ErrorMsg = N''
 BEGIN
 	BEGIN TRY
 		SELECT COUNT(SeqNo) AS Total
-		FROM agdSet.tb{tb}
+		FROM agdSet.tb$pt_tableName
 		WHERE SeqNo != @SeqNo
 			AND ( 
-                {pt_fColOr}
+                $pt_fColOr
             );
 	END TRY
 

@@ -5,7 +5,10 @@
     /// </summary>
     public class  PcPhoneResponse : CommonResponse
     {
-        
+        /// <summary>
+        /// 電話分機
+        /// </summary>
+        public string extCode { get; set; }
         /// <summary>
         /// 電腦名稱
         /// </summary>
@@ -14,10 +17,6 @@
         /// 電腦IP
         /// </summary>
         public string computerIp { get; set; }
-        /// <summary>
-        /// 電話分機
-        /// </summary>
-        public string extCode { get; set; }
         /// <summary>
         /// 備註
         /// </summary>

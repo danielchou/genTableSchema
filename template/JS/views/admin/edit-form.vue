@@ -10,8 +10,7 @@
 
         
         <q-card-section style="max-height: 50vh" class="scroll">
-          //$pt_EditForm_q_input
-          <!-- COPYDANIEL: 固定的，免套 -->
+          $pt_EditForm_q_input
           <div class="row q-col-gutter-md" v-show="!isCreate">
             <q-input
               class="col"
@@ -72,13 +71,12 @@ export default {
   setup(props, { emit }) {
     const { modelValue, fetchItemForEdit, isCreate } = toRefs(props);
     const valueChangeFlag = ref(false);
-    const $q = useQuasar();
+    const $$q = useQuasar();
 
-    // COPYDANIEL: Table Schema
     const formData = ref({
-  //$pt_editForm_formData
-      updateDt: '',
-      updator: '',
+      $pt_editForm_formData
+        updateDt: '',
+        updator: '',
     });
 
     watch(
@@ -101,7 +99,7 @@ export default {
 
     const onCancel = () => {
       if (valueChangeFlag.value) {
-        useConfirmDialog($q, { message: '請確認是否要取消，所有未儲存的異動將會消失。' }).onOk(
+        useConfirmDialog($$q, { message: '請確認是否要取消，所有未儲存的異動將會消失。' }).onOk(
           () => {
             emit('update:model-value', false);
           }
@@ -142,10 +140,10 @@ export default {
 
 .is-update {
   &.outer-card {
-    background: rgba($color: $esungreen3, $alpha: 1);
+    background: rgba($$color: $$esungreen3, $$alpha: 1);
   }
   .card-title {
-    background: rgba($color: $esungreen, $alpha: 1);
+    background: rgba($$color: $$esungreen, $$alpha: 1);
     color: white;
   }
 }

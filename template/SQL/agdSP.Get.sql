@@ -1,11 +1,11 @@
 /****************************************************************
-** Name: [agdSp].[usp{tb}Get]
-** Desc: {tbDscr}查詢
+** Name: [agdSp].[usp$pt_tableName$pt_get]
+** Desc: $pt_tbDscr查詢
 **
 ** Return values: 0 成功
 ** Return Recordset: 
-{pt_getSelectAll}
-**	UpdatorName - 更新者名稱
+$pt_getSelectAll
+**	UpdatorName       NVARCHAR(20)   - 更新者名稱
 **
 ** Called by: 
 **	AGD WebApi
@@ -13,7 +13,7 @@
 ** Parameters:
 **	Input
 ** -----------
-	{pt_input}
+	$pt_input
 **
 **   Output
 ** -----------
@@ -25,9 +25,9 @@
 		,@SeqNo INT
 		,@ErrorMsg NVARCHAR(100)
 
-	{pt_existSetValue}
+	$pt_existSetValue
 
-	EXEC @return_value = [agdSp].[usp{tb}Get] @SeqNo = @SeqNo
+	EXEC @return_value = [agdSp].[usp$pt_tableName$pt_get] @SeqNo = @SeqNo
 		,@ErrorMsg = @ErrorMsg OUTPUT
 
 	SELECT @return_value AS 'Return Value'
@@ -38,9 +38,9 @@
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** {pt_DateTime}    Daniel Chou	    first release
+** $pt_DateTime    	Daniel Chou	    first release
 *****************************************************************/
-CREATE PROCEDURE [agdSp].[usp{tb}Get] (
+CREATE PROCEDURE [agdSp].[usp$pt_tableName$pt_get] (
 	@SeqNo INT
 	,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
 	)
@@ -51,9 +51,9 @@ SET @ErrorMsg = N''
 BEGIN
 	BEGIN TRY
 		SELECT
-			{pt_fCol}
+			$pt_fColAll
 			,u.UserName AS UpdatorName
-		FROM agdSet.tb{tb} AS f
+		FROM agdSet.tb$pt_tableName AS f
 		JOIN agdSet.tbUser AS u ON u.UserId = f.Updator
 		WHERE f.SeqNo = @SeqNo;
 	END TRY

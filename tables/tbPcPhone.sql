@@ -1,15 +1,14 @@
 CREATE TABLE [agdSet].[tbPcPhone](
-	[SeqNo] [int] IDENTITY(1,1) NOT NULL,
-	[ComputerName] [nvarchar(20)]  NOT NULL,
-	[ComputerIp] [nvarchar(20)]  NOT NULL,
-	[ExtCode] [nvarchar(20)]  NOT NULL,
-	[Memo] [nvarchar(600)]  NOT NULL,
-	[IsEnable] [bit]  NOT NULL,
-	[Creator] [varchar(20)]  NOT NULL,
-	[Updator] [varchar(20)]  NOT NULL,
-	[CreateDt] [datetime2(7)]  NOT NULL,
-	[UpdateDt] [datetime2(7)]  NOT NULL,
-
+	[SeqNo] [INT] IDENTITY(1,1) NOT NULL
+	[ExtCode] [NVARCHAR(10)]  NOT NULL
+	[ComputerName] [NVARCHAR(25)]  NOT NULL
+	[ComputerIp] [NVARCHAR(23)]  NOT NULL
+	[Memo] [NVARCHAR(600)]  NOT NULL
+	[IsEnable] [BIT]  NOT NULL
+	[Creator] [VARCHAR(20)]  NOT NULL
+	[Updator] [VARCHAR(20)]  NOT NULL
+	[CreateDt] [DATETIME2]  NOT NULL
+	[UpdateDt] [DATETIME2]  NOT NULL
  CONSTRAINT [PK_tbPcPhone] PRIMARY KEY CLUSTERED 
 (
 	[SeqNo] ASC
@@ -22,11 +21,11 @@ GO
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Seq No.' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'SeqNo'
 GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'電話分機' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'ExtCode'
+GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'電腦名稱' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'ComputerName'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'IP 位址' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'ComputerIp'
-GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'電話分機' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'ExtCode'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'電腦IP' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'ComputerIp'
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'備註' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'Memo'
 GO

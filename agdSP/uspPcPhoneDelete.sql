@@ -12,7 +12,7 @@
 ** Parameters:
 **	Input
 ** -----------
-	@SeqNo INT - 部門序號
+	@SeqNo           INT          - Seq No.
 **
 **   Output
 ** -----------
@@ -24,9 +24,10 @@
 		,@SeqNo INT
 		,@ErrorMsg NVARCHAR(100)
 
-	SET @SeqNo = 25
+	SET @SeqNo = 11.0
 
-	EXEC @return_value = [agdSp].[uspPcPhoneDelete] @SeqNo = @SeqNo
+	EXEC @return_value = [agdSp].[uspPcPhoneDelete] 
+		@SeqNo = @SeqNo
 		,@ErrorMsg = @ErrorMsg OUTPUT
 
 	SELECT @return_value AS 'Return Value'
@@ -35,12 +36,12 @@
 *****************************************************************
 ** Change History
 *****************************************************************
-** Date:		Author:			Description:
+** Date:		 	Author:				Description:
 ** ---------- ------- ------------------------------------
-** 2022-04-01 13:51:30 Jerry Yang		first release
+** 2022/04/07 15:31:24 	Jerry Yang			first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[uspPcPhoneDelete] (
-	@SeqNo INT
+	SeqNo INT
 	,@ErrorMsg NVARCHAR(100) = NULL OUTPUT
 	)
 AS

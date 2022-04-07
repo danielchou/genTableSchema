@@ -1,15 +1,14 @@
 CREATE TABLE [agdSet].[tbFunc](
-	[SeqNo] [int] IDENTITY(1,1) NOT NULL,
-	[FuncId] [varchar(20)]  NOT NULL,
-	[FuncName] [nvarchar(50)]  NOT NULL,
-	[FuncPath] [nvarchar(20)]  NOT NULL,
-	[FuncIcon] [nvarchar(20)]  NOT NULL,
-	[IsEnable] [bit]  NOT NULL,
-	[Creator] [varchar(20)]  NOT NULL,
-	[Updator] [varchar(20)]  NOT NULL,
-	[CreateDt] [datetime2(7)]  NOT NULL,
-	[UpdateDt] [datetime2(7)]  NOT NULL,
-
+	[SeqNo] [INT] IDENTITY(1,1) NOT NULL
+	[FuncId] [VARCHAR(20)]  NOT NULL
+	[FuncName] [NVARCHAR(50)]  NOT NULL
+	[FuncPath] [NVARCHAR(20)]  NOT NULL
+	[FuncIcon] [NVARCHAR(20)]  NOT NULL
+	[IsEnable] [BIT]  NOT NULL
+	[Creator] [VARCHAR(20)]  NOT NULL
+	[Updator] [VARCHAR(20)]  NOT NULL
+	[CreateDt] [DATETIME2]  NOT NULL
+	[UpdateDt] [DATETIME2]  NOT NULL
  CONSTRAINT [PK_tbFunc] PRIMARY KEY CLUSTERED 
 (
 	[SeqNo] ASC

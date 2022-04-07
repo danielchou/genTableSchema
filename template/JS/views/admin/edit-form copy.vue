@@ -10,9 +10,7 @@
 
         
         <q-card-section style="max-height: 50vh" class="scroll">
-          
           <div class="row q-col-gutter-md">
-            <!-- COPYDANIEL: 一個 q-input 為一組 -->
             <q-input
               class="col"
               type="text"
@@ -50,7 +48,6 @@
               :rules="[useRequiredInput, (val) => useMaxLength(val, 20)]"
             />
           </div>
-          <!-- COPYDANIEL: 固定的，免套 -->
           <div class="row q-col-gutter-md" v-show="!isCreate">
             <q-input
               class="col"

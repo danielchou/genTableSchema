@@ -65,10 +65,8 @@ namespace ESUN.AGD.WebApi.Controllers
         /// isEnable - 是否啟用
         /// createDt - 建立日期
         /// creator - 建立者
-        /// createIP - 建立IP
         /// updateDt - 更新日期
         /// updator - 更新者
-        /// updateIP - 更新IP
         /// updatorName - 更新者名稱
         /// </returns>        
         [Authorize]

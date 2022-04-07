@@ -7,7 +7,7 @@
     "todohighlight.keywordsPattern": "\\$pt_([\da-zA-Z0-9_]+)",
     "todohighlight.defaultStyle": {
         "color": "#333",
-        "backgroundColor": "#FFD111",
+        "backgroundColor": "#8CDCFE",
         "cursor": "pointer",
         "border": "1px solid #eee",
         "borderRadius": "2px",

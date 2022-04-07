@@ -55,3 +55,35 @@
     # f.write(t)
     # f.close()
 
+##-------------------------------------------------
+
+    # tmpJSFile = codecs.open(f"template/JS/views/admin/index.vue",mode="r",encoding="utf-8", buffering=-1).read()
+    # t1 = Template(tmpJSFile).substitute(jsDict)
+    # fileName = f"JS/src/views/admin/{pt_table_name}/index.vue"
+    # os.makedirs(os.path.dirname(fileName), exist_ok=True)
+    # f = codecs.open(fileName, mode="w", encoding="utf-8", errors="strict")
+    # f.write(t1)
+    # f.close()
+
+    # tmp_editForm = codecs.open(f"template/JS/views/admin/edit-form.vue",mode="r",encoding="utf-8", buffering=-1).read()
+    # t2 = MyTemplate(tmp_editForm).substitute()
+    # fileName = f"JS/src/views/admin/{pt_table_name}/edit-form.vue"
+    # os.makedirs(os.path.dirname(fileName), exist_ok=True)
+    # f = codecs.open(fileName, mode="w", encoding="utf-8", errors="strict")
+    # f.write(t2)
+    # f.close()
+
+    # tmp_actionsForm = codecs.open(f"template/JS/store/admin/actions.js",mode="r",encoding="utf-8", buffering=-1).read()
+    # t3 = MyTemplate(tmp_actionsForm).substitute(pt_TableName = pt_TableName)
+    # fileName = f"JS/src/store/admin/{pt_table_name}/actions.js"
+    # os.makedirs(os.path.dirname(fileName), exist_ok=True)
+    # f = codecs.open(fileName, mode="w", encoding="utf-8", errors="strict")
+    # f.write(t3)
+    # f.close()
+    
+##-------------------------------------------------
+    #df_IsExist = df[~(df[keyCol]=="")]                                      #主軸欄位:KeyColumn in Excel.
+    #dfc_IsExist = dfc[dfc["col"].isin(df_IsExist["Column"].tolist())]       #衍生出的另一個dataframe
+    #target = df_IsExist.merge(dfc_IsExist, left_on="Column", right_on="col")
+    #orderByList = df[df["orderBy"]=="V"]["Column"].tolist()             #找出orderBy欄位有哪些欄位
+    #df_OrderBy = df[df["Column"].isin(orderByList)]

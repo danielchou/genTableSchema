@@ -25,7 +25,7 @@ $pt_ColDscr_ParasPK
         /// </param>
         /// <returns>
 $pt_ColDscr_GetReturnAll
-        /// updatorName - 更新者名稱
+        /// updatorName      - string     - 更新者名稱
         /// </returns>
         [Authorize]
         [HttpGet("{seqNo}")]
@@ -38,7 +38,7 @@ $pt_ColDscr_GetReturnAll
         /// 搜尋$TbDscr設定 
         /// </summary>
         /// <param name="request">
-$pt_ColDscr_QueryParas
+$pt_ColDscr_QueryParas_Query
         /// page             - int        - 分頁
         /// rowsPerPage      - int        - 每頁筆數
         /// sortColumn       - string     - 排序欄位
@@ -46,7 +46,7 @@ $pt_ColDscr_QueryParas
         /// </param>
         /// <returns>
 $pt_ColDscr_GetReturnAll
-        /// updatorName - 更新者名稱
+        /// updatorName      - string     - 更新者名稱
         /// </returns>        
         [Authorize]
         [HttpGet("query")]

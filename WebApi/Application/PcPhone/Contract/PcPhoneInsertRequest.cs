@@ -3,9 +3,12 @@
     /// <summary>
     /// 電腦電話新增請求
     /// </summary>
-    public class PcPhoneInsertRequest:CommonInsertRequest
+    public class PcPhoneInsertRequest : CommonInsertRequest
     {
-        
+                /// <summary>
+        /// 電話分機
+        /// </summary>
+        public string extCode { get; set; }
         /// <summary>
         /// 電腦名稱
         /// </summary>
@@ -14,10 +17,6 @@
         /// 電腦IP
         /// </summary>
         public string computerIp { get; set; }
-        /// <summary>
-        /// 電話分機
-        /// </summary>
-        public string extCode { get; set; }
         /// <summary>
         /// 備註
         /// </summary>

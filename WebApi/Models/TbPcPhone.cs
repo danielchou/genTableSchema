@@ -8,6 +8,10 @@
         /// </summary>
         public int SeqNo { get; set; } 
         /// <summary>
+        /// 電話分機
+        /// </summary>
+        public string ExtCode { get; set; }  = null!;
+        /// <summary>
         /// 電腦名稱
         /// </summary>
         public string ComputerName { get; set; }  = null!;
@@ -15,10 +19,6 @@
         /// 電腦IP
         /// </summary>
         public string ComputerIp { get; set; }  = null!;
-        /// <summary>
-        /// 電話分機
-        /// </summary>
-        public string ExtCode { get; set; }  = null!;
         /// <summary>
         /// 備註
         /// </summary>

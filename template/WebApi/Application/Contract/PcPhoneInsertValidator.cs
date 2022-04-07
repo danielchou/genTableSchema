@@ -10,5 +10,4 @@ namespace ESUN.AGD.WebApi.Application.$pt_TableName.Contract
 $pt_insertValidator
         }
     }
-
 }

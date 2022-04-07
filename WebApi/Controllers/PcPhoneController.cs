@@ -25,33 +25,33 @@ namespace ESUN.AGD.WebApi.Controllers
         /// </param>
         /// <returns>
 		/// seqNo            - int        - Seq No.
+		/// extCode          - string     - 電話分機
 		/// computerName     - string     - 電腦名稱
 		/// computerIp       - string     - 電腦IP
-		/// extCode          - string     - 電話分機
 		/// memo             - string     - 備註
 		/// isEnable         - bool       - 是否啟用?
 		/// creator          - string     - 建立者
 		/// updator          - string     - 更新者
 		/// createDt         - DateTime   - 建立時間
 		/// updateDt         - DateTime   - 異動時間
-        /// updatorName - 更新者名稱
+        /// updatorName      - string     - 更新者名稱
         /// </returns>
         [Authorize]
         [HttpGet("{seqNo}")]
         public async ValueTask<IActionResult> GetPcPhone(int seqNo)
         {
-            return Ok(await _PcPhoneService.GetPcPhone(SeqNo));
+            return Ok(await _PcPhoneService.GetPcPhone(seqNo));
         }
 
         /// <summary>
         /// 搜尋電腦電話設定 
         /// </summary>
         /// <param name="request">
+		/// extCode          - string     - 電話分機
 		/// computerName     - string     - 電腦名稱
 		/// computerIp       - string     - 電腦IP
-		/// extCode          - string     - 電話分機
 		/// memo             - string     - 備註
-		/// isEnable         - bool       - 是否啟用?
+		/// isEnable         - string     - 是否啟用?
         /// page             - int        - 分頁
         /// rowsPerPage      - int        - 每頁筆數
         /// sortColumn       - string     - 排序欄位
@@ -59,16 +59,16 @@ namespace ESUN.AGD.WebApi.Controllers
         /// </param>
         /// <returns>
 		/// seqNo            - int        - Seq No.
+		/// extCode          - string     - 電話分機
 		/// computerName     - string     - 電腦名稱
 		/// computerIp       - string     - 電腦IP
-		/// extCode          - string     - 電話分機
 		/// memo             - string     - 備註
 		/// isEnable         - bool       - 是否啟用?
 		/// creator          - string     - 建立者
 		/// updator          - string     - 更新者
 		/// createDt         - DateTime   - 建立時間
 		/// updateDt         - DateTime   - 異動時間
-        /// updatorName - 更新者名稱
+        /// updatorName      - string     - 更新者名稱
         /// </returns>        
         [Authorize]
         [HttpGet("query")]
@@ -81,9 +81,9 @@ namespace ESUN.AGD.WebApi.Controllers
         /// 新增電腦電話設定 
         /// </summary>
         /// <param name="request">
+		/// extCode          - string     - 電話分機
 		/// computerName     - string     - 電腦名稱
 		/// computerIp       - string     - 電腦IP
-		/// extCode          - string     - 電話分機
 		/// memo             - string     - 備註
 		/// isEnable         - bool       - 是否啟用?
         /// </param>
@@ -101,9 +101,9 @@ namespace ESUN.AGD.WebApi.Controllers
         /// </summary>
         /// <param name="request">
 		/// seqNo            - int        - Seq No.
+		/// extCode          - string     - 電話分機
 		/// computerName     - string     - 電腦名稱
 		/// computerIp       - string     - 電腦IP
-		/// extCode          - string     - 電話分機
 		/// memo             - string     - 備註
 		/// isEnable         - bool       - 是否啟用?
         /// </param>
@@ -126,7 +126,7 @@ namespace ESUN.AGD.WebApi.Controllers
         [HttpDelete]
         public async ValueTask<IActionResult> DetelePcPhone(int seqNo)
         {
-            return Ok(await _PcPhoneService.DeletePcPhone(SeqNo));
+            return Ok(await _PcPhoneService.DeletePcPhone(seqNo));
         }
 
     }

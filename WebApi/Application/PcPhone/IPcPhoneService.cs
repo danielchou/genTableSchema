@@ -12,16 +12,16 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
         /// </param>
         /// <returns>
 		/// seqNo            - int        - Seq No.
+		/// extCode          - string     - 電話分機
 		/// computerName     - string     - 電腦名稱
 		/// computerIp       - string     - 電腦IP
-		/// extCode          - string     - 電話分機
 		/// memo             - string     - 備註
 		/// isEnable         - bool       - 是否啟用?
 		/// creator          - string     - 建立者
 		/// updator          - string     - 更新者
 		/// createDt         - DateTime   - 建立時間
 		/// updateDt         - DateTime   - 異動時間
-        /// updatorName - 更新者名稱
+        /// updatorName      - string     - 更新者名稱
         /// </returns>
         ValueTask<BasicResponse<PcPhoneResponse>> GetPcPhone(int seqNo);
 
@@ -29,21 +29,21 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
         /// 搜尋電腦電話設定 
         /// </summary>
         /// <param name="request">
+		/// extCode          - string     - 電話分機
 		/// computerName     - string     - 電腦名稱
 		/// computerIp       - string     - 電腦IP
-		/// extCode          - string     - 電話分機
 		/// memo             - string     - 備註
-		/// isEnable         - bool       - 是否啟用?
+		/// isEnable         - string     - 是否啟用?
         /// page             - int        - 分頁
         /// rowsPerPage      - int        - 每頁筆數
         /// sortColumn       - string     - 排序欄位
-        /// sortOrder        - bool       - 排序順序
+        /// sortOrder        - string     - 排序順序
         /// </param>
         /// <returns>
 		/// seqNo            - int        - Seq No.
+		/// extCode          - string     - 電話分機
 		/// computerName     - string     - 電腦名稱
 		/// computerIp       - string     - 電腦IP
-		/// extCode          - string     - 電話分機
 		/// memo             - string     - 備註
 		/// isEnable         - bool       - 是否啟用?
 		/// creator          - string     - 建立者
@@ -58,9 +58,9 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
         /// 新增電腦電話設定 
         /// </summary>
         /// <param name="request">
+		/// extCode          - string     - 電話分機
 		/// computerName     - string     - 電腦名稱
 		/// computerIp       - string     - 電腦IP
-		/// extCode          - string     - 電話分機
 		/// memo             - string     - 備註
 		/// isEnable         - bool       - 是否啟用?
         /// </param>
@@ -73,9 +73,9 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
         /// </summary>
         /// <param name="request">
 		/// seqNo            - int        - Seq No.
+		/// extCode          - string     - 電話分機
 		/// computerName     - string     - 電腦名稱
 		/// computerIp       - string     - 電腦IP
-		/// extCode          - string     - 電話分機
 		/// memo             - string     - 備註
 		/// isEnable         - bool       - 是否啟用?
         /// </param>
@@ -96,11 +96,11 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
         /// </summary>
         /// <param>
 		/// seqNo            - int        - Seq No.
+		/// extCode          - string     - 電話分機
 		/// computerIp       - string     - 電腦IP
-		/// extCode          - string     - 電話分
         /// </param>
         /// <returns></returns>
-        ValueTask<BasicResponse<bool>> Exists(int seqNo,string computerIp,string extCode);
+        ValueTask<BasicResponse<bool>> Exists(int seqNo,string extCode,string computerIp);
 
     }
 }

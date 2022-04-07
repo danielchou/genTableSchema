@@ -1,6 +1,6 @@
 /****************************************************************
-** Name: [agdSp].[usp{tb}Delete]
-** Desc: {tbDscr}刪除
+** Name: [agdSp].[usp$pt_tableName$pt_delete]
+** Desc: $pt_tbDscr刪除
 **
 ** Return values: 0 成功
 ** Return Recordset: 
@@ -12,7 +12,7 @@
 ** Parameters:
 **	Input
 ** -----------
-	@SeqNo INT - 部門序號
+	$pt_inputPK
 **
 **   Output
 ** -----------
@@ -21,12 +21,13 @@
 ** Example:
 ** -----------
 	DECLARE @return_value INT
-		,@SeqNo INT
+		,$pt_DeclarePK
 		,@ErrorMsg NVARCHAR(100)
 
-	SET @SeqNo = 25
+	$pt_deleteSetVal
 
-	EXEC @return_value = [agdSp].[usp{tb}Delete] @SeqNo = @SeqNo
+	EXEC @return_value = [agdSp].[usp$pt_tableName$pt_delete] 
+		$pt_cmmtExecPK
 		,@ErrorMsg = @ErrorMsg OUTPUT
 
 	SELECT @return_value AS 'Return Value'
@@ -35,12 +36,12 @@
 *****************************************************************
 ** Change History
 *****************************************************************
-** Date:		Author:			Description:
+** Date:		 	Author:				Description:
 ** ---------- ------- ------------------------------------
-** {pt_DateTime} Jerry Yang		first release
+** $pt_DateTime 	Jerry Yang			first release
 *****************************************************************/
-CREATE PROCEDURE [agdSp].[usp{tb}Delete] (
-	@SeqNo INT
+CREATE PROCEDURE [agdSp].[usp$pt_tableName$pt_delete] (
+	$pt_parasSetPK
 	,@ErrorMsg NVARCHAR(100) = NULL OUTPUT
 	)
 AS
@@ -49,8 +50,8 @@ SET @ErrorMsg = N''
 
 BEGIN
 	BEGIN TRY
-		DELETE agdSet.tb{tb}
-		WHERE SeqNo = @SeqNo;
+		DELETE agdSet.tb$pt_tableName
+		WHERE $pt_queryWherePK;
 	END TRY
 
 	BEGIN CATCH

@@ -12,7 +12,7 @@ namespace ESUN.AGD.WebApi.Application.$pt_TableName
         /// </param>
         /// <returns>
 $pt_ColDscr_GetReturnAll
-        /// updatorName - 更新者名稱
+        /// updatorName      - string     - 更新者名稱
         /// </returns>
         ValueTask<BasicResponse<$pt_TableName$response>> Get$pt_TableName(int seqNo);
 
@@ -20,11 +20,11 @@ $pt_ColDscr_GetReturnAll
         /// 搜尋$TbDscr設定 
         /// </summary>
         /// <param name="request">
-$pt_ColDscr_QueryParas
+$pt_ColDscr_QueryParas_Query
         /// page             - int        - 分頁
         /// rowsPerPage      - int        - 每頁筆數
         /// sortColumn       - string     - 排序欄位
-        /// sortOrder        - bool       - 排序順序
+        /// sortOrder        - string     - 排序順序
         /// </param>
         /// <returns>
 $pt_ColDscr_GetReturnAll
@@ -48,7 +48,8 @@ $pt_ColDscr_InsertParas
         /// <param name="request">
 $pt_colDscr_UpdateParas
         /// </param>
-        /// <returns></returns>
+        /// <returns>
+        /// </returns>
         ValueTask<BasicResponse<bool>> Update$pt_TableName($pt_TableName$updateRequest request);
 
         /// <summary>
@@ -57,7 +58,8 @@ $pt_colDscr_UpdateParas
         /// <param>
 $pt_ColDscr_ParasPK
         /// </param>
-        /// <returns></returns>
+        /// <returns>
+        /// </returns>
         ValueTask<BasicResponse<bool>> Delete$pt_TableName($pt_InputPK);
 
         /// <summary>
@@ -66,7 +68,8 @@ $pt_ColDscr_ParasPK
         /// <param>
 $pt_colDscr_ExistsParas
         /// </param>
-        /// <returns></returns>
+        /// <returns>
+        /// </returns>
         ValueTask<BasicResponse<bool>> Exists($pt_InputIsExist);
 
     }

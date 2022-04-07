@@ -4,17 +4,17 @@
 **
 ** Return values: 0 成功
 ** Return Recordset: 
-**  SeqNo	 - Seq No.
-**  ComputerName	 - 電腦名稱
-**  ComputerIp	 - IP 位址
-**  ExtCode	 - 電話分機
-**  Memo	 - 備註
-**  IsEnable	 - 是否啟用?
-**  Creator	 - 建立者
-**  Updator	 - 更新者
-**  CreateDt	 - 建立時間
-**  UpdateDt	 - 異動時間
-**	UpdatorName - 更新者名稱
+** SeqNo            INT          - Seq No.
+** ExtCode          NVARCHAR(10) - 電話分機
+** ComputerName     NVARCHAR(25) - 電腦名稱
+** ComputerIp       NVARCHAR(23) - 電腦IP
+** Memo             NVARCHAR(600) - 備註
+** IsEnable         BIT          - 是否啟用?
+** Creator          VARCHAR(20)  - 建立者
+** Updator          VARCHAR(20)  - 更新者
+** CreateDt         DATETIME2    - 建立時間
+** UpdateDt         DATETIME2    - 異動時間
+**	UpdatorName       NVARCHAR(20)   - 更新者名稱
 **
 ** Called by: 
 **	AGD WebApi
@@ -22,8 +22,7 @@
 ** Parameters:
 **	Input
 ** -----------
-	@SeqNo	INT - Seq No.
-	@ExtCode	NVARCHAR(20) - 電話分機
+	@SeqNo           INT          - Seq No.
 **
 **   Output
 ** -----------
@@ -35,8 +34,7 @@
 		,@SeqNo INT
 		,@ErrorMsg NVARCHAR(100)
 
-	SET @SeqNo = '1'
-	SET @ExtCode = '1111'
+	SET @SeqNo = 1
 
 	EXEC @return_value = [agdSp].[uspPcPhoneGet] @SeqNo = @SeqNo
 		,@ErrorMsg = @ErrorMsg OUTPUT
@@ -49,7 +47,7 @@
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022-04-01 13:51:30    Daniel Chou	    first release
+** 2022/04/07 15:31:24    	Daniel Chou	    first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[uspPcPhoneGet] (
 	@SeqNo INT
@@ -64,6 +62,14 @@ BEGIN
 		SELECT
 			f.SeqNo
 			,f.ExtCode
+			,f.ComputerName
+			,f.ComputerIp
+			,f.Memo
+			,f.IsEnable
+			,f.Creator
+			,f.Updator
+			,f.CreateDt
+			,f.UpdateDt
 			,u.UserName AS UpdatorName
 		FROM agdSet.tbPcPhone AS f
 		JOIN agdSet.tbUser AS u ON u.UserId = f.Updator

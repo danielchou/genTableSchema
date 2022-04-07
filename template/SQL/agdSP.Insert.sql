@@ -1,6 +1,6 @@
 /****************************************************************
-** Name: [agdSp].[usp{tb}Insert]
-** Desc: {tbDscr}新增
+** Name: [agdSp].[usp$pt_tableName$pt_insert]
+** Desc: $pt_tbDscr新增
 **
 ** Return values: 0 成功
 ** Return Recordset: 
@@ -12,7 +12,7 @@
 ** Parameters:
 **	Input
 ** -----------
-	{pt_input}
+	$pt_input
 	@Creator NVARCHAR(20) - 建立者
 **
 **   Output
@@ -22,17 +22,17 @@
 ** Example: 
 ** -----------
 DECLARE @return_value INT
-	,{pt_Declare}
+	,$pt_Declare
 	,@Creator VARCHAR(20)
 	,@ErrorMsg NVARCHAR(100);
 
-	{pt_insertSetVal}
+	$pt_insertSetVal
 	SET @Creator = 'admin'
 
-EXEC @return_value = [agdSp].[usp{tb}Insert] 
-	 {pt_Exec}
-	,@Creator = @Creator
-	,@ErrorMsg = @ErrorMsg OUTPUT
+	EXEC @return_value = [agdSp].[usp$pt_tableName$pt_insert] 
+		$pt_Exec
+		,@Creator = @Creator
+		,@ErrorMsg = @ErrorMsg OUTPUT
 
 SELECT @return_value AS 'Return Value'
 	,@ErrorMsg AS N'@ErrorMsg'
@@ -42,10 +42,10 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** {pt_DateTime}    Daniel Chou	    first release
+** $pt_DateTime    Daniel Chou	    first release
 *****************************************************************/
-CREATE PROCEDURE [agdSp].[usp{tb}Insert] (
-	{pt_Declare}    
+CREATE PROCEDURE [agdSp].[usp$pt_tableName$pt_insert] (
+	$pt_Declare
 	,@Creator VARCHAR(20)
 	,@ErrorMsg NVARCHAR(100) = NULL OUTPUT
 	)
@@ -55,15 +55,15 @@ SET @ErrorMsg = N''
 
 BEGIN
 	BEGIN TRY
-	INSERT INTO [agdSet].[tb{tb}] (
-			{pt_insertCols}
+	INSERT INTO [agdSet].[tb$pt_tableName] (
+			$pt_insertCols
 			,CreateDT
 			,Creator
 			,UpdateDT
 			,Updator
         )
 		VALUES (
-			{pt_insertVals}
+			$pt_insertVals
 			,GETDATE()
 			,@Creator
 			,GETDATE()

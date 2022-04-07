@@ -1,21 +1,20 @@
 CREATE TABLE [agdSet].[tbUser](
-	[SeqNo] [int] IDENTITY(1,1) NOT NULL,
-	[UserId] [varchar(20)]  NOT NULL,
-	[Password] [nvarchar(100)]  NOT NULL,
-	[UserName] [nvarchar(50)]  NOT NULL,
-	[AgentId] [nvarchar(20)]  NOT NULL,
-	[GroupId] [nvarchar(20)]  NOT NULL,
-	[ExtPhone] [nvarchar(10)]  NOT NULL,
-	[MobilePhone] [nvarchar(20)]  NULL,
-	[Email] [varchar(50)]  NULL,
-	[IsAdmin] [bit]  NOT NULL,
-	[IsEnable] [bit]  NOT NULL,
-	[CreateDT] [datetime2(7)]  NOT NULL,
-	[Creator] [varchar(20)]  NOT NULL,
-	[Updator] [varchar(20)]  NOT NULL,
-	[CreateDt] [datetime2(7)]  NOT NULL,
-	[UpdateDt] [datetime2(7)]  NOT NULL,
-
+	[SeqNo] [INT] IDENTITY(1,1) NOT NULL
+	[UserId] [VARCHAR(20)]  NOT NULL
+	[Password] [NVARCHAR(100)]  NOT NULL
+	[UserName] [NVARCHAR(50)]  NOT NULL
+	[AgentId] [NVARCHAR(20)]  NOT NULL
+	[GroupId] [NVARCHAR(20)]  NOT NULL
+	[ExtPhone] [NVARCHAR(10)]  NOT NULL
+	[MobilePhone] [NVARCHAR(20)]  NULL
+	[Email] [VARCHAR(50)]  NULL
+	[IsAdmin] [BIT]  NOT NULL
+	[IsEnable] [BIT]  NOT NULL
+	[CreateDT] [DATETIME2(7)]  NOT NULL
+	[Creator] [VARCHAR(20)]  NOT NULL
+	[Updator] [VARCHAR(20)]  NOT NULL
+	[CreateDt] [DATETIME2]  NOT NULL
+	[UpdateDt] [DATETIME2]  NOT NULL
  CONSTRAINT [PK_tbUser] PRIMARY KEY CLUSTERED 
 (
 	[SeqNo] ASC
