@@ -75,10 +75,10 @@
 
         <q-card-actions align="right">
           <q-toggle
-            v-model="formData.isEnable"
-            color="primary"
-            :label="formData.isEnable ? '啟用' : '停用'"
-          />
+                v-model="formData.isEnable"
+                color="primary"
+                :label="formData.isEnable ? '啟用' : '停用'"
+            />
           <q-space />
           <q-btn flat label="取消" color="primary" @click="onCancel" />
           <q-btn label="儲存" type="submit" color="primary" />

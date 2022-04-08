@@ -21,15 +21,15 @@ GO
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Seq No.' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'SeqNo'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'電話分機' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'ExtCode'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'電話分機 : AAAAA' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'ExtCode'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'電腦名稱' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'ComputerName'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'電腦名稱 : 經辦的電腦名稱' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'ComputerName'
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'電腦IP' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'ComputerIp'
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'備註' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'Memo'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'是否啟用?' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'IsEnable'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'是否啟用? : ALL | 1:是 | 0:否 ' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'IsEnable'
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'建立者' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbPcPhone', @level2type=N'COLUMN',@level2name=N'Creator'
 GO

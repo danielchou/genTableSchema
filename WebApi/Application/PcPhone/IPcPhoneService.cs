@@ -79,7 +79,8 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
 		/// memo             - string     - 備註
 		/// isEnable         - bool       - 是否啟用?
         /// </param>
-        /// <returns></returns>
+        /// <returns>
+        /// </returns>
         ValueTask<BasicResponse<bool>> UpdatePcPhone(PcPhoneUpdateRequest request);
 
         /// <summary>
@@ -88,7 +89,8 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
         /// <param>
 		/// seqNo            - int        - Seq No.
         /// </param>
-        /// <returns></returns>
+        /// <returns>
+        /// </returns>
         ValueTask<BasicResponse<bool>> DeletePcPhone(int seqNo);
 
         /// <summary>
@@ -99,7 +101,8 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
 		/// extCode          - string     - 電話分機
 		/// computerIp       - string     - 電腦IP
         /// </param>
-        /// <returns></returns>
+        /// <returns>
+        /// </returns>
         ValueTask<BasicResponse<bool>> Exists(int seqNo,string extCode,string computerIp);
 
     }

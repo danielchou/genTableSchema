@@ -29,8 +29,8 @@ DECLARE @return_value INT
     ,@ErrorMsg NVARCHAR(100)
 
     SET @SeqNo = 1
-	SET @ExtCode = '1111'
-	SET @ComputerIp = '1.1.1.1'
+	SET @ExtCode = ''
+	SET @ComputerIp = ''
 
 	EXEC @return_value = [agdSp].[uspPcPhoneExists] 
     	@SeqNo = @SeqNo
@@ -46,7 +46,7 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022/04/07 15:31:24    Daniel Chou     first release
+** 2022/04/08 16:28:54    Daniel Chou     first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[uspPcPhoneExists]
     @SeqNo INT

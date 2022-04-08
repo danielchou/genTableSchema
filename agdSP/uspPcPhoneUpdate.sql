@@ -62,7 +62,7 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022/04/07 15:31:25    Daniel Chou	    first release
+** 2022/04/08 16:28:54    Daniel Chou	    first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[uspPcPhoneUpdate] (
 	@SeqNo INT

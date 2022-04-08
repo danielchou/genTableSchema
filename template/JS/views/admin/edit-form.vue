@@ -36,11 +36,7 @@
         <q-separator />
 
         <q-card-actions align="right">
-          <q-toggle
-            v-model="formData.isEnable"
-            color="primary"
-            :label="formData.isEnable ? '啟用' : '停用'"
-          />
+          $pt_EditForm_q_input_isEnable
           <q-space />
           <q-btn flat label="取消" color="primary" @click="onCancel" />
           <q-btn label="儲存" type="submit" color="primary" />

@@ -25,7 +25,6 @@
 ** -----------
     @ExtCode         NVARCHAR(10) - 電話分機
 	@ComputerName    NVARCHAR(25) - 電腦名稱
-	@ComputerIp      NVARCHAR(23) - 電腦IP
 	@IsEnable        BIT          - 是否啟用?
 	@Page 			  INT 			- 頁數
 	@RowsPerPage 	  INT 			- 每頁筆數
@@ -41,7 +40,6 @@
 DECLARE @return_value INT
 	,@ExtCode NVARCHAR(10)
 	,@ComputerName NVARCHAR(25)
-	,@ComputerIp NVARCHAR(23)
 	,@IsEnable BIT
 	,@Page INT = 1
 	,@RowsPerPage INT = 20
@@ -51,13 +49,11 @@ DECLARE @return_value INT
 
 	SET @ExtCode = '1111'
 	SET @ComputerName = 'CP0001'
-	SET @ComputerIp = '1.1.1.1'
 	SET @IsEnable = '1'
 
 EXEC @return_value = agdSp.uspPcPhoneQuery
 	@ExtCode = @ExtCode
 		,@ComputerName = @ComputerName
-		,@ComputerIp = @ComputerIp
 		,@IsEnable = @IsEnable
 	,@Page = @Page
 	,@RowsPerPage = @RowsPerPage
@@ -73,12 +69,11 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************
 ** Date:            Author:         Description:
 ** ---------- ------- ------------------------------------
-** 2022/04/07 15:31:24    Daniel Chou     first release
+** 2022/04/08 16:28:54    Daniel Chou     first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[uspPcPhoneQuery] (
 	@ExtCode NVARCHAR(10)
 	,@ComputerName NVARCHAR(25)
-	,@ComputerIp NVARCHAR(23)
 	,@IsEnable BIT
 	,@Page INT = 1
 	,@RowsPerPage INT = 20
@@ -110,16 +105,13 @@ BEGIN
 		------- WHERE 查詢條件 -------
 		WHERE  f.ExtCode LIKE CASE WHEN @ExtCode = '' THEN f.ExtCode ELSE '%' + @ExtCode + '%' END
 				AND f.ComputerName LIKE CASE WHEN @ComputerName = '' THEN f.ComputerName ELSE '%' + @ComputerName + '%' END
-				AND f.ComputerIp LIKE CASE WHEN @ComputerIp = '' THEN f.ComputerIp ELSE '%' + @ComputerIp + '%' END
 				AND f.IsEnable = CASE WHEN @IsEnable = 'ALL' THEN f.IsEnable ELSE CASE WHEN @IsEnable = '1' THEN 1 ELSE 0 END END
 		------- Sort 排序條件 -------
 		ORDER BY 
 				CASE WHEN @SortColumn = 'ExtCode' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
 				CASE WHEN @SortColumn = 'ExtCode' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
 				CASE WHEN @SortColumn = 'ComputerName' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
-				CASE WHEN @SortColumn = 'ComputerName' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC,
-				CASE WHEN @SortColumn = 'ComputerIp' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
-				CASE WHEN @SortColumn = 'ComputerIp' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC
+				CASE WHEN @SortColumn = 'ComputerName' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC
 		------- Page 分頁條件 -------
 		OFFSET @RowsPerPage * (@page - 1) ROWS
 
