@@ -6,24 +6,20 @@
     public class PcPhoneInsertRequest : CommonInsertRequest
     {
                 /// <summary>
-        /// 電話分機
+        /// 電腦IP
         /// </summary>
-        public string extCode { get; set; }
+        public string computerIP { get; set; }
         /// <summary>
         /// 電腦名稱
         /// </summary>
         public string computerName { get; set; }
         /// <summary>
-        /// 電腦IP
+        /// 分機號碼
         /// </summary>
-        public string computerIp { get; set; }
+        public string extCode { get; set; }
         /// <summary>
         /// 備註
         /// </summary>
         public string? memo { get; set; }
-        /// <summary>
-        /// 是否啟用?
-        /// </summary>
-        public bool isEnable { get; set; }
     }
 }

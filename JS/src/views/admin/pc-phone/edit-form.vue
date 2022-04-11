@@ -15,18 +15,18 @@
             <q-input
                 class="col"
                 type="text"
-                v-model.trim="formData.computerName"
-                label="電腦名稱"
+                v-model.trim="formData.computerIP"
+                label="電腦IP"
                 lazy-rules
-                :rules="[useRequiredInput, (val) => useMaxLength(val, 25)]"
+                :rules="[useRequiredInput, (val) => useMaxLength(val, 20)]"
             />
             <q-input
                 class="col"
                 type="text"
-                v-model.trim="formData.computerIp"
-                label="電腦IP"
+                v-model.trim="formData.computerName"
+                label="電腦名稱"
                 lazy-rules
-                :rules="[useRequiredInput, (val) => useMaxLength(val, 23)]"
+                :rules="[useRequiredInput, (val) => useMaxLength(val, 50)]"
             />
             </div>
             <div class="row q-col-gutter-md">
@@ -34,19 +34,17 @@
                 class="col"
                 type="text"
                 v-model.trim="formData.extCode"
-                label="電話分機"
+                label="分機號碼"
                 lazy-rules
-                :rules="[useRequiredInput, (val) => useMaxLength(val, 10)]"
+                :rules="[useRequiredInput, (val) => useMaxLength(val, 20)]"
             />
-            </div>
-            <div class="row q-col-gutter-md">
             <q-input
                 class="col"
                 type="text"
                 v-model.trim="formData.memo"
                 label="備註"
                 lazy-rules
-                :rules="[useRequiredInput, (val) => useMaxLength(val, 600)]"
+                :rules="[useRequiredInput, (val) => useMaxLength(val, 200)]"
             />
             </div>
           <div class="row q-col-gutter-md" v-show="!isCreate">
@@ -74,11 +72,7 @@
         <q-separator />
 
         <q-card-actions align="right">
-          <q-toggle
-                v-model="formData.isEnable"
-                color="primary"
-                :label="formData.isEnable ? '啟用' : '停用'"
-            />
+          
           <q-space />
           <q-btn flat label="取消" color="primary" @click="onCancel" />
           <q-btn label="儲存" type="submit" color="primary" />
@@ -113,11 +107,12 @@ export default {
 
     const formData = ref({
       	seqNo: 0,
-		extCode: '',
+		computerIP: '',
 		computerName: '',
-		computerIp: '',
+		extCode: '',
 		memo: '',
-		isEnable: true,
+		createDT: '',
+		updateDT: '',
         updateDt: '',
         updator: '',
     });

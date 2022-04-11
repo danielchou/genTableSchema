@@ -89,16 +89,16 @@ import EditForm from './edit-form';
 const columns = [
   	{
 		 name: 'seqNo',
-		 label: 'Seq No.',
+		 label: '流水號',
 		 align: 'right',
 		 field: 'seqNo',
 		 sortable: true,
 	},
 	{
-		 name: 'extCode',
-		 label: '電話分機',
+		 name: 'computerIP',
+		 label: '電腦IP',
 		 align: 'left',
-		 field: 'extCode',
+		 field: 'computerIP',
 		 sortable: true,
 	},
 	{
@@ -109,24 +109,17 @@ const columns = [
 		 sortable: true,
 	},
 	{
-		 name: 'computerIp',
-		 label: '電腦IP',
+		 name: 'extCode',
+		 label: '分機號碼',
 		 align: 'left',
-		 field: 'computerIp',
+		 field: 'extCode',
 		 sortable: true,
 	},
 	{
-		 name: 'memo',
-		 label: '備註',
+		 name: 'updateDT',
+		 label: '更新時間',
 		 align: 'left',
-		 field: 'memo',
-		 sortable: true,
-	},
-	{
-		 name: 'updateDt',
-		 label: '異動時間',
-		 align: 'left',
-		 field: (row) => dayjs(row.updateDt).format('YYYY-MM-DD HH:mm:ss'),
+		 field: 'updateDT',
 		 sortable: true,
 	},
   {
@@ -172,14 +165,14 @@ export default {
 
     const filterItemOptions = [
       {
-		 label: '電話分機',
-		 value: 'ExtCode',
-		 placeholder: '請輸入電話分機',
-},
-{
 		 label: '電腦名稱',
 		 value: 'ComputerName',
 		 placeholder: '請輸入電腦名稱',
+},
+{
+		 label: '分機號碼',
+		 value: 'ExtCode',
+		 placeholder: '請輸入分機號碼',
 },
     ];
 

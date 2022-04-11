@@ -18,56 +18,53 @@ namespace ESUN.AGD.WebApi.Controllers
         }
 
         /// <summary>
-        /// 依序號取得電腦電話設定
+        /// 依序號取得電腦電話配對設定
         /// </summary>
         /// <param>
-		/// seqNo            - int        - Seq No.
+		/// computerIP       - string     - 電腦IP
         /// </param>
         /// <returns>
-		/// seqNo            - int        - Seq No.
-		/// extCode          - string     - 電話分機
+		/// seqNo            - int        - 流水號
+		/// computerIP       - string     - 電腦IP
 		/// computerName     - string     - 電腦名稱
-		/// computerIp       - string     - 電腦IP
+		/// extCode          - string     - 分機號碼
 		/// memo             - string     - 備註
-		/// isEnable         - bool       - 是否啟用?
+		/// createDT         - DateTime   - 建立時間
 		/// creator          - string     - 建立者
+		/// updateDT         - DateTime   - 更新時間
 		/// updator          - string     - 更新者
-		/// createDt         - DateTime   - 建立時間
-		/// updateDt         - DateTime   - 異動時間
         /// updatorName      - string     - 更新者名稱
         /// </returns>
         [Authorize]
         [HttpGet("{seqNo}")]
-        public async ValueTask<IActionResult> GetPcPhone(int seqNo)
+        public async ValueTask<IActionResult> GetPcPhone(string computerIP)
         {
-            return Ok(await _PcPhoneService.GetPcPhone(seqNo));
+            return Ok(await _PcPhoneService.GetPcPhone(computerIP));
         }
 
         /// <summary>
-        /// 搜尋電腦電話設定 
+        /// 搜尋電腦電話配對設定 
         /// </summary>
         /// <param name="request">
-		/// extCode          - string     - 電話分機
+		/// computerIP       - string     - 電腦IP
 		/// computerName     - string     - 電腦名稱
-		/// computerIp       - string     - 電腦IP
+		/// extCode          - string     - 分機號碼
 		/// memo             - string     - 備註
-		/// isEnable         - string     - 是否啟用?
         /// page             - int        - 分頁
         /// rowsPerPage      - int        - 每頁筆數
         /// sortColumn       - string     - 排序欄位
         /// sortOrder        - bool       - 排序順序
         /// </param>
         /// <returns>
-		/// seqNo            - int        - Seq No.
-		/// extCode          - string     - 電話分機
+		/// seqNo            - int        - 流水號
+		/// computerIP       - string     - 電腦IP
 		/// computerName     - string     - 電腦名稱
-		/// computerIp       - string     - 電腦IP
+		/// extCode          - string     - 分機號碼
 		/// memo             - string     - 備註
-		/// isEnable         - bool       - 是否啟用?
+		/// createDT         - DateTime   - 建立時間
 		/// creator          - string     - 建立者
+		/// updateDT         - DateTime   - 更新時間
 		/// updator          - string     - 更新者
-		/// createDt         - DateTime   - 建立時間
-		/// updateDt         - DateTime   - 異動時間
         /// updatorName      - string     - 更新者名稱
         /// </returns>        
         [Authorize]
@@ -78,14 +75,13 @@ namespace ESUN.AGD.WebApi.Controllers
         }
 
         /// <summary>
-        /// 新增電腦電話設定 
+        /// 新增電腦電話配對設定 
         /// </summary>
         /// <param name="request">
-		/// extCode          - string     - 電話分機
+		/// computerIP       - string     - 電腦IP
 		/// computerName     - string     - 電腦名稱
-		/// computerIp       - string     - 電腦IP
+		/// extCode          - string     - 分機號碼
 		/// memo             - string     - 備註
-		/// isEnable         - bool       - 是否啟用?
         /// </param>
         /// <returns>
         /// </returns>        
@@ -97,15 +93,14 @@ namespace ESUN.AGD.WebApi.Controllers
         }
 
         /// <summary>
-        /// 更新電腦電話設定
+        /// 更新電腦電話配對設定
         /// </summary>
         /// <param name="request">
-		/// seqNo            - int        - Seq No.
-		/// extCode          - string     - 電話分機
+		/// seqNo            - int        - 流水號
+		/// computerIP       - string     - 電腦IP
 		/// computerName     - string     - 電腦名稱
-		/// computerIp       - string     - 電腦IP
+		/// extCode          - string     - 分機號碼
 		/// memo             - string     - 備註
-		/// isEnable         - bool       - 是否啟用?
         /// </param>
         /// <returns></returns>
         [Authorize]
@@ -116,17 +111,17 @@ namespace ESUN.AGD.WebApi.Controllers
         }
 
         /// <summary>
-        /// 刪除電腦電話設定
+        /// 刪除電腦電話配對設定
         /// </summary>
         /// <param>
-		/// seqNo            - int        - Seq No.
+		/// computerIP       - string     - 電腦IP
         /// </param>
         /// <returns></returns>
         [Authorize]
         [HttpDelete]
-        public async ValueTask<IActionResult> DetelePcPhone(int seqNo)
+        public async ValueTask<IActionResult> DetelePcPhone(string computerIP)
         {
-            return Ok(await _PcPhoneService.DeletePcPhone(seqNo));
+            return Ok(await _PcPhoneService.DeletePcPhone(computerIP));
         }
 
     }

@@ -18,7 +18,7 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
             _getTokenService = getTokenService;
         }
 
-        public async ValueTask<BasicResponse<PcPhoneResponse>> GetPcPhone(int seqNo)
+        public async ValueTask<BasicResponse<PcPhoneResponse>> GetPcPhone(string computerIP)
         {
             var data = await _dataAccessService
                 .LoadSingleData<TbPcPhone, object>(storeProcedure: "agdSp.uspPcPhoneGet", new { seqNo = seqNo, });
@@ -29,15 +29,14 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
             var result = new PcPhoneResponse
             {
 				seqNo = data.SeqNo,
-				extCode = data.ExtCode,
+				computerIP = data.ComputerIP,
 				computerName = data.ComputerName,
-				computerIp = data.ComputerIp,
+				extCode = data.ExtCode,
 				memo = data.Memo,
-				isEnable = data.IsEnable,
+				createDT = data.CreateDT,
 				creator = data.Creator,
+				updateDT = data.UpdateDT,
 				updator = data.Updator,
-				createDt = data.CreateDt,
-				updateDt = data.UpdateDt,
                 updatorName = data.UpdatorName
             };
             
@@ -60,15 +59,14 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
             var result = data.Select(item => new PcPhoneResponse
             {
 				seqNo = item.SeqNo,
-				extCode = item.ExtCode,
+				computerIP = item.ComputerIP,
 				computerName = item.ComputerName,
-				computerIp = item.ComputerIp,
+				extCode = item.ExtCode,
 				memo = item.Memo,
-				isEnable = item.IsEnable,
+				createDT = item.CreateDT,
 				creator = item.Creator,
-				updator = item.Updator,
-				createDt = item.CreateDt,
-				updateDt = item.UpdateDt,            
+				updateDT = item.UpdateDT,
+				updator = item.Updator,            
                 updatorName = item.UpdatorName   
             }).ToList();
 
@@ -120,7 +118,7 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
             { resultCode = "U200", resultDescription = "更新成功", data = true };
         }
 
-        public async ValueTask<BasicResponse<bool>> DeletePcPhone(int seqNo)
+        public async ValueTask<BasicResponse<bool>> DeletePcPhone(string computerIP)
         {
             var data = await _dataAccessService
                 .OperateData(storeProcedure: "agdSp.uspPcPhoneDelete", new { seqNo = seqNo });
@@ -132,14 +130,13 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
             { resultCode = "U200", resultDescription = "刪除成功", data = true };
         }
 
-        public async ValueTask<BasicResponse<bool>> Exists(int seqNo,string extCode,string computerIp)
+        public async ValueTask<BasicResponse<bool>> Exists(string computerIP,string extCode)
         {
             var data = await _dataAccessService
                 .LoadSingleData<int, object>(storeProcedure: "agdSp.uspPcPhoneExists", new
                 {
-					SeqNo = seqNo,
-					ExtCode = extCode,
-					ComputerIp = computerIp,               
+					ComputerIP = computerIP,
+					ExtCode = extCode,               
                 });
 
             if (data == 0) return new BasicResponse<bool>()

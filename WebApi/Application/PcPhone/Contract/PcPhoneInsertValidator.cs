@@ -7,13 +7,14 @@ namespace ESUN.AGD.WebApi.Application.PcPhone.Contract
     {
         public  PcPhoneInsertValidator()
         {
-			RuleFor(x => x.extCode).NotEmpty().WithMessage("電話分機為必填");
-			RuleFor(x => x.extCode).MaximumLength(10).WithMessage("電話分機長度超過系統限制");
+			RuleFor(x => x.computerIP).NotEmpty().WithMessage("電腦IP為必填");
+			RuleFor(x => x.computerIP).MaximumLength(20).WithMessage("電腦IP長度超過系統限制");
 			RuleFor(x => x.computerName).NotEmpty().WithMessage("電腦名稱為必填");
-			RuleFor(x => x.computerName).MaximumLength(25).WithMessage("電腦名稱長度超過系統限制");
-			RuleFor(x => x.computerIp).NotEmpty().WithMessage("電腦IP為必填");
-			RuleFor(x => x.computerIp).MaximumLength(23).WithMessage("電腦IP長度超過系統限制");
-			RuleFor(x => x.isEnable).NotEmpty().WithMessage("是否啟用?為必填")
+			RuleFor(x => x.computerName).MaximumLength(50).WithMessage("電腦名稱長度超過系統限制");
+			RuleFor(x => x.extCode).NotEmpty().WithMessage("分機號碼為必填");
+			RuleFor(x => x.extCode).MaximumLength(20).WithMessage("分機號碼長度超過系統限制");
+			RuleFor(x => x.updator).NotEmpty().WithMessage("更新者為必填");
+			RuleFor(x => x.updator).MaximumLength(20).WithMessage("更新者長度超過系統限制");
         }
     }
 }

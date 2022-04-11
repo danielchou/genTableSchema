@@ -14,7 +14,7 @@ $pt_getSelectAll
 ** Parameters:
 **	Input
 ** -----------
-    $pt_input
+    $pt_inputQuery
 	@Page 			  INT 			- 頁數
 	@RowsPerPage 	  INT 			- 每頁筆數
 	@SortColumn 	  NVARCHAR(30) 	- 排序欄位
@@ -27,7 +27,7 @@ $pt_getSelectAll
 ** Example:
 ** -----------
 DECLARE @return_value INT
-	,$pt_Declare
+	,$pt_DeclareQuery
 	,@Page INT = 1
 	,@RowsPerPage INT = 20
 	,@SortColumn NVARCHAR(30) = 'CreateDt'
@@ -55,7 +55,7 @@ SELECT @return_value AS 'Return Value'
 ** $pt_DateTime    Daniel Chou     first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[usp$pt_tableName$pt_query] (
-	$pt_Declare
+	$pt_DeclareQuery
 	,@Page INT = 1
 	,@RowsPerPage INT = 20
 	,@SortColumn NVARCHAR(30) = 'CreateDt'
