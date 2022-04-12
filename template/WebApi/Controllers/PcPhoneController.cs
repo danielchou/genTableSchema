@@ -21,7 +21,7 @@ namespace ESUN.AGD.WebApi.Controllers
         /// 依序號取得$TbDscr設定
         /// </summary>
         /// <param>
-$pt_ColDscr_ParasPK
+        /// seqNo           - int     - 流水號
         /// </param>
         /// <returns>
 $pt_ColDscr_GetReturnAll
@@ -76,7 +76,8 @@ $pt_ColDscr_InsertParas
         /// <param name="request">
 $pt_colDscr_UpdateParas
         /// </param>
-        /// <returns></returns>
+        /// <returns>
+        /// </returns>
         [Authorize]
         [HttpPut]
         public async ValueTask<IActionResult> Update$pt_TableName($pt_TableName$updateRequest request)

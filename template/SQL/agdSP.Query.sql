@@ -14,7 +14,7 @@ $pt_getSelectAll
 ** Parameters:
 **	Input
 ** -----------
-    $pt_input
+    $pt_inputQuery
 	@Page 			  INT 			- 頁數
 	@RowsPerPage 	  INT 			- 每頁筆數
 	@SortColumn 	  NVARCHAR(30) 	- 排序欄位
@@ -27,7 +27,7 @@ $pt_getSelectAll
 ** Example:
 ** -----------
 DECLARE @return_value INT
-	,$pt_Declare
+	,$pt_DeclareQuery
 	,@Page INT = 1
 	,@RowsPerPage INT = 20
 	,@SortColumn NVARCHAR(30) = 'CreateDt'
@@ -55,7 +55,7 @@ SELECT @return_value AS 'Return Value'
 ** $pt_DateTime    Daniel Chou     first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[usp$pt_tableName$pt_query] (
-	$pt_Declare
+	$pt_DeclareQuery
 	,@Page INT = 1
 	,@RowsPerPage INT = 20
 	,@SortColumn NVARCHAR(30) = 'CreateDt'
@@ -76,7 +76,6 @@ BEGIN
 		JOIN agdSet.tbUser AS u ON u.UserId = f.Updator
 		------- WHERE 查詢條件 -------
 		WHERE $pt_queryWhere
-				AND f.IsEnable = CASE WHEN @IsEnable = 'ALL' THEN f.IsEnable ELSE CASE WHEN @IsEnable = '1' THEN 1 ELSE 0 END END
 		------- Sort 排序條件 -------
 		ORDER BY 
 $pt_orderBy

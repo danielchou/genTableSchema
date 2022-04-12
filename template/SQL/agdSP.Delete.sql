@@ -41,7 +41,7 @@
 ** $pt_DateTime 	Jerry Yang			first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[usp$pt_tableName$pt_delete] (
-	$pt_parasSetPK
+	$pt_AtParasSetPK
 	,@ErrorMsg NVARCHAR(100) = NULL OUTPUT
 	)
 AS

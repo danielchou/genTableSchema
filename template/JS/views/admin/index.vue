@@ -31,15 +31,7 @@
         dense
         :placeholder="filter.filterItem.placeholder"
         @keypress.enter="onFilter"
-      />
-      <q-select
-        class="q-mr-md filter-isenable"
-        v-model="filter.isEnable"
-        outlined
-        dense
-        :options="isEnableOptions"
-        label="是否啟用"
-      />
+      />$pt_JsIndexVue_IsEnableSelect
       <q-btn class="q-mr-md" color="secondary" label="查詢" @click="onFilter" />
       <q-btn class="q-mr-md" color="secondary" label="匯出" @click="onExportReport" />
       <q-btn class="q-mr-md" color="secondary" label="清空條件" @click="onClearFilter" />
@@ -61,7 +53,7 @@ import { ref, reactive, onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useStore } from 'vuex';
 import dayjs from 'dayjs';
-import $pt_tableName from '@admin-store/$pt_table_name';
+import $pt_tableName from '@supervisor-store/$pt_table_name';
 
 import { useQuasar } from 'quasar';
 import { useSuccessNotify } from '@composables/use-notify';
@@ -88,6 +80,20 @@ import EditForm from './edit-form';
 
 const columns = [
   $pt_indexVue_Columns
+  {
+    name: 'updateDT',
+    label: '更新時間',
+    align: 'left',
+    field: (row) => dayjs(row.updateDT).format('YYYY-MM-DD HH:mm:ss'),
+    sortable: true,
+  },
+  {
+    name: 'updatorName',
+    label: '更新者',
+    align: 'left',
+    field: 'updatorName',
+    sortable: false,
+  },
   {
     name: 'actions',
     align: 'center',
@@ -203,7 +209,7 @@ export default {
     };
 
     const onFilter = () => {
-      pagination.value.sortBy = 'createDt';
+      pagination.value.sortBy = 'createDT';
       fetchItems(true);
     };
 

@@ -5,6 +5,6 @@
     /// </summary>
     public class $pt_TableName$insertRequest : CommonInsertRequest
     {
-        $pt_apiModels_insertRequest
+$pt_apiModels_insertRequest
     }
 }
