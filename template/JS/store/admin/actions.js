@@ -27,9 +27,9 @@ export const fetchItems = ({ rootGetters, commit }, data) => {
 
 export const fetchItemById = ({ commit }, seqNo) => {
   /**
-   * Request body:
-   *  seqNo : Integer *Required
-   */
+    * Request body:
+    *  seqNo : Integer *Required
+    */
   const opts = {
     method: 'get',
     url: `$${apiUrlPrefix}/$${seqNo}`,
@@ -45,9 +45,9 @@ export const fetchItemById = ({ commit }, seqNo) => {
 
 export const fetchCreate = ({ commit }, data) => {
   /**
-   * Request body:
-   $pt_jsActionCmmt
-   */
+    * Request body:
+$pt_jsActionCmmt
+    */
   const opts = {
     method: 'post',
     url: `$${apiUrlPrefix}`,
@@ -61,9 +61,9 @@ export const fetchCreate = ({ commit }, data) => {
 
 export const fetchUpdate = ({ commit }, data) => {
   /**
-   * Request body:
-   $pt_jsActionCmmt
-   */
+    * Request body:
+$pt_jsActionCmmt
+    */
 
   const opts = {
     method: 'put',

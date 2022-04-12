@@ -81,7 +81,7 @@ export default {
     const $$q = useQuasar();
 
     const formData = ref({
-      $pt_editForm_formData
+  $pt_editForm_formData
         updateDT: '',
         updatorName: '',
     });
