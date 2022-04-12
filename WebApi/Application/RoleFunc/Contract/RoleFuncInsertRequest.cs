@@ -5,7 +5,7 @@
     /// </summary>
     public class RoleFuncInsertRequest : CommonInsertRequest
     {
-                /// <summary>
+        /// <summary>
         /// 角色代碼
         /// </summary>
         public string roleID { get; set; }

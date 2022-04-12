@@ -1,5 +1,12 @@
 <template>
-  <q-dialog :model-value="modelValue" no-backdrop-dismiss no-esc-dismiss no-shake full-width>
+  <q-dialog
+    :model-value="modelValue"
+    no-backdrop-dismiss
+    no-esc-dismiss
+    no-shake
+    full-width
+    @keydown.esc="onCancelByEsc"
+  >
     <q-card class="outer-card" :class="{ 'is-update': !isCreate }">
       <q-form @submit="onSubmitForm" class="q-gutter-md">
         <q-card-section class="card-title">
@@ -8,15 +15,14 @@
 
         <q-separator />
 
-        
         <q-card-section style="max-height: 50vh" class="scroll">
-          $pt_EditForm_q_input
+$pt_EditForm_q_input
           <div class="row q-col-gutter-md" v-show="!isCreate">
             <q-input
               class="col"
               type="text"
-              :model-value="formData.updator"
-              label="最後修改人員"
+              :model-value="formData.updatorName"
+              label="最後更新人員"
               borderless
               disable
               readonly
@@ -24,8 +30,8 @@
             <q-input
               class="col"
               type="text"
-              :model-value="formData.updateDt"
-              label="最後修改時間"
+              :model-value="formData.updateDT"
+              label="最後更新時間"
               borderless
               disable
               readonly
@@ -36,10 +42,14 @@
         <q-separator />
 
         <q-card-actions align="right">
-          $pt_EditForm_q_input_isEnable
-          <q-space />
-          <q-btn flat label="取消" color="primary" @click="onCancel" />
-          <q-btn label="儲存" type="submit" color="primary" />
+          <q-btn
+            class="col-2 shadow-1"
+            flat
+            label="取消"
+            text-color="secondary"
+            @click="onCancel"
+          />
+          <q-btn class="col-2" label="儲存" type="submit" color="secondary" />
         </q-card-actions>
       </q-form>
     </q-card>
@@ -49,6 +59,7 @@
 <script>
 import { ref, toRefs, watch } from 'vue';
 import { useQuasar } from 'quasar';
+import { throttle } from 'lodash';
 import { useRequiredInput, useMaxLength } from '@composables/use-validations';
 import { useCombineFields, useDatetime } from '@composables/use-common';
 import { useConfirmDialog } from '@composables/use-dialog';
@@ -71,8 +82,8 @@ export default {
 
     const formData = ref({
       $pt_editForm_formData
-        updateDt: '',
-        updator: '',
+        updateDT: '',
+        updatorName: '',
     });
 
     watch(
@@ -93,13 +104,26 @@ export default {
       emit('submit-form', formData.value);
     };
 
+    const onCancelByEsc = () => {
+      throttle(() => {
+        setTimeout(() => {
+          onCancel();
+        }, 100);
+      }, 1000)();
+    };
+
+    let closeDialogOpened = false;
     const onCancel = () => {
       if (valueChangeFlag.value) {
-        useConfirmDialog($$q, { message: '請確認是否要取消，所有未儲存的異動將會消失。' }).onOk(
-          () => {
-            emit('update:model-value', false);
-          }
-        );
+        closeDialogOpened = true;
+        closeDialogOpened &&
+          useConfirmDialog($$q, { message: '請確認是否要取消，所有未儲存的異動將會消失。' })
+            .onOk(() => {
+              emit('update:model-value', false);
+            })
+            .onDismiss(() => {
+              closeDialogOpened = false;
+            });
         return;
       }
       emit('update:model-value', false);
@@ -110,7 +134,7 @@ export default {
      * 偵測到視窗打開時就自動將資料塞入進 formData
      */
     if (modelValue.value && !isCreate.value) {
-      fetchItemForEdit.value.updateDt = useDatetime(fetchItemForEdit.value.updateDt);
+      fetchItemForEdit.value.updateDT = useDatetime(fetchItemForEdit.value.updateDT);
       formData.value = useCombineFields(formData.value, fetchItemForEdit.value);
       valueChangeFlag.value = false;
     }
@@ -118,6 +142,7 @@ export default {
     return {
       formData,
       valueChangeFlag,
+      onCancelByEsc,
       onCancel,
       onSubmitForm,
       useRequiredInput,

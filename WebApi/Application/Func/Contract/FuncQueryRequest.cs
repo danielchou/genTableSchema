@@ -10,10 +10,11 @@ namespace ESUN.AGD.WebApi.Application.Func.Contract
 		/// <summary>
         /// 功能代碼
         /// </summary>
-        public string funcID { get; set; } 
+        public string? funcID { get; set; }
 		/// <summary>
         /// 功能名稱
         /// </summary>
-        public string funcName { get; set; } 
+        public string? funcName { get; set; }
+
     }
 }

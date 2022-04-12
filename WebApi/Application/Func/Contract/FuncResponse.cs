@@ -20,15 +20,19 @@
         /// <summary>
         /// 階層
         /// </summary>
-        public  level { get; set; }
+        public int level { get; set; }
         /// <summary>
         /// 系統類別
         /// </summary>
         public string systemType { get; set; }
         /// <summary>
+        /// Icon名稱
+        /// </summary>
+        public string? iconName { get; set; }
+        /// <summary>
         /// 路由名稱
         /// </summary>
-        public string routeName { get; set; }
+        public string? routeName { get; set; }
         /// <summary>
         /// 顯示順序
         /// </summary>

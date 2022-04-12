@@ -18,7 +18,7 @@ namespace ESUN.AGD.WebApi.Application.User
             _getTokenService = getTokenService;
         }
 
-        public async ValueTask<BasicResponse<UserResponse>> GetUser(string userID)
+        public async ValueTask<BasicResponse<UserResponse>> GetUser(int seqNo)
         {
             var data = await _dataAccessService
                 .LoadSingleData<TbUser, object>(storeProcedure: "agdSp.uspUserGet", new { seqNo = seqNo, });
@@ -60,9 +60,11 @@ namespace ESUN.AGD.WebApi.Application.User
 
         public async ValueTask<BasicResponse<List<UserResponse>>> QueryUser(UserQueryRequest request)
         {
-
-            if (string.IsNullOrEmpty(request.extCode)) { request.extCode = string.Empty; }            
-            if (string.IsNullOrEmpty(request.computerName)) { request.computerName = string.Empty; }            
+			if (string.IsNullOrEmpty(request.userID)) { request.userID = string.Empty; }
+			if (string.IsNullOrEmpty(request.userName)) { request.userName = string.Empty; }
+			if (string.IsNullOrEmpty(request.agentLoginID)) { request.agentLoginID = string.Empty; }
+			if (string.IsNullOrEmpty(request.groupID)) { request.groupID = string.Empty; }
+            
 
             var data = await _dataAccessService
                 .LoadData<TbUser, object>(storeProcedure: "agdSp.uspUserQuery", request);
@@ -106,9 +108,9 @@ namespace ESUN.AGD.WebApi.Application.User
 
         public async ValueTask<BasicResponse<bool>> InsertUser(UserInsertRequest request)
         {
-            var creator = _getTokenService.userId ?? "";
-
-            var exists = await Exists(0, request.extCode, request.computerIp);
+            var creator = _getTokenService.userID ?? "";
+            
+            var exists = await Exists(0, request.userID, request.agentLoginID);
             
             if (exists.data == true) return new BasicResponse<bool>()
             { resultCode = "U999", resultDescription = "資料重複，請重新設定", data=false };
@@ -127,9 +129,9 @@ namespace ESUN.AGD.WebApi.Application.User
 
         public async ValueTask<BasicResponse<bool>> UpdateUser(UserUpdateRequest request)
         {
-            var updator = _getTokenService.userId ?? "";
+            var updator = _getTokenService.userID ?? "";
 
-            var exists = await Exists(request.seqNo, request.extCode, request.computerIp);
+            var exists = await Exists(request.seqNo, request.userID, request.agentLoginID);
             
             if (exists.data == true) return new BasicResponse<bool>()
             { resultCode = "U999", resultDescription = "資料重複，請重新設定", data = false };
@@ -146,7 +148,7 @@ namespace ESUN.AGD.WebApi.Application.User
             { resultCode = "U200", resultDescription = "更新成功", data = true };
         }
 
-        public async ValueTask<BasicResponse<bool>> DeleteUser(string userID)
+        public async ValueTask<BasicResponse<bool>> DeleteUser(int seqNo)
         {
             var data = await _dataAccessService
                 .OperateData(storeProcedure: "agdSp.uspUserDelete", new { seqNo = seqNo });

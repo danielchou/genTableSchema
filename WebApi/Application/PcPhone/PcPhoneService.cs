@@ -18,7 +18,7 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
             _getTokenService = getTokenService;
         }
 
-        public async ValueTask<BasicResponse<PcPhoneResponse>> GetPcPhone(string computerIP)
+        public async ValueTask<BasicResponse<PcPhoneResponse>> GetPcPhone(int seqNo)
         {
             var data = await _dataAccessService
                 .LoadSingleData<TbPcPhone, object>(storeProcedure: "agdSp.uspPcPhoneGet", new { seqNo = seqNo, });
@@ -46,9 +46,9 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
 
         public async ValueTask<BasicResponse<List<PcPhoneResponse>>> QueryPcPhone(PcPhoneQueryRequest request)
         {
-
-            if (string.IsNullOrEmpty(request.extCode)) { request.extCode = string.Empty; }            
-            if (string.IsNullOrEmpty(request.computerName)) { request.computerName = string.Empty; }            
+			if (string.IsNullOrEmpty(request.computerName)) { request.computerName = string.Empty; }
+			if (string.IsNullOrEmpty(request.extCode)) { request.extCode = string.Empty; }
+            
 
             var data = await _dataAccessService
                 .LoadData<TbPcPhone, object>(storeProcedure: "agdSp.uspPcPhoneQuery", request);
@@ -78,9 +78,9 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
 
         public async ValueTask<BasicResponse<bool>> InsertPcPhone(PcPhoneInsertRequest request)
         {
-            var creator = _getTokenService.userId ?? "";
-
-            var exists = await Exists(0, request.extCode, request.computerIp);
+            var creator = _getTokenService.userID ?? "";
+            
+            var exists = await Exists(0, request.computerIP, request.extCode);
             
             if (exists.data == true) return new BasicResponse<bool>()
             { resultCode = "U999", resultDescription = "資料重複，請重新設定", data=false };
@@ -99,9 +99,9 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
 
         public async ValueTask<BasicResponse<bool>> UpdatePcPhone(PcPhoneUpdateRequest request)
         {
-            var updator = _getTokenService.userId ?? "";
+            var updator = _getTokenService.userID ?? "";
 
-            var exists = await Exists(request.seqNo, request.extCode, request.computerIp);
+            var exists = await Exists(request.seqNo, request.computerIP, request.extCode);
             
             if (exists.data == true) return new BasicResponse<bool>()
             { resultCode = "U999", resultDescription = "資料重複，請重新設定", data = false };
@@ -118,7 +118,7 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
             { resultCode = "U200", resultDescription = "更新成功", data = true };
         }
 
-        public async ValueTask<BasicResponse<bool>> DeletePcPhone(string computerIP)
+        public async ValueTask<BasicResponse<bool>> DeletePcPhone(int seqNo)
         {
             var data = await _dataAccessService
                 .OperateData(storeProcedure: "agdSp.uspPcPhoneDelete", new { seqNo = seqNo });
@@ -130,11 +130,12 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
             { resultCode = "U200", resultDescription = "刪除成功", data = true };
         }
 
-        public async ValueTask<BasicResponse<bool>> Exists(string computerIP,string extCode)
+        public async ValueTask<BasicResponse<bool>> Exists(int seqNo,string computerIP,string extCode)
         {
             var data = await _dataAccessService
                 .LoadSingleData<int, object>(storeProcedure: "agdSp.uspPcPhoneExists", new
                 {
+					SeqNo = seqNo,
 					ComputerIP = computerIP,
 					ExtCode = extCode,               
                 });

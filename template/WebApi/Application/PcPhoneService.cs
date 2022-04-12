@@ -38,9 +38,7 @@ $pt_data2Json
 
         public async ValueTask<BasicResponse<List<$pt_TableName$response>>> Query$pt_TableName($pt_TableName$queryRequest request)
         {
-
-            if (string.IsNullOrEmpty(request.extCode)) { request.extCode = string.Empty; }            
-            if (string.IsNullOrEmpty(request.computerName)) { request.computerName = string.Empty; }            
+$pt_requestIsNullOrEmpty            
 
             var data = await _dataAccessService
                 .LoadData<Tb$pt_TableName, object>(storeProcedure: "agdSp.usp$pt_TableName$query", request);
@@ -62,9 +60,9 @@ $pt_item2Json
 
         public async ValueTask<BasicResponse<bool>> Insert$pt_TableName($pt_TableName$insertRequest request)
         {
-            var creator = _getTokenService.userId ?? "";
-
-            var exists = await Exists(0, request.extCode, request.computerIp);
+            var creator = _getTokenService.userID ?? "";
+            
+            var exists = await Exists(0, $pt_requstInsertIsExist);
             
             if (exists.data == true) return new BasicResponse<bool>()
             { resultCode = "U999", resultDescription = "資料重複，請重新設定", data=false };
@@ -83,9 +81,9 @@ $pt_item2Json
 
         public async ValueTask<BasicResponse<bool>> Update$pt_TableName($pt_TableName$updateRequest request)
         {
-            var updator = _getTokenService.userId ?? "";
+            var updator = _getTokenService.userID ?? "";
 
-            var exists = await Exists(request.seqNo, request.extCode, request.computerIp);
+            var exists = await Exists($pt_requstInsertIsExistWithSeqNo);
             
             if (exists.data == true) return new BasicResponse<bool>()
             { resultCode = "U999", resultDescription = "資料重複，請重新設定", data = false };

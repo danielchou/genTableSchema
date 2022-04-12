@@ -8,7 +8,7 @@ namespace ESUN.AGD.WebApi.Application.User
         /// 依序號取得使用者設定
         /// </summary>
         /// <param>
-        /// seqNo - 電腦電話序號
+		/// seqNo            - int        - 流水號
         /// </param>
         /// <returns>
 		/// seqNo            - int        - 流水號
@@ -44,21 +44,8 @@ namespace ESUN.AGD.WebApi.Application.User
         /// <param name="request">
 		/// userID           - string     - 使用者帳號
 		/// userName         - string     - 使用者名稱
-		/// userCode         - string     - 使用者代碼
 		/// agentLoginID     - string     - CTI登入帳號
-		/// agentLoginCode   - string     - CTI登入代碼
-		/// employeeNo       - string     - 員工編號
-		/// nickName         - string     - 使用者暱稱
-		/// empDept          - string     - 所屬單位
 		/// groupID          - string     - 群組代碼
-		/// officeEmail      - string     - 公司Email
-		/// employedStatusCode - string     - 在職狀態代碼
-		/// isSupervisor     - bool       - 是否為主管?
-		/// b08Code1         - string     - B08_code1
-		/// b08Code2         - string     - B08_code2
-		/// b08Code3         - string     - B08_code3
-		/// b08Code4         - string     - B08_code4
-		/// b08Code5         - string     - B08_code5
 		/// isEnable         - string     - 是否啟用?
         /// page             - int        - 分頁
         /// rowsPerPage      - int        - 每頁筆數
@@ -152,11 +139,11 @@ namespace ESUN.AGD.WebApi.Application.User
         /// 刪除使用者設定
         /// </summary>
         /// <param>
-		/// userID           - string     - 使用者帳號
+		/// seqNo            - int        - 流水號
         /// </param>
         /// <returns>
         /// </returns>
-        ValueTask<BasicResponse<bool>> DeleteUser(string userID);
+        ValueTask<BasicResponse<bool>> DeleteUser(int seqNo);
 
         /// <summary>
         /// 檢查使用者是否存在

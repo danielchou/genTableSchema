@@ -18,7 +18,7 @@ namespace ESUN.AGD.WebApi.Application.Role
             _getTokenService = getTokenService;
         }
 
-        public async ValueTask<BasicResponse<RoleResponse>> GetRole(string roleID)
+        public async ValueTask<BasicResponse<RoleResponse>> GetRole(int seqNo)
         {
             var data = await _dataAccessService
                 .LoadSingleData<TbRole, object>(storeProcedure: "agdSp.uspRoleGet", new { seqNo = seqNo, });
@@ -44,9 +44,9 @@ namespace ESUN.AGD.WebApi.Application.Role
 
         public async ValueTask<BasicResponse<List<RoleResponse>>> QueryRole(RoleQueryRequest request)
         {
-
-            if (string.IsNullOrEmpty(request.extCode)) { request.extCode = string.Empty; }            
-            if (string.IsNullOrEmpty(request.computerName)) { request.computerName = string.Empty; }            
+			if (string.IsNullOrEmpty(request.roleID)) { request.roleID = string.Empty; }
+			if (string.IsNullOrEmpty(request.roleName)) { request.roleName = string.Empty; }
+            
 
             var data = await _dataAccessService
                 .LoadData<TbRole, object>(storeProcedure: "agdSp.uspRoleQuery", request);
@@ -74,9 +74,9 @@ namespace ESUN.AGD.WebApi.Application.Role
 
         public async ValueTask<BasicResponse<bool>> InsertRole(RoleInsertRequest request)
         {
-            var creator = _getTokenService.userId ?? "";
-
-            var exists = await Exists(0, request.extCode, request.computerIp);
+            var creator = _getTokenService.userID ?? "";
+            
+            var exists = await Exists(0, request.roleID, request.roleName);
             
             if (exists.data == true) return new BasicResponse<bool>()
             { resultCode = "U999", resultDescription = "資料重複，請重新設定", data=false };
@@ -95,9 +95,9 @@ namespace ESUN.AGD.WebApi.Application.Role
 
         public async ValueTask<BasicResponse<bool>> UpdateRole(RoleUpdateRequest request)
         {
-            var updator = _getTokenService.userId ?? "";
+            var updator = _getTokenService.userID ?? "";
 
-            var exists = await Exists(request.seqNo, request.extCode, request.computerIp);
+            var exists = await Exists(request.seqNo, request.roleID, request.roleName);
             
             if (exists.data == true) return new BasicResponse<bool>()
             { resultCode = "U999", resultDescription = "資料重複，請重新設定", data = false };
@@ -114,7 +114,7 @@ namespace ESUN.AGD.WebApi.Application.Role
             { resultCode = "U200", resultDescription = "更新成功", data = true };
         }
 
-        public async ValueTask<BasicResponse<bool>> DeleteRole(string roleID)
+        public async ValueTask<BasicResponse<bool>> DeleteRole(int seqNo)
         {
             var data = await _dataAccessService
                 .OperateData(storeProcedure: "agdSp.uspRoleDelete", new { seqNo = seqNo });
@@ -126,11 +126,12 @@ namespace ESUN.AGD.WebApi.Application.Role
             { resultCode = "U200", resultDescription = "刪除成功", data = true };
         }
 
-        public async ValueTask<BasicResponse<bool>> Exists(string roleID,string roleName)
+        public async ValueTask<BasicResponse<bool>> Exists(int seqNo,string roleID,string roleName)
         {
             var data = await _dataAccessService
                 .LoadSingleData<int, object>(storeProcedure: "agdSp.uspRoleExists", new
                 {
+					SeqNo = seqNo,
 					RoleID = roleID,
 					RoleName = roleName,               
                 });

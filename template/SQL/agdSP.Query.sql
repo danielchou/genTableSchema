@@ -76,7 +76,6 @@ BEGIN
 		JOIN agdSet.tbUser AS u ON u.UserId = f.Updator
 		------- WHERE 查詢條件 -------
 		WHERE $pt_queryWhere
-				AND f.IsEnable = CASE WHEN @IsEnable = 'ALL' THEN f.IsEnable ELSE CASE WHEN @IsEnable = '1' THEN 1 ELSE 0 END END
 		------- Sort 排序條件 -------
 		ORDER BY 
 $pt_orderBy

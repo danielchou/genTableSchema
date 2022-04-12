@@ -5,7 +5,7 @@
     /// </summary>
     public class GroupInsertRequest : CommonInsertRequest
     {
-                /// <summary>
+        /// <summary>
         /// 群組代碼
         /// </summary>
         public string groupID { get; set; }

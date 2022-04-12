@@ -8,7 +8,7 @@ namespace ESUN.AGD.WebApi.Application.UserRole
         /// 依序號取得使用者角色配對設定
         /// </summary>
         /// <param>
-        /// seqNo - 電腦電話序號
+		/// seqNo            - int        - 流水號
         /// </param>
         /// <returns>
 		/// seqNo            - int        - 流水號
@@ -72,23 +72,23 @@ namespace ESUN.AGD.WebApi.Application.UserRole
         /// 刪除使用者角色配對設定
         /// </summary>
         /// <param>
-		/// userID           - string     - 使用者帳號
-		/// roleID           - string     - 角色代碼
+		/// seqNo            - int        - 流水號
         /// </param>
         /// <returns>
         /// </returns>
-        ValueTask<BasicResponse<bool>> DeleteUserRole(string userID,string roleID);
+        ValueTask<BasicResponse<bool>> DeleteUserRole(int seqNo);
 
         /// <summary>
         /// 檢查使用者角色配對是否存在
         /// </summary>
         /// <param>
+		/// seqNo            - int        - 流水號
 		/// userID           - string     - 使用者帳號
 		/// roleID           - string     - 角色代碼
         /// </param>
         /// <returns>
         /// </returns>
-        ValueTask<BasicResponse<bool>> Exists(string userID,string roleID);
+        ValueTask<BasicResponse<bool>> Exists(int seqNo,string userID,string roleID);
 
     }
 }

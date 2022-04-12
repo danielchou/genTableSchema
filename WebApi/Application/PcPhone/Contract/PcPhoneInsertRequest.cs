@@ -5,7 +5,7 @@
     /// </summary>
     public class PcPhoneInsertRequest : CommonInsertRequest
     {
-                /// <summary>
+        /// <summary>
         /// 電腦IP
         /// </summary>
         public string computerIP { get; set; }

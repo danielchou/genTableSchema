@@ -46,11 +46,7 @@ export const fetchItemById = ({ commit }, seqNo) => {
 export const fetchCreate = ({ commit }, data) => {
   /**
    * Request body:
-   * extCode      : String,
-   * computerName : String,
-   * computerIp   : String,
-   * memo         : String,
-   * isEnable     : Boolean
+   $pt_jsActionCmmt
    */
   const opts = {
     method: 'post',
@@ -66,12 +62,7 @@ export const fetchCreate = ({ commit }, data) => {
 export const fetchUpdate = ({ commit }, data) => {
   /**
    * Request body:
-   * seqNo        : Integer,
-   * extCode      : String,
-   * computerName : String,
-   * computerIp   : String,
-   * memo         : String,
-   * isEnable     : Boolean
+   $pt_jsActionCmmt
    */
 
   const opts = {

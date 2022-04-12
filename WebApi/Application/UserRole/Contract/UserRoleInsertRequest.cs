@@ -5,7 +5,7 @@
     /// </summary>
     public class UserRoleInsertRequest : CommonInsertRequest
     {
-                /// <summary>
+        /// <summary>
         /// 使用者帳號
         /// </summary>
         public string userID { get; set; }

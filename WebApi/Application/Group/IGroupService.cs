@@ -8,7 +8,7 @@ namespace ESUN.AGD.WebApi.Application.Group
         /// 依序號取得群組設定
         /// </summary>
         /// <param>
-        /// seqNo - 電腦電話序號
+		/// seqNo            - int        - 流水號
         /// </param>
         /// <returns>
 		/// seqNo            - int        - 流水號
@@ -72,22 +72,23 @@ namespace ESUN.AGD.WebApi.Application.Group
         /// 刪除群組設定
         /// </summary>
         /// <param>
-		/// groupID          - string     - 群組代碼
+		/// seqNo            - int        - 流水號
         /// </param>
         /// <returns>
         /// </returns>
-        ValueTask<BasicResponse<bool>> DeleteGroup(string groupID);
+        ValueTask<BasicResponse<bool>> DeleteGroup(int seqNo);
 
         /// <summary>
         /// 檢查群組是否存在
         /// </summary>
         /// <param>
+		/// seqNo            - int        - 流水號
 		/// groupID          - string     - 群組代碼
 		/// groupName        - string     - 群組名稱
         /// </param>
         /// <returns>
         /// </returns>
-        ValueTask<BasicResponse<bool>> Exists(string groupID,string groupName);
+        ValueTask<BasicResponse<bool>> Exists(int seqNo,string groupID,string groupName);
 
     }
 }

@@ -5,7 +5,8 @@ CREATE TABLE [agdSet].[tbFunc](
 	[ParentFuncID] [varchar](20) NOT NULL,
 	[Level] [tinyint] NOT NULL,
 	[SystemType] [varchar](20) NOT NULL,
-	[RouteName] [varchar](50) NOT NULL,
+	[IconName] [varchar](20) NULL,
+	[RouteName] [varchar](50) NULL,
 	[DisplayOrder] [int] NOT NULL,
 	[CreateDT] [datetime2](7) NOT NULL,
 	[Creator] [varchar](20) NOT NULL,
@@ -32,6 +33,8 @@ GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'階層' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbFunc', @level2type=N'COLUMN',@level2name=N'Level'
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'系統類別 : AGD, Supervisor, Recording, Monitor' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbFunc', @level2type=N'COLUMN',@level2name=N'SystemType'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Icon名稱' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbFunc', @level2type=N'COLUMN',@level2name=N'IconName'
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'路由名稱' ,@level0type=N'SCHEMA',@level0name=N'agdSet', @level1type=N'TABLE',@level1name=N'tbFunc', @level2type=N'COLUMN',@level2name=N'RouteName'
 GO

@@ -18,7 +18,7 @@ namespace ESUN.AGD.WebApi.Application.Func
             _getTokenService = getTokenService;
         }
 
-        public async ValueTask<BasicResponse<FuncResponse>> GetFunc(string funcID)
+        public async ValueTask<BasicResponse<FuncResponse>> GetFunc(int seqNo)
         {
             var data = await _dataAccessService
                 .LoadSingleData<TbFunc, object>(storeProcedure: "agdSp.uspFuncGet", new { seqNo = seqNo, });
@@ -34,6 +34,7 @@ namespace ESUN.AGD.WebApi.Application.Func
 				parentFuncID = data.ParentFuncID,
 				level = data.Level,
 				systemType = data.SystemType,
+				iconName = data.IconName,
 				routeName = data.RouteName,
 				displayOrder = data.DisplayOrder,
 				createDT = data.CreateDT,
@@ -49,9 +50,9 @@ namespace ESUN.AGD.WebApi.Application.Func
 
         public async ValueTask<BasicResponse<List<FuncResponse>>> QueryFunc(FuncQueryRequest request)
         {
-
-            if (string.IsNullOrEmpty(request.extCode)) { request.extCode = string.Empty; }            
-            if (string.IsNullOrEmpty(request.computerName)) { request.computerName = string.Empty; }            
+			if (string.IsNullOrEmpty(request.funcID)) { request.funcID = string.Empty; }
+			if (string.IsNullOrEmpty(request.funcName)) { request.funcName = string.Empty; }
+            
 
             var data = await _dataAccessService
                 .LoadData<TbFunc, object>(storeProcedure: "agdSp.uspFuncQuery", request);
@@ -67,6 +68,7 @@ namespace ESUN.AGD.WebApi.Application.Func
 				parentFuncID = item.ParentFuncID,
 				level = item.Level,
 				systemType = item.SystemType,
+				iconName = item.IconName,
 				routeName = item.RouteName,
 				displayOrder = item.DisplayOrder,
 				createDT = item.CreateDT,
@@ -84,9 +86,9 @@ namespace ESUN.AGD.WebApi.Application.Func
 
         public async ValueTask<BasicResponse<bool>> InsertFunc(FuncInsertRequest request)
         {
-            var creator = _getTokenService.userId ?? "";
-
-            var exists = await Exists(0, request.extCode, request.computerIp);
+            var creator = _getTokenService.userID ?? "";
+            
+            var exists = await Exists(0, request.funcID, request.funcName);
             
             if (exists.data == true) return new BasicResponse<bool>()
             { resultCode = "U999", resultDescription = "資料重複，請重新設定", data=false };
@@ -105,9 +107,9 @@ namespace ESUN.AGD.WebApi.Application.Func
 
         public async ValueTask<BasicResponse<bool>> UpdateFunc(FuncUpdateRequest request)
         {
-            var updator = _getTokenService.userId ?? "";
+            var updator = _getTokenService.userID ?? "";
 
-            var exists = await Exists(request.seqNo, request.extCode, request.computerIp);
+            var exists = await Exists(request.seqNo, request.funcID, request.funcName);
             
             if (exists.data == true) return new BasicResponse<bool>()
             { resultCode = "U999", resultDescription = "資料重複，請重新設定", data = false };
@@ -124,7 +126,7 @@ namespace ESUN.AGD.WebApi.Application.Func
             { resultCode = "U200", resultDescription = "更新成功", data = true };
         }
 
-        public async ValueTask<BasicResponse<bool>> DeleteFunc(string funcID)
+        public async ValueTask<BasicResponse<bool>> DeleteFunc(int seqNo)
         {
             var data = await _dataAccessService
                 .OperateData(storeProcedure: "agdSp.uspFuncDelete", new { seqNo = seqNo });
@@ -136,11 +138,12 @@ namespace ESUN.AGD.WebApi.Application.Func
             { resultCode = "U200", resultDescription = "刪除成功", data = true };
         }
 
-        public async ValueTask<BasicResponse<bool>> Exists(string funcID,string funcName)
+        public async ValueTask<BasicResponse<bool>> Exists(int seqNo,string funcID,string funcName)
         {
             var data = await _dataAccessService
                 .LoadSingleData<int, object>(storeProcedure: "agdSp.uspFuncExists", new
                 {
+					SeqNo = seqNo,
 					FuncID = funcID,
 					FuncName = funcName,               
                 });

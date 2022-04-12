@@ -8,7 +8,7 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
         /// 依序號取得電腦電話配對設定
         /// </summary>
         /// <param>
-        /// seqNo - 電腦電話序號
+		/// seqNo            - int        - 流水號
         /// </param>
         /// <returns>
 		/// seqNo            - int        - 流水號
@@ -28,10 +28,8 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
         /// 搜尋電腦電話配對設定 
         /// </summary>
         /// <param name="request">
-		/// computerIP       - string     - 電腦IP
 		/// computerName     - string     - 電腦名稱
 		/// extCode          - string     - 分機號碼
-		/// memo             - string     - 備註
         /// page             - int        - 分頁
         /// rowsPerPage      - int        - 每頁筆數
         /// sortColumn       - string     - 排序欄位
@@ -82,22 +80,23 @@ namespace ESUN.AGD.WebApi.Application.PcPhone
         /// 刪除電腦電話配對設定
         /// </summary>
         /// <param>
-		/// computerIP       - string     - 電腦IP
+		/// seqNo            - int        - 流水號
         /// </param>
         /// <returns>
         /// </returns>
-        ValueTask<BasicResponse<bool>> DeletePcPhone(string computerIP);
+        ValueTask<BasicResponse<bool>> DeletePcPhone(int seqNo);
 
         /// <summary>
         /// 檢查電腦電話配對是否存在
         /// </summary>
         /// <param>
+		/// seqNo            - int        - 流水號
 		/// computerIP       - string     - 電腦IP
 		/// extCode          - string     - 分機號碼
         /// </param>
         /// <returns>
         /// </returns>
-        ValueTask<BasicResponse<bool>> Exists(string computerIP,string extCode);
+        ValueTask<BasicResponse<bool>> Exists(int seqNo,string computerIP,string extCode);
 
     }
 }

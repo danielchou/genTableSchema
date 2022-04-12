@@ -21,8 +21,7 @@ namespace ESUN.AGD.WebApi.Controllers
         /// 依序號取得角色功能配對設定
         /// </summary>
         /// <param>
-		/// roleID           - string     - 角色代碼
-		/// funcID           - string     - 功能代碼
+        /// seqNo           - int     - 流水號
         /// </param>
         /// <returns>
 		/// seqNo            - int        - 流水號
@@ -36,9 +35,9 @@ namespace ESUN.AGD.WebApi.Controllers
         /// </returns>
         [Authorize]
         [HttpGet("{seqNo}")]
-        public async ValueTask<IActionResult> GetRoleFunc(string roleID,string funcID)
+        public async ValueTask<IActionResult> GetRoleFunc(int seqNo)
         {
-            return Ok(await _RoleFuncService.GetRoleFunc(roleID,funcID));
+            return Ok(await _RoleFuncService.GetRoleFunc(seqNo));
         }
 
         /// <summary>
@@ -93,7 +92,8 @@ namespace ESUN.AGD.WebApi.Controllers
 		/// roleID           - string     - 角色代碼
 		/// funcID           - string     - 功能代碼
         /// </param>
-        /// <returns></returns>
+        /// <returns>
+        /// </returns>
         [Authorize]
         [HttpPut]
         public async ValueTask<IActionResult> UpdateRoleFunc(RoleFuncUpdateRequest request)
@@ -105,15 +105,14 @@ namespace ESUN.AGD.WebApi.Controllers
         /// 刪除角色功能配對設定
         /// </summary>
         /// <param>
-		/// roleID           - string     - 角色代碼
-		/// funcID           - string     - 功能代碼
+		/// seqNo            - int        - 流水號
         /// </param>
         /// <returns></returns>
         [Authorize]
         [HttpDelete]
-        public async ValueTask<IActionResult> DeteleRoleFunc(string roleID,string funcID)
+        public async ValueTask<IActionResult> DeteleRoleFunc(int seqNo)
         {
-            return Ok(await _RoleFuncService.DeleteRoleFunc(roleID,funcID));
+            return Ok(await _RoleFuncService.DeleteRoleFunc(seqNo));
         }
 
     }

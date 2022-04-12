@@ -21,7 +21,7 @@ namespace ESUN.AGD.WebApi.Controllers
         /// 依序號取得群組設定
         /// </summary>
         /// <param>
-		/// groupID          - string     - 群組代碼
+        /// seqNo           - int     - 流水號
         /// </param>
         /// <returns>
 		/// seqNo            - int        - 流水號
@@ -35,9 +35,9 @@ namespace ESUN.AGD.WebApi.Controllers
         /// </returns>
         [Authorize]
         [HttpGet("{seqNo}")]
-        public async ValueTask<IActionResult> GetGroup(string groupID)
+        public async ValueTask<IActionResult> GetGroup(int seqNo)
         {
-            return Ok(await _GroupService.GetGroup(groupID));
+            return Ok(await _GroupService.GetGroup(seqNo));
         }
 
         /// <summary>
@@ -92,7 +92,8 @@ namespace ESUN.AGD.WebApi.Controllers
 		/// groupID          - string     - 群組代碼
 		/// groupName        - string     - 群組名稱
         /// </param>
-        /// <returns></returns>
+        /// <returns>
+        /// </returns>
         [Authorize]
         [HttpPut]
         public async ValueTask<IActionResult> UpdateGroup(GroupUpdateRequest request)
@@ -104,14 +105,14 @@ namespace ESUN.AGD.WebApi.Controllers
         /// 刪除群組設定
         /// </summary>
         /// <param>
-		/// groupID          - string     - 群組代碼
+		/// seqNo            - int        - 流水號
         /// </param>
         /// <returns></returns>
         [Authorize]
         [HttpDelete]
-        public async ValueTask<IActionResult> DeteleGroup(string groupID)
+        public async ValueTask<IActionResult> DeteleGroup(int seqNo)
         {
-            return Ok(await _GroupService.DeleteGroup(groupID));
+            return Ok(await _GroupService.DeleteGroup(seqNo));
         }
 
     }

@@ -18,7 +18,7 @@ namespace ESUN.AGD.WebApi.Application.Group
             _getTokenService = getTokenService;
         }
 
-        public async ValueTask<BasicResponse<GroupResponse>> GetGroup(string groupID)
+        public async ValueTask<BasicResponse<GroupResponse>> GetGroup(int seqNo)
         {
             var data = await _dataAccessService
                 .LoadSingleData<TbGroup, object>(storeProcedure: "agdSp.uspGroupGet", new { seqNo = seqNo, });
@@ -44,9 +44,9 @@ namespace ESUN.AGD.WebApi.Application.Group
 
         public async ValueTask<BasicResponse<List<GroupResponse>>> QueryGroup(GroupQueryRequest request)
         {
-
-            if (string.IsNullOrEmpty(request.extCode)) { request.extCode = string.Empty; }            
-            if (string.IsNullOrEmpty(request.computerName)) { request.computerName = string.Empty; }            
+			if (string.IsNullOrEmpty(request.groupID)) { request.groupID = string.Empty; }
+			if (string.IsNullOrEmpty(request.groupName)) { request.groupName = string.Empty; }
+            
 
             var data = await _dataAccessService
                 .LoadData<TbGroup, object>(storeProcedure: "agdSp.uspGroupQuery", request);
@@ -74,9 +74,9 @@ namespace ESUN.AGD.WebApi.Application.Group
 
         public async ValueTask<BasicResponse<bool>> InsertGroup(GroupInsertRequest request)
         {
-            var creator = _getTokenService.userId ?? "";
-
-            var exists = await Exists(0, request.extCode, request.computerIp);
+            var creator = _getTokenService.userID ?? "";
+            
+            var exists = await Exists(0, request.groupID, request.groupName);
             
             if (exists.data == true) return new BasicResponse<bool>()
             { resultCode = "U999", resultDescription = "資料重複，請重新設定", data=false };
@@ -95,9 +95,9 @@ namespace ESUN.AGD.WebApi.Application.Group
 
         public async ValueTask<BasicResponse<bool>> UpdateGroup(GroupUpdateRequest request)
         {
-            var updator = _getTokenService.userId ?? "";
+            var updator = _getTokenService.userID ?? "";
 
-            var exists = await Exists(request.seqNo, request.extCode, request.computerIp);
+            var exists = await Exists(request.seqNo, request.groupID, request.groupName);
             
             if (exists.data == true) return new BasicResponse<bool>()
             { resultCode = "U999", resultDescription = "資料重複，請重新設定", data = false };
@@ -114,7 +114,7 @@ namespace ESUN.AGD.WebApi.Application.Group
             { resultCode = "U200", resultDescription = "更新成功", data = true };
         }
 
-        public async ValueTask<BasicResponse<bool>> DeleteGroup(string groupID)
+        public async ValueTask<BasicResponse<bool>> DeleteGroup(int seqNo)
         {
             var data = await _dataAccessService
                 .OperateData(storeProcedure: "agdSp.uspGroupDelete", new { seqNo = seqNo });
@@ -126,11 +126,12 @@ namespace ESUN.AGD.WebApi.Application.Group
             { resultCode = "U200", resultDescription = "刪除成功", data = true };
         }
 
-        public async ValueTask<BasicResponse<bool>> Exists(string groupID,string groupName)
+        public async ValueTask<BasicResponse<bool>> Exists(int seqNo,string groupID,string groupName)
         {
             var data = await _dataAccessService
                 .LoadSingleData<int, object>(storeProcedure: "agdSp.uspGroupExists", new
                 {
+					SeqNo = seqNo,
 					GroupID = groupID,
 					GroupName = groupName,               
                 });

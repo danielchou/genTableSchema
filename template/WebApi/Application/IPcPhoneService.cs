@@ -8,7 +8,7 @@ namespace ESUN.AGD.WebApi.Application.$pt_TableName
         /// 依序號取得$TbDscr設定
         /// </summary>
         /// <param>
-        /// seqNo - 電腦電話序號
+$pt_ColDscr_ParasPK
         /// </param>
         /// <returns>
 $pt_ColDscr_GetReturnAll

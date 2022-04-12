@@ -8,7 +8,7 @@ namespace ESUN.AGD.WebApi.Application.RoleFunc
         /// 依序號取得角色功能配對設定
         /// </summary>
         /// <param>
-        /// seqNo - 電腦電話序號
+		/// seqNo            - int        - 流水號
         /// </param>
         /// <returns>
 		/// seqNo            - int        - 流水號
@@ -72,23 +72,23 @@ namespace ESUN.AGD.WebApi.Application.RoleFunc
         /// 刪除角色功能配對設定
         /// </summary>
         /// <param>
-		/// roleID           - string     - 角色代碼
-		/// funcID           - string     - 功能代碼
+		/// seqNo            - int        - 流水號
         /// </param>
         /// <returns>
         /// </returns>
-        ValueTask<BasicResponse<bool>> DeleteRoleFunc(string roleID,string funcID);
+        ValueTask<BasicResponse<bool>> DeleteRoleFunc(int seqNo);
 
         /// <summary>
         /// 檢查角色功能配對是否存在
         /// </summary>
         /// <param>
+		/// seqNo            - int        - 流水號
 		/// roleID           - string     - 角色代碼
 		/// funcID           - string     - 功能代碼
         /// </param>
         /// <returns>
         /// </returns>
-        ValueTask<BasicResponse<bool>> Exists(string roleID,string funcID);
+        ValueTask<BasicResponse<bool>> Exists(int seqNo,string roleID,string funcID);
 
     }
 }

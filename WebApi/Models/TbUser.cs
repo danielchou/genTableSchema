@@ -26,19 +26,19 @@
         /// <summary>
         /// CTI登入代碼
         /// </summary>
-        public string AgentLoginCode { get; set; } 
+        public string AgentLoginCode { get; set; }  = null!;
         /// <summary>
         /// 員工編號
         /// </summary>
-        public string EmployeeNo { get; set; } 
+        public string EmployeeNo { get; set; }  = null!;
         /// <summary>
         /// 使用者暱稱
         /// </summary>
-        public string NickName { get; set; } 
+        public string NickName { get; set; }  = null!;
         /// <summary>
         /// 所屬單位
         /// </summary>
-        public string EmpDept { get; set; } 
+        public string EmpDept { get; set; }  = null!;
         /// <summary>
         /// 群組代碼
         /// </summary>
@@ -46,11 +46,11 @@
         /// <summary>
         /// 公司Email
         /// </summary>
-        public string OfficeEmail { get; set; } 
+        public string OfficeEmail { get; set; }  = null!;
         /// <summary>
         /// 在職狀態代碼
         /// </summary>
-        public string EmployedStatusCode { get; set; } 
+        public string EmployedStatusCode { get; set; }  = null!;
         /// <summary>
         /// 是否為主管?
         /// </summary>

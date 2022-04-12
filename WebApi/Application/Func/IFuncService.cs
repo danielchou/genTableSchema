@@ -8,15 +8,16 @@ namespace ESUN.AGD.WebApi.Application.Func
         /// 依序號取得功能設定
         /// </summary>
         /// <param>
-        /// seqNo - 電腦電話序號
+		/// seqNo            - int        - 流水號
         /// </param>
         /// <returns>
 		/// seqNo            - int        - 流水號
 		/// funcID           - string     - 功能代碼
 		/// funcName         - string     - 功能名稱
 		/// parentFuncID     - string     - 上層功能代碼
-		/// level            -            - 階層
+		/// level            - int        - 階層
 		/// systemType       - string     - 系統類別
+		/// iconName         - string     - Icon名稱
 		/// routeName        - string     - 路由名稱
 		/// displayOrder     - int        - 顯示順序
 		/// createDT         - DateTime   - 建立時間
@@ -33,11 +34,6 @@ namespace ESUN.AGD.WebApi.Application.Func
         /// <param name="request">
 		/// funcID           - string     - 功能代碼
 		/// funcName         - string     - 功能名稱
-		/// parentFuncID     - string     - 上層功能代碼
-		/// level            -            - 階層
-		/// systemType       - string     - 系統類別
-		/// routeName        - string     - 路由名稱
-		/// displayOrder     - int        - 顯示順序
         /// page             - int        - 分頁
         /// rowsPerPage      - int        - 每頁筆數
         /// sortColumn       - string     - 排序欄位
@@ -48,8 +44,9 @@ namespace ESUN.AGD.WebApi.Application.Func
 		/// funcID           - string     - 功能代碼
 		/// funcName         - string     - 功能名稱
 		/// parentFuncID     - string     - 上層功能代碼
-		/// level            -            - 階層
+		/// level            - int        - 階層
 		/// systemType       - string     - 系統類別
+		/// iconName         - string     - Icon名稱
 		/// routeName        - string     - 路由名稱
 		/// displayOrder     - int        - 顯示順序
 		/// createDT         - DateTime   - 建立時間
@@ -67,8 +64,9 @@ namespace ESUN.AGD.WebApi.Application.Func
 		/// funcID           - string     - 功能代碼
 		/// funcName         - string     - 功能名稱
 		/// parentFuncID     - string     - 上層功能代碼
-		/// level            -            - 階層
+		/// level            - int        - 階層
 		/// systemType       - string     - 系統類別
+		/// iconName         - string     - Icon名稱
 		/// routeName        - string     - 路由名稱
 		/// displayOrder     - int        - 顯示順序
         /// </param>
@@ -84,8 +82,9 @@ namespace ESUN.AGD.WebApi.Application.Func
 		/// funcID           - string     - 功能代碼
 		/// funcName         - string     - 功能名稱
 		/// parentFuncID     - string     - 上層功能代碼
-		/// level            -            - 階層
+		/// level            - int        - 階層
 		/// systemType       - string     - 系統類別
+		/// iconName         - string     - Icon名稱
 		/// routeName        - string     - 路由名稱
 		/// displayOrder     - int        - 顯示順序
         /// </param>
@@ -97,22 +96,23 @@ namespace ESUN.AGD.WebApi.Application.Func
         /// 刪除功能設定
         /// </summary>
         /// <param>
-		/// funcID           - string     - 功能代碼
+		/// seqNo            - int        - 流水號
         /// </param>
         /// <returns>
         /// </returns>
-        ValueTask<BasicResponse<bool>> DeleteFunc(string funcID);
+        ValueTask<BasicResponse<bool>> DeleteFunc(int seqNo);
 
         /// <summary>
         /// 檢查功能是否存在
         /// </summary>
         /// <param>
+		/// seqNo            - int        - 流水號
 		/// funcID           - string     - 功能代碼
 		/// funcName         - string     - 功能名稱
         /// </param>
         /// <returns>
         /// </returns>
-        ValueTask<BasicResponse<bool>> Exists(string funcID,string funcName);
+        ValueTask<BasicResponse<bool>> Exists(int seqNo,string funcID,string funcName);
 
     }
 }

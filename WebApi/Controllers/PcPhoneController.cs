@@ -21,7 +21,7 @@ namespace ESUN.AGD.WebApi.Controllers
         /// 依序號取得電腦電話配對設定
         /// </summary>
         /// <param>
-		/// computerIP       - string     - 電腦IP
+        /// seqNo           - int     - 流水號
         /// </param>
         /// <returns>
 		/// seqNo            - int        - 流水號
@@ -37,19 +37,17 @@ namespace ESUN.AGD.WebApi.Controllers
         /// </returns>
         [Authorize]
         [HttpGet("{seqNo}")]
-        public async ValueTask<IActionResult> GetPcPhone(string computerIP)
+        public async ValueTask<IActionResult> GetPcPhone(int seqNo)
         {
-            return Ok(await _PcPhoneService.GetPcPhone(computerIP));
+            return Ok(await _PcPhoneService.GetPcPhone(seqNo));
         }
 
         /// <summary>
         /// 搜尋電腦電話配對設定 
         /// </summary>
         /// <param name="request">
-		/// computerIP       - string     - 電腦IP
 		/// computerName     - string     - 電腦名稱
 		/// extCode          - string     - 分機號碼
-		/// memo             - string     - 備註
         /// page             - int        - 分頁
         /// rowsPerPage      - int        - 每頁筆數
         /// sortColumn       - string     - 排序欄位
@@ -102,7 +100,8 @@ namespace ESUN.AGD.WebApi.Controllers
 		/// extCode          - string     - 分機號碼
 		/// memo             - string     - 備註
         /// </param>
-        /// <returns></returns>
+        /// <returns>
+        /// </returns>
         [Authorize]
         [HttpPut]
         public async ValueTask<IActionResult> UpdatePcPhone(PcPhoneUpdateRequest request)
@@ -114,14 +113,14 @@ namespace ESUN.AGD.WebApi.Controllers
         /// 刪除電腦電話配對設定
         /// </summary>
         /// <param>
-		/// computerIP       - string     - 電腦IP
+		/// seqNo            - int        - 流水號
         /// </param>
         /// <returns></returns>
         [Authorize]
         [HttpDelete]
-        public async ValueTask<IActionResult> DetelePcPhone(string computerIP)
+        public async ValueTask<IActionResult> DetelePcPhone(int seqNo)
         {
-            return Ok(await _PcPhoneService.DeletePcPhone(computerIP));
+            return Ok(await _PcPhoneService.DeletePcPhone(seqNo));
         }
 
     }
