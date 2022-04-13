@@ -13,7 +13,8 @@
 **	Input
 ** -----------
 	$pt_input
-	@Creator NVARCHAR(20) - 建立者
+	@Creator		 VARCHAR(20) - 建立者
+	@CreatorName	 NVARCHAR(60) - 建立者名稱
 **
 **   Output
 ** -----------
@@ -24,14 +25,17 @@
 DECLARE @return_value INT
 	,$pt_Declare
 	,@Creator VARCHAR(20)
+	,@CreatorName NVARCHAR(60)
 	,@ErrorMsg NVARCHAR(100);
 
 	$pt_insertSetVal
 	SET @Creator = 'admin'
+	SET @CreatorName = 'admin'
 
 	EXEC @return_value = [agdSp].[usp$pt_tableName$pt_insert] 
 		$pt_Exec
 		,@Creator = @Creator
+		,@CreatorName = @CreatorName
 		,@ErrorMsg = @ErrorMsg OUTPUT
 
 SELECT @return_value AS 'Return Value'
@@ -47,6 +51,7 @@ SELECT @return_value AS 'Return Value'
 CREATE PROCEDURE [agdSp].[usp$pt_tableName$pt_insert] (
 	$pt_Declare
 	,@Creator VARCHAR(20)
+	,@CreatorName NVARCHAR(60)
 	,@ErrorMsg NVARCHAR(100) = NULL OUTPUT
 	)
 AS
@@ -59,15 +64,19 @@ BEGIN
 			$pt_insertCols
 			,CreateDT
 			,Creator
+			,CreatorName
 			,UpdateDT
 			,Updator
+			,UpdatorName
         )
 		VALUES (
 			$pt_insertVals
-			,GETDATE()
+			,DATEADD(HH, +8, GETUTCDATE())
 			,@Creator
-			,GETDATE()
+			,@CreatorName
+			,DATEADD(HH, +8, GETUTCDATE())
 			,@Creator
+			,@CreatorName
 			);
 	END TRY
 

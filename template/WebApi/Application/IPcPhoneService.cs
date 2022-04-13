@@ -12,7 +12,6 @@ $pt_ColDscr_ParasPK
         /// </param>
         /// <returns>
 $pt_ColDscr_GetReturnAll
-        /// updatorName      - string     - 更新者名稱
         /// </returns>
         ValueTask<BasicResponse<$pt_TableName$response>> Get$pt_TableName(int seqNo);
 
@@ -28,7 +27,6 @@ $pt_ColDscr_QueryParas_Query
         /// </param>
         /// <returns>
 $pt_ColDscr_GetReturnAll
-        /// updatorName      - string     - 更新者名稱
         /// </returns> 
         ValueTask<BasicResponse<List<$pt_TableName$response>>> Query$pt_TableName($pt_TableName$queryRequest request);
 

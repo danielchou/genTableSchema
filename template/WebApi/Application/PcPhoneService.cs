@@ -28,7 +28,6 @@ namespace ESUN.AGD.WebApi.Application.$pt_TableName
             var result = new $pt_TableName$response
             {
 $pt_data2Json
-                updatorName = data.UpdatorName
             };
             
             return new BasicResponse<$pt_TableName$response>()
@@ -47,8 +46,7 @@ $pt_requestIsNullOrEmpty
 
             var result = data.Select(item => new $pt_TableName$response
             {
-$pt_item2Json            
-                updatorName = item.UpdatorName   
+$pt_item2Json  
             }).ToList();
 
             int totalCount = data.FirstOrDefault().Total;
@@ -60,13 +58,15 @@ $pt_item2Json
         public async ValueTask<BasicResponse<bool>> Insert$pt_TableName($pt_TableName$insertRequest request)
         {
             var creator = _getTokenService.userID ?? "";
-            
+            var creatorName = _getTokenService.userName ?? "";
+
             var exists = await Exists(0, $pt_requstInsertIsExist);
             
             if (exists.data == true) return new BasicResponse<bool>()
             { resultCode = "U999", resultDescription = "資料重複，請重新設定", data=false };
                         
             request.creator = creator;
+            request.creatorName = creatorName;
 
             var data = await _dataAccessService
                 .OperateData(storeProcedure: "agdSp.usp$pt_TableName$insert", request);
@@ -81,13 +81,15 @@ $pt_item2Json
         public async ValueTask<BasicResponse<bool>> Update$pt_TableName($pt_TableName$updateRequest request)
         {
             var updator = _getTokenService.userID ?? "";
+            var updatorName = _getTokenService.userName ?? "";
 
             var exists = await Exists($pt_requstInsertIsExistWithSeqNo);
             
             if (exists.data == true) return new BasicResponse<bool>()
             { resultCode = "U999", resultDescription = "資料重複，請重新設定", data = false };
 
-            request.updator = updator;            
+            request.updator = updator;
+            request.updatorName = updatorName;
 
             var data = await _dataAccessService
                 .OperateData(storeProcedure: "agdSp.usp$pt_TableName$update", request);

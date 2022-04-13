@@ -70,10 +70,8 @@ BEGIN
 	BEGIN TRY
 		SELECT
             $pt_fColAll
-			,u.UserName AS UpdatorName
 			,COUNT(f.SeqNo) OVER () AS Total
 		FROM agdSet.tb$pt_tableName AS f
-		JOIN agdSet.tbUser AS u ON u.UserId = f.Updator
 		------- WHERE 查詢條件 -------
 		WHERE $pt_queryWhere
 		------- Sort 排序條件 -------

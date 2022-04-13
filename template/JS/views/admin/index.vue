@@ -79,26 +79,26 @@ import EditForm from './edit-form';
  */
 
 const columns = [
+  {
+    name: 'actions',
+    align: 'center',
+    label: '動作',
+  },
   $pt_indexVue_Columns
+  {
+    name: 'updatorName',
+    label: '更新人員',
+    align: 'left',
+    field: 'updatorName',
+    sortable: false,
+  },
   {
     name: 'updateDT',
     label: '更新時間',
     align: 'left',
     field: (row) => dayjs(row.updateDT).format('YYYY-MM-DD HH:mm:ss'),
     sortable: true,
-  },
-  {
-    name: 'updatorName',
-    label: '更新者',
-    align: 'left',
-    field: 'updatorName',
-    sortable: false,
-  },
-  {
-    name: 'actions',
-    align: 'center',
-    label: '動作',
-  },
+  }
 ];
 
 export default {
@@ -136,7 +136,7 @@ export default {
     const rowsPerPageOptions = computed(() => store.getters['app/getRowsPerPageOptions']);
 
     const filterItemOptions = [
-      $pt_filterItem
+$pt_filterItem
     ];
 
     const isEnableOptions = [

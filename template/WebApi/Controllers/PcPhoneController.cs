@@ -25,7 +25,6 @@ namespace ESUN.AGD.WebApi.Controllers
         /// </param>
         /// <returns>
 $pt_ColDscr_GetReturnAll
-        /// updatorName      - string     - 更新者名稱
         /// </returns>
         [Authorize]
         [HttpGet("{seqNo}")]
@@ -46,7 +45,6 @@ $pt_ColDscr_QueryParas_Query
         /// </param>
         /// <returns>
 $pt_ColDscr_GetReturnAll
-        /// updatorName      - string     - 更新者名稱
         /// </returns>        
         [Authorize]
         [HttpGet("query")]

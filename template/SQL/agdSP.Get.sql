@@ -5,7 +5,6 @@
 ** Return values: 0 成功
 ** Return Recordset: 
 $pt_getSelectAll
-**	UpdatorName       NVARCHAR(20)   - 更新者名稱
 **
 ** Called by: 
 **	AGD WebApi
@@ -52,9 +51,7 @@ BEGIN
 	BEGIN TRY
 		SELECT
 			$pt_fColAll
-			,u.UserName AS UpdatorName
 		FROM agdSet.tb$pt_tableName AS f
-		JOIN agdSet.tbUser AS u ON u.UserId = f.Updator
 		WHERE f.SeqNo = @SeqNo;
 	END TRY
 

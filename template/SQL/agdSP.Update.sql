@@ -13,7 +13,8 @@
 **	Input
 ** -----------
     $pt_input
-	@Updator NVARCHAR(20) - 建立者
+	@Updator VARCHAR(20) - 建立者
+	@UpdatorName NVARCHAR(60) - 建立者名稱
 **
 **   Output
 ** -----------
@@ -23,16 +24,19 @@
 ** -----------
 DECLARE @return_value INT
     ,$pt_Declare
-	,@Updator NVARCHAR(20)
+	,@Updator VARCHAR(20)
+	,@UpdatorName NVARCHAR(60)
     ,@ErrorMsg NVARCHAR(100)
 
     $pt_updateSetVal
 	SET @Updator = 'admin'
+	SET @UpdatorName = 'admin'
 
 EXEC @return_value = [agdSp].[usp$pt_tableName$pt_update]
     $pt_Exec
 	,@Updator = @Updator
-    ,@ErrorMsg = @ErrorMsg OUTPUT
+	,@UpdatorName = @UpdatorName
+	,@ErrorMsg = @ErrorMsg OUTPUT
 
 SELECT @return_value AS 'Return Value'
     ,@ErrorMsg AS N'@ErrorMsg'
@@ -46,7 +50,8 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[usp$pt_tableName$pt_update] (
 	$pt_Declare
-	,@Updator NVARCHAR(20)
+	,@Updator VARCHAR(20)
+	,@UpdatorName NVARCHAR(60)
 	,@ErrorMsg NVARCHAR(100) = NULL OUTPUT
 	)
 AS
@@ -57,8 +62,9 @@ BEGIN
 	BEGIN TRY
 		UPDATE agdSet.tb$pt_tableName
 		SET $pt_UpdateSet
-            ,UpdateDt = GETDATE()
+            ,UpdateDT = DATEADD(HH, +8, GETUTCDATE())
 			,Updator = @Updator
+			,UpdatorName = @UpdatorName
 		WHERE SeqNo = @SeqNo;
 	END TRY
 
