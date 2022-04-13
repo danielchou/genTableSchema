@@ -11,8 +11,7 @@ namespace ESUN.AGD.WebApi.Application.$pt_TableName
         private readonly IDataAccessService _dataAccessService;
         private readonly IGetTokenService _getTokenService;
         
-
-        public $pt_TableName$service(IDataAccessService dataAccessService , IGetTokenService getTokenService)
+        public $pt_TableName$service(IDataAccessService dataAccessService, IGetTokenService getTokenService)
         {
             _dataAccessService = dataAccessService;
             _getTokenService = getTokenService;
