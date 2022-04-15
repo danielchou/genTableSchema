@@ -56,6 +56,7 @@ import dayjs from 'dayjs';
 import $pt_tableName from '@supervisor-store/$pt_table_name';
 
 import { useQuasar } from 'quasar';
+import { getFuncNameByAGDFunc } from '@composables/use-common';
 import { useSuccessNotify } from '@composables/use-notify';
 import { useConfirmDialog } from '@composables/use-dialog';
 
@@ -81,7 +82,7 @@ import EditForm from './edit-form';
 const columns = [
   {
     name: 'actions',
-    align: 'center',
+    align: 'left',
     label: '動作',
   },
   $pt_indexVue_Columns
@@ -112,7 +113,7 @@ export default {
   setup() {
     // 抓取 router meta 設定的 title
     const route = useRoute();
-    const routeTitle = route.meta.title;
+    const routeTitle = getFuncNameByAGDFunc(route.name);
 
     /**
      ********************************************************************
@@ -220,6 +221,7 @@ $pt_filterItem
     const onClearFilter = () => {
       filter.filterItem = filterItemOptions[0];
       filter.filterValue = '';
+      filter.isEnable = isEnableOptions[1];
       pagination.value.sortBy = defaultSortBy;
       fetchItems(true);
     };
@@ -271,7 +273,7 @@ $pt_filterItem
     };
 
     const fetchItem = (id) => {
-      return store.dispatch(`$${moduleName}/fetchItemById`, id);
+      return store.dispatch(`$${moduleName}/fetchItemById`, id).then((res) => res.data);
     };
 
     const fetchItems = (reset) => {

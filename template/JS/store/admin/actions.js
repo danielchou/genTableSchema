@@ -37,7 +37,7 @@ export const fetchItemById = ({ commit }, seqNo) => {
 
   const response = axios.webapi({ opts, commit }).then((res) => {
     commit('setItem', res.data);
-    return res.data;
+    return res;
   });
 
   return response;

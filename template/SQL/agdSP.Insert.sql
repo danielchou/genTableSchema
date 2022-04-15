@@ -14,7 +14,7 @@
 ** -----------
 	$pt_input
 	@Creator		 VARCHAR(20) - 建立者
-	@CreatorName	 NVARCHAR(60) - 建立者名稱
+	@CreatorName	 NVARCHAR(60) - 建立人員
 **
 **   Output
 ** -----------

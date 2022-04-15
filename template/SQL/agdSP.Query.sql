@@ -77,6 +77,8 @@ BEGIN
 		------- Sort 排序條件 -------
 		ORDER BY 
 $pt_orderBy
+            CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
+			CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC
 		------- Page 分頁條件 -------
 		OFFSET @RowsPerPage * (@page - 1) ROWS
 

@@ -14,7 +14,7 @@
 ** -----------
     $pt_input
 	@Updator VARCHAR(20) - 建立者
-	@UpdatorName NVARCHAR(60) - 建立者名稱
+	@UpdatorName NVARCHAR(60) - 建立人員
 **
 **   Output
 ** -----------

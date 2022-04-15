@@ -17,31 +17,26 @@
 
         <q-card-section style="max-height: 50vh" class="scroll">
 $pt_EditForm_q_input
-          <div class="row q-col-gutter-md" v-show="!isCreate">
-            <q-input
-              class="col"
-              type="text"
-              :model-value="formData.updatorName"
-              label="最後更新人員"
-              borderless
-              disable
-              readonly
-            />
-            <q-input
-              class="col"
-              type="text"
-              :model-value="formData.updateDT"
-              label="最後更新時間"
-              borderless
-              disable
-              readonly
-            />
-          </div>
         </q-card-section>
 
         <q-separator />
 
         <q-card-actions align="right">
+          <div class="text-subtitle2 text-grey-5" v-show="!isCreate">
+            <div class="row">
+              <span>建立日期：</span>
+              <span>{{ formData.createDT }}&nbsp;</span>
+              <span>{{ formData.creatorName }}&nbsp;</span>
+              <span>( {{ formData.creator }} )</span>
+            </div>
+            <div class="row">
+              <span>更新日期：</span>
+              <span>{{ formData.updateDT }}&nbsp;</span>
+              <span>{{ formData.updatorName }}&nbsp;</span>
+              <span>( {{ formData.updator }} )</span>
+            </div>
+          </div>
+          <q-space />
           <q-btn
             class="col-2 shadow-1"
             flat
@@ -59,7 +54,7 @@ $pt_EditForm_q_input
 <script>
 import { ref, toRefs, watch } from 'vue';
 import { useQuasar } from 'quasar';
-import { throttle } from 'lodash';
+import { debounce } from 'lodash';
 import { useRequiredInput, useMaxLength } from '@composables/use-validations';
 import { useCombineFields, useDatetime } from '@composables/use-common';
 import { useConfirmDialog } from '@composables/use-dialog';
@@ -81,9 +76,13 @@ export default {
     const $$q = useQuasar();
 
     const formData = ref({
-  $pt_editForm_formData
-        updateDT: '',
-        updatorName: '',
+$pt_editForm_formData
+      updateDT: '',
+      updator: '',
+      updatorName: '',
+      createDT: '',
+      creator: '',
+      creatorName: '',
     });
 
     watch(
@@ -104,13 +103,9 @@ export default {
       emit('submit-form', formData.value);
     };
 
-    const onCancelByEsc = () => {
-      throttle(() => {
-        setTimeout(() => {
-          onCancel();
-        }, 100);
-      }, 1000)();
-    };
+    const onCancelByEsc = debounce(() => {
+      onCancel();
+    }, 200);
 
     let closeDialogOpened = false;
     const onCancel = () => {
@@ -135,6 +130,7 @@ export default {
      */
     if (modelValue.value && !isCreate.value) {
       fetchItemForEdit.value.updateDT = useDatetime(fetchItemForEdit.value.updateDT);
+      fetchItemForEdit.value.createDT = useDatetime(fetchItemForEdit.value.createDT);
       formData.value = useCombineFields(formData.value, fetchItemForEdit.value);
       valueChangeFlag.value = false;
     }
