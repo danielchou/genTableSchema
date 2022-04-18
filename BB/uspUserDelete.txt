@@ -1,0 +1,75 @@
+USE [newcti]
+GO
+
+/****** Object:  StoredProcedure [agdSp].[uspUserDelete]    Script Date: 2022/4/11 上午 11:24:04 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+/****************************************************************
+** Name: [agdSp].[uspUserDelete]
+** Desc: 使用者刪除
+**
+** Return values: 0 成功
+** Return Recordset: 
+**	NA
+**
+** Called by: 
+**	AGD WebApi
+**
+** Parameters:
+**	Input
+** -----------
+	@SeqNO          INT  - 流水號
+**
+**   Output
+** -----------
+	@ErrorMsg NVARCHAR(100) - 錯誤回傳訊息
+** 
+** Example:
+** -----------
+	DECLARE @return_value INT
+		,@SeqNO INT
+		,@ErrorMsg NVARCHAR(100)
+
+	SET @SeqNO = 1
+
+	EXEC @return_value = [agdSp].[uspUserDelete] 
+		@SeqNO = @SeqNO
+		,@ErrorMsg = @ErrorMsg OUTPUT
+
+	SELECT @return_value AS 'Return Value'
+		,@ErrorMsg AS N'@ErrorMsg'
+**
+*****************************************************************
+** Change History
+*****************************************************************
+** Date:		 	Author:				Description:
+** ---------- ------- ------------------------------------
+** 2022/04/10 16:02:49 	Jerry Yang			first release
+*****************************************************************/
+CREATE PROCEDURE [agdSp].[uspUserDelete] (
+	@SeqNo INT
+	,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
+	)
+AS
+SET NOCOUNT ON
+SET @ErrorMsg = N''
+
+BEGIN
+	BEGIN TRY
+		DELETE agdSet.tbUser
+		WHERE SeqNO = @SeqNO;
+	END TRY
+
+	BEGIN CATCH
+		SELECT @ErrorMsg = LEFT(ERROR_MESSAGE(), 100)
+	END CATCH
+END
+
+SET NOCOUNT OFF
+GO
+
+
