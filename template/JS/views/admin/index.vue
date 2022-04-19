@@ -16,25 +16,12 @@
     @action-delete="onActionDelete"
   >
     <template v-slot:top-right>
-      <q-select
-        class="q-mr-md filter-isenable"
-        v-model="filter.filterItem"
-        outlined
-        dense
-        :options="filterItemOptions"
-        label="篩選項目"
-      />
-      <q-input
-        class="q-mr-md"
-        v-model.trim="filter.filterValue"
-        outlined
-        dense
-        :placeholder="filter.filterItem.placeholder"
-        @keypress.enter="onFilter"
-      />$pt_JsIndexVue_IsEnableSelect
-      <q-btn class="q-mr-md" color="secondary" label="查詢" @click="onFilter" />
-      <q-btn class="q-mr-md" color="secondary" label="匯出" @click="onExportReport" />
-      <q-btn class="q-mr-md" color="secondary" label="清空條件" @click="onClearFilter" />
+      <q-select class="filter-isenable" v-model="filter.filterItem" outlined dense :options="filterItemOptions" label="篩選項目" />
+      <q-input v-model.trim="filter.filterValue" outlined dense :placeholder="filter.filterItem.placeholder" @keypress.enter="onFilter" />
+$pt_JsIndexVue_IsEnableSelect
+      <q-btn color="secondary" label="查詢" @click="onFilter" />
+      <q-btn color="secondary" label="匯出" @click="onExportReport" />
+      <q-btn color="secondary" label="清空條件" @click="onClearFilter" />
     </template>
   </table-list>
 
@@ -262,10 +249,7 @@ $pt_filterItem
     const fetchDelete = (id) => {
       return store.dispatch(`$${moduleName}/fetchDelete`, id).then(() => {
         useSuccessNotify($$q, `刪除成功`);
-        if (
-          pagination.value.rowsNumber % pagination.value.rowsPerPage === 1 &&
-          pagination.value.page > 1
-        ) {
+        if (pagination.value.rowsNumber % pagination.value.rowsPerPage === 1 && pagination.value.page > 1) {
           pagination.value.page -= 1;
         }
         fetchItems(false);

@@ -57,14 +57,13 @@ $pt_item2Json
 
         public async ValueTask<BasicResponse<bool>> Insert$pt_TableName($pt_TableName$insertRequest request)
         {
-            var creator = _getTokenService.userID ?? "";
-            var creatorName = _getTokenService.userName ?? "";
-
             var exists = await Exists(0, $pt_requstInsertIsExist);
             
             if (exists.data == true) return new BasicResponse<bool>()
             { resultCode = "U999", resultDescription = "資料重複，請重新設定", data=false };
-                        
+
+            var creator = _getTokenService.userID ?? "";
+            var creatorName = _getTokenService.userName ?? "";               
             request.creator = creator;
             request.creatorName = creatorName;
 

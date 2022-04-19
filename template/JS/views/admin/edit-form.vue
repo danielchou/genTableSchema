@@ -1,12 +1,5 @@
 <template>
-  <q-dialog
-    :model-value="modelValue"
-    no-backdrop-dismiss
-    no-esc-dismiss
-    no-shake
-    full-width
-    @keydown.esc="onCancelByEsc"
-  >
+  <q-dialog :model-value="modelValue" no-backdrop-dismiss no-esc-dismiss no-shake full-width @keydown.esc="onCancelByEsc">
     <q-card class="outer-card" :class="{ 'is-update': !isCreate }">
       <q-form @submit="onSubmitForm" class="q-gutter-md">
         <q-card-section class="card-title">
@@ -37,13 +30,7 @@ $pt_EditForm_q_input
             </div>
           </div>
           <q-space />
-          <q-btn
-            class="col-2 shadow-1"
-            flat
-            label="取消"
-            text-color="secondary"
-            @click="onCancel"
-          />
+          <q-btn class="col-2 shadow-1" flat label="取消" text-color="secondary" @click="onCancel" />
           <q-btn class="col-2" label="儲存" type="submit" color="secondary" />
         </q-card-actions>
       </q-form>
