@@ -7,6 +7,8 @@ CREATE TABLE [agdSet].[tb{tb}](
 ) ON [PRIMARY]
 GO
 
+{pt_nonCluster}
+
 ALTER TABLE [agdSet].[tb{tb}] ADD  CONSTRAINT [DF_tb{tb}_Creator]  DEFAULT ((1)) FOR [Creator]
 GO
 
