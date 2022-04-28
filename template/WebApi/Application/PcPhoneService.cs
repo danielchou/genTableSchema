@@ -63,7 +63,8 @@ $pt_item2Json
             { resultCode = "U999", resultDescription = "資料重複，請重新設定", data=false };
 
             var creator = _getTokenService.userID ?? "";
-            var creatorName = _getTokenService.userName ?? "";               
+            var creatorName = _getTokenService.userName ?? "";
+                          
             request.creator = creator;
             request.creatorName = creatorName;
 
@@ -79,13 +80,13 @@ $pt_item2Json
 
         public async ValueTask<BasicResponse<bool>> Update$pt_TableName($pt_TableName$updateRequest request)
         {
-            var updator = _getTokenService.userID ?? "";
-            var updatorName = _getTokenService.userName ?? "";
-
             var exists = await Exists($pt_requstInsertIsExistWithSeqNo);
             
             if (exists.data == true) return new BasicResponse<bool>()
             { resultCode = "U999", resultDescription = "資料重複，請重新設定", data = false };
+
+            var updator = _getTokenService.userID ?? "";
+            var updatorName = _getTokenService.userName ?? "";
 
             request.updator = updator;
             request.updatorName = updatorName;

@@ -78,7 +78,7 @@ const columns = [
     label: '更新人員',
     align: 'left',
     field: 'updatorName',
-    sortable: false,
+    sortable: true,
   },
   {
     name: 'updateDT',

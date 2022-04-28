@@ -1,5 +1,6 @@
 ﻿using ESUN.AGD.WebApi.Application.$pt_TableName;
 using ESUN.AGD.WebApi.Application.$pt_TableName.Contract;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,7 +27,7 @@ namespace ESUN.AGD.WebApi.Controllers
         /// <returns>
 $pt_ColDscr_GetReturnAll
         /// </returns>
-        [Authorize]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("{seqNo}")]
         public async ValueTask<IActionResult> Get$pt_TableName($pt_InputPK)
         {
@@ -46,8 +47,9 @@ $pt_ColDscr_QueryParas_Query
         /// <returns>
 $pt_ColDscr_GetReturnAll
         /// </returns>        
-        [Authorize]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("query")]
+        [EncryptFilter]
         public async ValueTask<IActionResult> Query$pt_TableName([FromQuery] $pt_TableName$queryRequest request)
         {
             return Ok(await _$pt_TableName$service.Query$pt_TableName(request));
@@ -61,7 +63,7 @@ $pt_ColDscr_InsertParas
         /// </param>
         /// <returns>
         /// </returns>        
-        [Authorize]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
         public async ValueTask<IActionResult> Insert$pt_TableName($pt_TableName$insertRequest request)
         {
@@ -76,7 +78,7 @@ $pt_colDscr_UpdateParas
         /// </param>
         /// <returns>
         /// </returns>
-        [Authorize]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPut]
         public async ValueTask<IActionResult> Update$pt_TableName($pt_TableName$updateRequest request)
         {
@@ -90,7 +92,7 @@ $pt_colDscr_UpdateParas
 $pt_ColDscr_ParasPK
         /// </param>
         /// <returns></returns>
-        [Authorize]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpDelete]
         public async ValueTask<IActionResult> Detele$pt_TableName($pt_InputPK)
         {
