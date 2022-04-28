@@ -20,13 +20,13 @@ $pt_EditForm_q_input
               <span>建立日期：</span>
               <span>{{ formData.createDT }}&nbsp;</span>
               <span>{{ formData.creatorName }}&nbsp;</span>
-              <span>( {{ formData.creator }} )</span>
+              <span>{{ formData.creator }}</span>
             </div>
             <div class="row">
               <span>更新日期：</span>
               <span>{{ formData.updateDT }}&nbsp;</span>
               <span>{{ formData.updatorName }}&nbsp;</span>
-              <span>( {{ formData.updator }} )</span>
+              <span>{{ formData.updator }}</span>
             </div>
           </div>
           <q-space />
