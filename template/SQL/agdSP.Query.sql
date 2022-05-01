@@ -30,7 +30,7 @@ DECLARE @return_value INT
 	,$pt_DeclareQuery
 	,@Page INT = 1
 	,@RowsPerPage INT = 20
-	,@SortColumn NVARCHAR(30) = 'CreateDt'
+	,@SortColumn NVARCHAR(30) = 'CreateDT'
 	,@SortOrder VARCHAR(10) = 'ASC'
 	,@ErrorMsg NVARCHAR(100)
 
@@ -58,7 +58,7 @@ CREATE PROCEDURE [agdSp].[usp$pt_tableName$pt_query] (
 	$pt_DeclareQuery
 	,@Page INT = 1
 	,@RowsPerPage INT = 20
-	,@SortColumn NVARCHAR(30) = 'CreateDt'
+	,@SortColumn NVARCHAR(30) = 'CreateDT'
 	,@SortOrder VARCHAR(10) = 'ASC'
     ,@ErrorMsg NVARCHAR(100) = NULL OUTPUT
 )
