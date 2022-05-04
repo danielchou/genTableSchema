@@ -65,7 +65,7 @@ BEGIN
             ,UpdateDT = DATEADD(HH, +8, GETUTCDATE())
 			,Updator = @Updator
 			,UpdatorName = @UpdatorName
-		WHERE SeqNo = @SeqNo;
+		WHERE $pt_sqNo = @$pt_sqNo;
 	END TRY
 
 	BEGIN CATCH

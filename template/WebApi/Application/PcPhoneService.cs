@@ -20,7 +20,7 @@ namespace ESUN.AGD.WebApi.Application.$pt_TableName
         public async ValueTask<BasicResponse<$pt_TableName$response>> Get$pt_TableName($pt_InputPK)
         {
             var data = await _dataAccessService
-                .LoadSingleData<Tb$pt_TableName, object>(storeProcedure: "agdSp.usp$pt_TableName$get", new { seqNo = seqNo, });
+                .LoadSingleData<Tb$pt_TableName, object>(storeProcedure: "agdSp.usp$pt_TableName$get", new { $pt_InputServicePK = $pt_InputServicePK, });
             
             if (data == null) return new BasicResponse<$pt_TableName$response>()
             { resultCode = "U999", resultDescription = "查無資料", data = null };
@@ -104,7 +104,7 @@ $pt_item2Json
         public async ValueTask<BasicResponse<bool>> Delete$pt_TableName($pt_InputPK)
         {
             var data = await _dataAccessService
-                .OperateData(storeProcedure: "agdSp.usp$pt_TableName$delete", new { seqNo = seqNo });
+                .OperateData(storeProcedure: "agdSp.usp$pt_TableName$delete", new { $pt_InputServicePK = $pt_InputServicePK });
 
             if (data == 0) return new BasicResponse<bool>() 
             { resultCode = "U999", resultDescription = "刪除失敗", data = false };

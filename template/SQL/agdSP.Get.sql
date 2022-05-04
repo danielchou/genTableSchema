@@ -21,12 +21,12 @@ $pt_getSelectAll
 ** Example:
 ** -----------
 	DECLARE @return_value INT
-		,@SeqNo INT
+		,$pt_Declare
 		,@ErrorMsg NVARCHAR(100)
 
 	$pt_existSetValue
 
-	EXEC @return_value = [agdSp].[usp$pt_tableName$pt_get] @SeqNo = @SeqNo
+	EXEC @return_value = [agdSp].[usp$pt_tableName$pt_get] @$pt_sqNo = @$pt_sqNo
 		,@ErrorMsg = @ErrorMsg OUTPUT
 
 	SELECT @return_value AS 'Return Value'
@@ -40,7 +40,7 @@ $pt_getSelectAll
 ** $pt_DateTime    	Daniel Chou	    first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[usp$pt_tableName$pt_get] (
-	@SeqNo INT
+	@$pt_sqNo SMALLINT
 	,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
 	)
 AS
@@ -52,7 +52,7 @@ BEGIN
 		SELECT
 			$pt_fColAll
 		FROM agdSet.tb$pt_tableName AS f
-		WHERE f.SeqNo = @SeqNo;
+		WHERE f.$pt_sqNo = @$pt_sqNo;
 	END TRY
 
 	BEGIN CATCH

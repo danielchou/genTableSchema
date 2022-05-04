@@ -13,7 +13,7 @@ $pt_ColDscr_ParasPK
         /// <returns>
 $pt_ColDscr_GetReturnAll
         /// </returns>
-        ValueTask<BasicResponse<$pt_TableName$response>> Get$pt_TableName(int seqNo);
+        ValueTask<BasicResponse<$pt_TableName$response>> Get$pt_TableName($pt_InputPK);
 
         /// <summary>
         /// 搜尋$TbDscr設定 

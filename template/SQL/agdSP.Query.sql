@@ -70,7 +70,7 @@ BEGIN
 	BEGIN TRY
 		SELECT
             $pt_fColAll
-			,COUNT(f.SeqNo) OVER () AS Total
+			,COUNT(f.$pt_sqNo) OVER () AS Total
 		FROM agdSet.tb$pt_tableName AS f
 		------- WHERE 查詢條件 -------
 		WHERE $pt_queryWhere

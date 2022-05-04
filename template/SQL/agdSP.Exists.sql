@@ -49,9 +49,9 @@ SET @ErrorMsg = N''
 
 BEGIN
 	BEGIN TRY
-		SELECT COUNT(SeqNo) AS Total
+		SELECT COUNT($pt_sqNo) AS Total
 		FROM agdSet.tb$pt_tableName
-		WHERE SeqNo != @SeqNo
+		WHERE $pt_sqNo != @$pt_sqNo
 			AND ( 
                 $pt_fColOr
             );

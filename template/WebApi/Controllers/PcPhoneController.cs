@@ -22,13 +22,13 @@ namespace ESUN.AGD.WebApi.Controllers
         /// 依序號取得$TbDscr設定
         /// </summary>
         /// <param>
-        /// seqNo           - int     - 流水號
+$pt_ColDscr_ParasPK
         /// </param>
         /// <returns>
 $pt_ColDscr_GetReturnAll
         /// </returns>
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpGet("{seqNo}")]
+        [HttpGet("{$pt_InputServicePK}")]
         public async ValueTask<IActionResult> Get$pt_TableName($pt_InputPK)
         {
             return Ok(await _$pt_TableName$service.Get$pt_TableName($pt_InputServicePK));
