@@ -48,7 +48,7 @@ $pt_ColDscr_QueryParas_Query
 $pt_ColDscr_GetReturnAll
         /// </returns>        
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpGet("query")]
+        [HttpGet("Query")]
         [EncryptFilter]
         public async ValueTask<IActionResult> Query$pt_TableName([FromQuery] $pt_TableName$queryRequest request)
         {

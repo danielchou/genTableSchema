@@ -47,7 +47,7 @@ import { getFuncNameByAGDFunc } from '@composables/use-common';
 import { useSuccessNotify } from '@composables/use-notify';
 import { useConfirmDialog } from '@composables/use-dialog';
 
-import TableList from '@components/table-list';
+import TableList from '@components/supervisor/table-list';
 import EditForm from './edit-form';
 
 /**
