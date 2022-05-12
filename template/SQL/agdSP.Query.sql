@@ -1,5 +1,5 @@
 /****************************************************************
-** Name: agdSp.usp$pt_tableName$pt_query
+** Name: [agdSp].[usp$pt_tableName$pt_query]
 ** Desc: $pt_tbDscr進階查詢
 **
 ** Return values: 0 成功
@@ -71,7 +71,7 @@ BEGIN
 		SELECT
             $pt_fColAll
 			,COUNT(f.$pt_sqNo) OVER () AS Total
-		FROM agdSet.tb$pt_tableName AS f
+		FROM $pt_schema.tb$pt_tableName AS f
 		------- WHERE 查詢條件 -------
 		WHERE $pt_queryWhere
 		------- Sort 排序條件 -------

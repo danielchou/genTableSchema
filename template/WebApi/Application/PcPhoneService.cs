@@ -122,10 +122,10 @@ $pt_json2Data
                 });
 
             if (data == 0) return new BasicResponse<bool>()
-            { resultCode = "U999", resultDescription = "資料重複", data = false };
+            { resultCode = "U999", resultDescription = "資料尚未存在", data = false };
 
             return new BasicResponse<bool>()
-            { resultCode = "U200", resultDescription = "資料正常", data = true };
+            { resultCode = "U200", resultDescription = "資料已存在", data = true };
         }
     }
 }

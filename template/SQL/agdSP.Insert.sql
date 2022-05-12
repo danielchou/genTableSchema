@@ -60,7 +60,7 @@ SET @ErrorMsg = N''
 
 BEGIN
 	BEGIN TRY
-	INSERT INTO [agdSet].[tb$pt_tableName] (
+	INSERT INTO [$pt_schema].[tb$pt_tableName] (
 			$pt_insertCols
 			,CreateDT
 			,Creator

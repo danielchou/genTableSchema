@@ -49,8 +49,8 @@ SET @ErrorMsg = N''
 
 BEGIN
 	BEGIN TRY
-		SELECT COUNT($pt_sqNo) AS Total
-		FROM agdSet.tb$pt_tableName
+		SELECT TOP 1 1 AS Total
+		FROM $pt_schema.tb$pt_tableName
 		WHERE $pt_sqNo != @$pt_sqNo
 			AND ( 
                 $pt_fColOr

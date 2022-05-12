@@ -60,7 +60,7 @@ SET @ErrorMsg = N''
 
 BEGIN
 	BEGIN TRY
-		UPDATE agdSet.tb$pt_tableName
+		UPDATE $pt_schema.tb$pt_tableName
 		SET $pt_UpdateSet
             ,UpdateDT = DATEADD(HH, +8, GETUTCDATE())
 			,Updator = @Updator

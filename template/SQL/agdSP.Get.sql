@@ -51,7 +51,7 @@ BEGIN
 	BEGIN TRY
 		SELECT
 			$pt_fColAll
-		FROM agdSet.tb$pt_tableName AS f
+		FROM $pt_schema.tb$pt_tableName AS f
 		WHERE f.$pt_sqNo = @$pt_sqNo;
 	END TRY
 

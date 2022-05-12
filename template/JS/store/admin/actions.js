@@ -10,7 +10,7 @@ export const fetchItems = ({ rootGetters, commit }, data) => {
    */
   const opts = {
     method: 'get',
-    url: `$${apiUrlPrefix}/query`,
+    url: `$${apiUrlPrefix}/Query`,
     data: {
       ...rootGetters['app/getDefaultListParams'],
       ...data,

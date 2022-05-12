@@ -174,7 +174,7 @@ $pt_filterItem
     };
 
     const onActionDelete = (rows) => {
-      useConfirmDialog($$q).onOk(() => {
+      useConfirmDialog($$q, { title: '確認刪除'}).onOk(() => {
         fetchDelete(rows.seqNo);
       });
     };

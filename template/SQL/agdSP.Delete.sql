@@ -50,7 +50,7 @@ SET @ErrorMsg = N''
 
 BEGIN
 	BEGIN TRY
-		DELETE agdSet.tb$pt_tableName
+		DELETE $pt_schema.tb$pt_tableName
 		WHERE $pt_queryWherePK;
 	END TRY
 
