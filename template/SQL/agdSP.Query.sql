@@ -36,7 +36,7 @@ DECLARE @return_value INT
 
 	$pt_querySetVal
 
-EXEC @return_value = agdSp.usp$pt_tableName$pt_query
+EXEC @return_value = [agdSp].[usp$pt_tableName$pt_query]
 	$pt_Exec
 	,@Page = @Page
 	,@RowsPerPage = @RowsPerPage

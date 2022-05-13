@@ -68,7 +68,7 @@ $pt_colDscr_ExistsParas
         /// </param>
         /// <returns>
         /// </returns>
-        ValueTask<BasicResponse<bool>> Exists($pt_InputIsExist);
+        ValueTask<bool> Exists($pt_InputIsExist);
 
     }
 }
