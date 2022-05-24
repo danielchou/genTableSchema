@@ -5,7 +5,6 @@
 ** Return values: 0 成功
 ** Return Recordset: 
 $pt_getSelectAll
-** UpdatorName      NVARCHAR(20) - 更新者名稱
 ** Total            INT          - 資料總筆數
 **
 ** Called by: 

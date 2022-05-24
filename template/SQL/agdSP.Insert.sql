@@ -13,7 +13,7 @@
 **	Input
 ** -----------
 	$pt_input
-	@Creator		 VARCHAR(20) - 建立者
+	@Creator		 VARCHAR(11) - 建立者
 	@CreatorName	 NVARCHAR(60) - 建立人員
 **
 **   Output
@@ -24,7 +24,7 @@
 ** -----------
 DECLARE @return_value INT
 	,$pt_Declare
-	,@Creator VARCHAR(20)
+	,@Creator VARCHAR(11)
 	,@CreatorName NVARCHAR(60)
 	,@ErrorMsg NVARCHAR(100);
 
@@ -33,10 +33,10 @@ DECLARE @return_value INT
 	SET @CreatorName = 'admin'
 
 	EXEC @return_value = [agdSp].[usp$pt_tableName$pt_insert] 
-		$pt_Exec
-		,@Creator = @Creator
-		,@CreatorName = @CreatorName
-		,@ErrorMsg = @ErrorMsg OUTPUT
+	$pt_Exec
+	,@Creator = @Creator
+	,@CreatorName = @CreatorName
+	,@ErrorMsg = @ErrorMsg OUTPUT
 
 SELECT @return_value AS 'Return Value'
 	,@ErrorMsg AS N'@ErrorMsg'
@@ -50,9 +50,9 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[usp$pt_tableName$pt_insert] (
 	$pt_Declare
-	,@Creator VARCHAR(20)
-	,@CreatorName NVARCHAR(60)
-	,@ErrorMsg NVARCHAR(100) = NULL OUTPUT
+	,@Creator 		VARCHAR(11)
+	,@CreatorName	NVARCHAR(60)
+	,@ErrorMsg 		NVARCHAR(100) = NULL OUTPUT
 	)
 AS
 SET NOCOUNT ON
@@ -66,8 +66,8 @@ BEGIN
 			,Creator
 			,CreatorName
 			,UpdateDT
-			,Updator
-			,UpdatorName
+			,Updater
+			,UpdaterName
         )
 		VALUES (
 			$pt_insertVals

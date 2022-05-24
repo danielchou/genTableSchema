@@ -16,7 +16,7 @@
 **
 **   Output
 ** -----------
-	@ErrorMsg NVARCHAR(100) - 錯誤回傳訊息
+	@ErrorMsg 	NVARCHAR(100) - 錯誤回傳訊息
 ** 
 ** Example: 
 ** -----------

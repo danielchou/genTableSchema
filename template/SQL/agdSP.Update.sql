@@ -13,29 +13,29 @@
 **	Input
 ** -----------
     $pt_input
-	@Updator VARCHAR(20) - 建立者
-	@UpdatorName NVARCHAR(60) - 建立人員
+	@Updater 		VARCHAR(11)		- 更新者
+	@UpdaterName 	NVARCHAR(60)	- 更新人員
 **
 **   Output
 ** -----------
-	@ErrorMsg NVARCHAR(100) - 錯誤回傳訊息
+	@ErrorMsg 		NVARCHAR(100) 	- 錯誤回傳訊息
 ** 
 ** Example:
 ** -----------
 DECLARE @return_value INT
     ,$pt_Declare
-	,@Updator VARCHAR(20)
-	,@UpdatorName NVARCHAR(60)
+	,@Updater VARCHAR(11)
+	,@UpdaterName NVARCHAR(60)
     ,@ErrorMsg NVARCHAR(100)
 
     $pt_updateSetVal
-	SET @Updator = 'admin'
-	SET @UpdatorName = 'admin'
+	SET @Updater = 'admin'
+	SET @UpdaterName = 'admin'
 
 EXEC @return_value = [agdSp].[usp$pt_tableName$pt_update]
     $pt_Exec
-	,@Updator = @Updator
-	,@UpdatorName = @UpdatorName
+	,@Updater = @Updater
+	,@UpdaterName = @UpdaterName
 	,@ErrorMsg = @ErrorMsg OUTPUT
 
 SELECT @return_value AS 'Return Value'
@@ -50,8 +50,8 @@ SELECT @return_value AS 'Return Value'
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[usp$pt_tableName$pt_update] (
 	$pt_Declare
-	,@Updator VARCHAR(20)
-	,@UpdatorName NVARCHAR(60)
+	,@Updater VARCHAR(11)
+	,@UpdaterName NVARCHAR(60)
 	,@ErrorMsg NVARCHAR(100) = NULL OUTPUT
 	)
 AS
@@ -63,8 +63,8 @@ BEGIN
 		UPDATE $pt_schema.tb$pt_tableName
 		SET $pt_UpdateSet
             ,UpdateDT = DATEADD(HH, +8, GETUTCDATE())
-			,Updator = @Updator
-			,UpdatorName = @UpdatorName
+			,Updater = @Updater
+			,UpdaterName = @UpdaterName
 		WHERE $pt_sqNo = @$pt_sqNo;
 	END TRY
 
