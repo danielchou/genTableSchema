@@ -1,7 +1,6 @@
 using ESUN.AGD.WebApi.Application.Auth;
 using ESUN.AGD.WebApi.Application.$pt_TableName.Contract;
 using ESUN.AGD.DataAccess.DataService.DataAccess;
-using AutoMapper;
 
 namespace ESUN.AGD.WebApi.Application.$pt_TableName
 {
@@ -54,8 +53,8 @@ $pt_requestIsNullOrEmpty
 			
 			var exists = await Exists(0, $pt_requstInsertIsExist);
             
-            if (exists == true)
-                return ResponseHandler.ForBool(0, serviceName, method, "資料重複，請重新設定");
+            if (exists.data == true)
+                return ResponseHandler.ForCustomBool(serviceName, false, "資料重複，$pt_requstInsertIsExistWithSeqNoColDscr重複，請重新設定");
 
             var creator = _getTokenService.userID ?? "";
             var creatorName = _getTokenService.userName ?? "";
@@ -75,8 +74,8 @@ $pt_requestIsNullOrEmpty
 
 			var exists = await Exists($pt_requstInsertIsExistWithSeqNo);
             
-            if (exists == true)
-                return ResponseHandler.ForBool(0, serviceName, method, "資料重複，請重新設定");
+            if (exists.data == true)
+                return ResponseHandler.ForCustomBool(serviceName, false, "資料重複，$pt_requstInsertIsExistWithSeqNoColDscr重複，請重新設定");
 
             var updator = _getTokenService.userID ?? "";
             var updatorName = _getTokenService.userName ?? "";
@@ -100,7 +99,7 @@ $pt_requestIsNullOrEmpty
 			return ResponseHandler.ForBool(data, serviceName, method);
         }
 
-        public async ValueTask<bool> Exists($pt_InputIsExist)
+        public async ValueTask<BasicResponse<bool>> Exists($pt_InputIsExist)
         {
             var data = await _dataAccessService
                 .LoadSingleData<int, object>(storeProcedure: "agdSp.usp$pt_TableName$exists", new
@@ -110,13 +109,11 @@ $pt_json2Data
 
             if (data == 0)
             {
-                //資料不存在
-                return false;
+                return ResponseHandler.ForCustomBool(serviceName, false, "資料不存在");
             }
             else
             {
-                //資料存在
-                return true;
+                return ResponseHandler.ForCustomBool(serviceName, true, "資料存在");
             }
         }
     }

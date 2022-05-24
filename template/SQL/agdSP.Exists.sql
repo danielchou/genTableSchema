@@ -27,8 +27,8 @@ DECLARE @return_value INT
     $pt_existSetValue
 
 	EXEC @return_value = [agdSp].[usp$pt_tableName$pt_exists] 
-    	$pt_Exec
-    	,@ErrorMsg = @ErrorMsg OUTPUT
+	$pt_Exec
+	,@ErrorMsg = @ErrorMsg OUTPUT
 
 SELECT @return_value AS 'Return Value'
     ,@ErrorMsg AS N'@ErrorMsg'

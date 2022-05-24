@@ -46,10 +46,9 @@ $pt_ColDscr_QueryParas_Query
         /// </param>
         /// <returns>
 $pt_ColDscr_GetReturnAll
-        /// </returns>        
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        /// </returns>
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]       
         [HttpGet("Query")]
-        [EncryptFilter]
         public async ValueTask<IActionResult> Query$pt_TableName([FromQuery] $pt_TableName$queryRequest request)
         {
             return Ok(await _$pt_TableName$service.Query$pt_TableName(request));
@@ -62,8 +61,8 @@ $pt_ColDscr_GetReturnAll
 $pt_ColDscr_InsertParas
         /// </param>
         /// <returns>
-        /// </returns>        
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        /// </returns>
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]        
         [HttpPost]
         public async ValueTask<IActionResult> Insert$pt_TableName($pt_TableName$insertRequest request)
         {

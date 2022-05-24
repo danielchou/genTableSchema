@@ -1,0 +1,1 @@
+		WHERE $pt_queryWhere
