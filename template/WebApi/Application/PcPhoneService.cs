@@ -77,11 +77,11 @@ $pt_requestIsNullOrEmpty
             if (exists.data == true)
                 return ResponseHandler.ForCustomBool(serviceName, false, "資料重複，$pt_requstInsertIsExistWithSeqNoColDscr重複，請重新設定");
 
-            var updator = _getTokenService.userID ?? "";
-            var updatorName = _getTokenService.userName ?? "";
+            var updater = _getTokenService.userID ?? "";
+            var updaterName = _getTokenService.userName ?? "";
 
-            request.updator = updator;
-            request.updatorName = updatorName;
+            request.updater = updater;
+            request.updaterName = updaterName;
 
             var data = await _dataAccessService
                 .OperateData(storeProcedure: "agdSp.usp$pt_TableName$update", request);
