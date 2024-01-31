@@ -13,8 +13,6 @@
 **	Input
 ** -----------
 	$pt_input
-	@Creator		 VARCHAR(11) - 建立者
-	@CreatorName	 NVARCHAR(60) - 建立人員
 **
 **   Output
 ** -----------
@@ -23,19 +21,13 @@
 ** Example: 
 ** -----------
 DECLARE @return_value INT
-	,$pt_Declare
-	,@Creator VARCHAR(11)
-	,@CreatorName NVARCHAR(60)
+	,$pt_DeclareInsert
 	,@ErrorMsg NVARCHAR(100);
 
 	$pt_insertSetVal
-	SET @Creator = 'admin'
-	SET @CreatorName = 'admin'
 
 	EXEC @return_value = [agdSp].[usp$pt_tableName$pt_insert] 
-	$pt_Exec
-	,@Creator = @Creator
-	,@CreatorName = @CreatorName
+	$pt_ExecInsert
 	,@ErrorMsg = @ErrorMsg OUTPUT
 
 SELECT @return_value AS 'Return Value'
@@ -49,9 +41,7 @@ SELECT @return_value AS 'Return Value'
 ** $pt_DateTime    Daniel Chou	    first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[usp$pt_tableName$pt_insert] (
-	$pt_Declare
-	,@Creator 		VARCHAR(11)
-	,@CreatorName	NVARCHAR(60)
+	$pt_DeclareInsert
 	,@ErrorMsg 		NVARCHAR(100) = NULL OUTPUT
 	)
 AS
@@ -62,21 +52,9 @@ BEGIN
 	BEGIN TRY
 	INSERT INTO [$pt_schema].[tb$pt_tableName] (
 			$pt_insertCols
-			,CreateDT
-			,Creator
-			,CreatorName
-			,UpdateDT
-			,Updater
-			,UpdaterName
         )
 		VALUES (
 			$pt_insertVals
-			,DATEADD(HH, +8, GETUTCDATE())
-			,@Creator
-			,@CreatorName
-			,DATEADD(HH, +8, GETUTCDATE())
-			,@Creator
-			,@CreatorName
 			);
 	END TRY
 

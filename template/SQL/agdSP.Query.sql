@@ -13,7 +13,7 @@ $pt_getSelectAll
 ** Parameters:
 **	Input
 ** -----------
-    $pt_inputQuery
+  $pt_inputQuery
 	@Page 			  INT 			- 頁數
 	@RowsPerPage 	  INT 			- 每頁筆數
 	@SortColumn 	  NVARCHAR(30) 	- 排序欄位
@@ -59,7 +59,7 @@ CREATE PROCEDURE [agdSp].[usp$pt_tableName$pt_query] (
 	,@RowsPerPage INT = 20
 	,@SortColumn NVARCHAR(30) = 'CreateDT'
 	,@SortOrder VARCHAR(10) = 'ASC'
-    ,@ErrorMsg NVARCHAR(100) = NULL OUTPUT
+  ,@ErrorMsg NVARCHAR(100) = NULL OUTPUT
 )
 AS
 SET NOCOUNT ON
@@ -68,15 +68,15 @@ SET @ErrorMsg = N''
 BEGIN
 	BEGIN TRY
 		SELECT
-            $pt_fColAll
-			,COUNT(f.$pt_sqNo) OVER () AS Total
+      $pt_fColAll
+			,COUNT(1) OVER () AS Total
 		FROM $pt_schema.tb$pt_tableName AS f
 		------- WHERE 查詢條件 -------
 		WHERE $pt_queryWhere
 		------- Sort 排序條件 -------
 		ORDER BY 
 $pt_orderBy
-            CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
+      CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'ASC' THEN f.CreateDT END ASC,
 			CASE WHEN @SortColumn = 'CreateDT' AND @SortOrder = 'DESC' THEN f.CreateDT END DESC
 		------- Page 分頁條件 -------
 		OFFSET @RowsPerPage * (@page - 1) ROWS

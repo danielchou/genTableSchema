@@ -23,19 +23,13 @@
 ** Example:
 ** -----------
 DECLARE @return_value INT
-    ,$pt_Declare
-	,@Updater VARCHAR(11)
-	,@UpdaterName NVARCHAR(60)
-    ,@ErrorMsg NVARCHAR(100)
+  ,$pt_DeclareUpdate
+  ,@ErrorMsg NVARCHAR(100)
 
-    $pt_updateSetVal
-	SET @Updater = 'admin'
-	SET @UpdaterName = 'admin'
+  $pt_updateSetVal
 
 EXEC @return_value = [agdSp].[usp$pt_tableName$pt_update]
-    $pt_Exec
-	,@Updater = @Updater
-	,@UpdaterName = @UpdaterName
+    $pt_ExecUpdate
 	,@ErrorMsg = @ErrorMsg OUTPUT
 
 SELECT @return_value AS 'Return Value'
@@ -49,9 +43,7 @@ SELECT @return_value AS 'Return Value'
 ** $pt_DateTime    Daniel Chou	    first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[usp$pt_tableName$pt_update] (
-	$pt_Declare
-	,@Updater VARCHAR(11)
-	,@UpdaterName NVARCHAR(60)
+	$pt_DeclareUpdate
 	,@ErrorMsg NVARCHAR(100) = NULL OUTPUT
 	)
 AS
@@ -62,10 +54,8 @@ BEGIN
 	BEGIN TRY
 		UPDATE $pt_schema.tb$pt_tableName
 		SET $pt_UpdateSet
-            ,UpdateDT = DATEADD(HH, +8, GETUTCDATE())
-			,Updater = @Updater
-			,UpdaterName = @UpdaterName
-		WHERE $pt_sqNo = @$pt_sqNo;
+		WHERE
+					$pt_UpdateWhere;
 	END TRY
 
 	BEGIN CATCH

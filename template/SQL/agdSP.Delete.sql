@@ -36,9 +36,9 @@
 *****************************************************************
 ** Change History
 *****************************************************************
-** Date:		 	Author:				Description:
+** Date:		 			Author:					Description:
 ** ---------- ------- ------------------------------------
-** $pt_DateTime 	Jerry Yang			first release
+** $pt_DateTime 	DanielChou			first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[usp$pt_tableName$pt_delete] (
 	$pt_AtParasSetPK
@@ -50,7 +50,7 @@ SET @ErrorMsg = N''
 
 BEGIN
 	BEGIN TRY
-		DELETE $pt_schema.tb$pt_tableName
+		DELETE [$pt_schema].[tb$pt_tableName]
 		WHERE $pt_queryWherePK;
 	END TRY
 

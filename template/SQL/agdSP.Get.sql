@@ -21,12 +21,13 @@ $pt_getSelectAll
 ** Example:
 ** -----------
 	DECLARE @return_value INT
-		,$pt_Declare
-		,@ErrorMsg NVARCHAR(100)
+	,$pt_DeclareGet
+	,@ErrorMsg NVARCHAR(100)
 
-	$pt_existSetValue
+	$pt_getSetValue
 
-	EXEC @return_value = [agdSp].[usp$pt_tableName$pt_get] @$pt_sqNo = @$pt_sqNo
+	EXEC @return_value = [agdSp].[usp$pt_tableName$pt_get]
+		$pt_ExecGet
 		,@ErrorMsg = @ErrorMsg OUTPUT
 
 	SELECT @return_value AS 'Return Value'
@@ -40,8 +41,8 @@ $pt_getSelectAll
 ** $pt_DateTime    	Daniel Chou	    first release
 *****************************************************************/
 CREATE PROCEDURE [agdSp].[usp$pt_tableName$pt_get] (
-	@$pt_sqNo SMALLINT
-	,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
+		$pt_DeclarePK
+		,@ErrorMsg NVARCHAR(100) =NULL OUTPUT
 	)
 AS
 SET NOCOUNT ON
@@ -52,7 +53,7 @@ BEGIN
 		SELECT
 			$pt_fColAll
 		FROM $pt_schema.tb$pt_tableName AS f
-		WHERE f.$pt_sqNo = @$pt_sqNo;
+		WHERE $pt_queryWhere
 	END TRY
 
 	BEGIN CATCH
