@@ -131,8 +131,9 @@ dmypy.json
 # output files
 WebApi/
 JS/
-#tables/
-#agdSP/
-refFiles/
+tables/
+agdSP/
+refFiles/玉山*
 *.rar
+*.zip
 

@@ -1,5 +1,5 @@
 CREATE TABLE [agd].[tbContactCustomerReasonTemp](
-	[ContactID] [int](50)  NOT NULL,	/*服務紀錄ID*/
+	[ContactID] [int]  NOT NULL,	/*服務紀錄ID*/
 	[ContactSeq] [tinyint]  NOT NULL,	/*序號*/
 	[Memo] [nvarchar](200)  NULL,	/*備註*/
 	[ReasonID1] [varchar](20)  NOT NULL,	/*聯繫原因大類ID*/

@@ -1,5 +1,5 @@
 CREATE TABLE [agdSet].[tbMsgEmailTemplete](
-	[SeqNo] [smallint]  NOT NULL,	/*流水號*/
+	[SeqNo] [smallint] IDENTITY(1,1) NOT NULL,	/*流水號*/
 	[MsgEmailTempleteID] [smallint]  NOT NULL,	/*留言Email回覆範本ID*/
 	[MsgEmailTempleteName] [nvarchar](50)  NOT NULL,	/*留言Email回覆範本名稱*/
 	[ParentMsgEmailTempleteID] [smallint]  NOT NULL,	/*留言Email回覆範本父類ID*/

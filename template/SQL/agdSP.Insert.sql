@@ -20,7 +20,7 @@
 ** 
 ** Example: 
 ** -----------
-DECLARE @return_value INT
+DECLARE @return_value int
 	,$pt_DeclareInsert
 	,@ErrorMsg NVARCHAR(100);
 

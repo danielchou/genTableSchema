@@ -1,5 +1,5 @@
 CREATE TABLE [agd].[tbWebMsgTransferLog](
-	[SeqNo] [int]  NOT NULL,	/*流水號*/
+	[SeqNo] [int] IDENTITY(1,1) NOT NULL,	/*流水號*/
 	[MsgSn] [int]  NOT NULL,	/*留言編號*/
 	[OwnerBefore] [varchar](11)  NULL,	/*移轉前處理人*/
 	[OwnerAfter] [varchar](11)  NULL,	/*移轉後處理人*/

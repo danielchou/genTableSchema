@@ -1,5 +1,5 @@
 CREATE TABLE [agd].[tbWebMsgReviewLog](
-	[SeqNo] [int]  NOT NULL,	/*流水號*/
+	[SeqNo] [int] IDENTITY(1,1) NOT NULL,	/*流水號*/
 	[MsgSn] [int]  NOT NULL,	/*留言編號*/
 	[Owner] [varchar](11)  NULL,	/*處理人*/
 	[OwnerName] [nvarchar](60)  NULL,	/*處理人姓名*/

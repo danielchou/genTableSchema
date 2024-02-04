@@ -13,7 +13,7 @@
 **	Input
 ** -----------
     $pt_input
-	@Updater 		VARCHAR(11)		- 更新者
+	@Updater 			VARCHAR(11)		- 更新者
 	@UpdaterName 	NVARCHAR(60)	- 更新人員
 **
 **   Output

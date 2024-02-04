@@ -1,5 +1,5 @@
 CREATE TABLE [agd].[tbHubEmailAttenden](
-	[SeqNo] [int]  NOT NULL,	/*流水號*/
+	[SeqNo] [int] IDENTITY(1,1) NOT NULL,	/*流水號*/
 	[HubEmailLogSeqNo] [int]  NOT NULL,	/*Email 紀錄表流水號*/
 	[Type] [char](1)  NOT NULL,	/*類型*/
 	[AttendeeSeq] [int]  NOT NULL,	/*收件人編號*/

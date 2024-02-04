@@ -1,5 +1,5 @@
 CREATE TABLE [agd].[tbHubEmailAttachment](
-	[SeqNo] [int]  NOT NULL,	/*流水號*/
+	[SeqNo] [int] IDENTITY(1,1) NOT NULL,	/*流水號*/
 	[HubEmailLogSeqNo] [int]  NOT NULL,	/*Email 紀錄表流水號*/
 	[FileSeq] [int]  NOT NULL,	/*檔案編號*/
 	[FileName] [nvarchar](200)  NOT NULL,	/*檔案名稱*/

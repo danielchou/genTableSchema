@@ -1,5 +1,5 @@
 CREATE TABLE [agd].[tbHubChatAttenden](
-	[SeqNo] [int]  NOT NULL,	/*流水號*/
+	[SeqNo] [int] IDENTITY(1,1) NOT NULL,	/*流水號*/
 	[HubChatLogSeqNo] [int]  NOT NULL,	/*Chat 紀錄表流水號*/
 	[AttendeeSeq] [int]  NOT NULL,	/*參與者編號*/
 	[AttendeeId] [nvarchar](20)  NOT NULL,	/*發言者ID*/

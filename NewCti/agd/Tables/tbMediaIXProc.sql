@@ -1,5 +1,5 @@
 CREATE TABLE [agd].[tbMediaIXProc](
-	[SeqNo] [int]  NOT NULL,	/*流水號*/
+	[SeqNo] [int] IDENTITY(1,1) NOT NULL,	/*流水號*/
 	[Source] [char](1)  NOT NULL,	/*來源*/
 	[Status] [char](1)  NOT NULL,	/*狀態*/
 	[MsgSn] [int]  NOT NULL,	/*留言編號*/

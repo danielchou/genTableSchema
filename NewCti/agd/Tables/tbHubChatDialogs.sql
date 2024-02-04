@@ -1,5 +1,5 @@
 CREATE TABLE [agd].[tbHubChatDialogs](
-	[SeqNo] [int]  NOT NULL,	/*流水號*/
+	[SeqNo] [int] IDENTITY(1,1) NOT NULL,	/*流水號*/
 	[HubChatLogSeqNo] [int]  NOT NULL,	/*Chat 紀錄表流水號*/
 	[DialogSeq] [int]  NOT NULL,	/*對話編號*/
 	[DialogStartAtTime] [datetime2](7)  NOT NULL,	/*對話時間*/

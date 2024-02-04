@@ -1,5 +1,5 @@
 CREATE TABLE [agd].[tbHubChatLog](
-	[SeqNo] [int]  NOT NULL,	/*流水號*/
+	[SeqNo] [int] IDENTITY(1,1) NOT NULL,	/*流水號*/
 	[InteractionID] [varchar](20)  NOT NULL,	/*Interaction編號*/
 	[AgentLoginID] [varchar](10)  NOT NULL,	/*CTI登入帳號*/
 	[UserID] [varchar](11)  NOT NULL,	/*員工編號*/

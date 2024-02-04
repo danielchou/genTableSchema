@@ -1,5 +1,5 @@
 CREATE TABLE [agdSet].[tbMsgItem](
-	[SeqNo] [smallint]  NOT NULL,	/*流水號*/
+	[SeqNo] [smallint] IDENTITY(1,1) NOT NULL,	/*流水號*/
 	[MsgItemID] [varchar](3)  NOT NULL,	/*留言類型編號*/
 	[MsgItemName] [nvarchar](50)  NOT NULL,	/*留言類型名稱*/
 	[ProcessType] [char](1)  NOT NULL,	/*處理方式*/
