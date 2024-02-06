@@ -1,6 +1,5 @@
 ﻿using ESUN.AGD.WebApi.Application.$pt_TableName;
 using ESUN.AGD.WebApi.Application.$pt_TableName.Contract;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

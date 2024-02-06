@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using FluentValidation.Results;
 
 namespace ESUN.AGD.WebApi.Application.$pt_TableName.Contract
 {

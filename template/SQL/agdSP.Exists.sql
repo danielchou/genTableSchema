@@ -51,7 +51,7 @@ BEGIN
 	BEGIN TRY
 		SELECT TOP 1 1 AS Total
 		FROM $pt_schema.tb$pt_tableName
-		WHERE $pt_sqNo != @$pt_sqNo
+		WHERE $pt_sqNoHardCode
 			AND ( 
                 $pt_fColOr
             );

@@ -28,6 +28,7 @@ namespace ESUN.AGD.WebApi.Application.$pt_TableName
         public async ValueTask<BasicResponse<$pt_TableName$response>> Get$pt_TableName($pt_InputPK)
         {
             var method = _context?.HttpContext?.Request?.Method;
+
             var data = await _dataAccessService
                 .LoadSingleData<Tb$pt_TableName, object>(storeProcedure: "agdSp.usp$pt_TableName$get", new { $pt_InputServicePK = $pt_InputServicePK, });
             
@@ -36,11 +37,11 @@ namespace ESUN.AGD.WebApi.Application.$pt_TableName
 
         public async ValueTask<BasicResponse<List<$pt_TableName$response>>> Query$pt_TableName($pt_TableName$queryRequest request)
         {
-			var method = _context?.HttpContext?.Request.Path.ToString().Split("/")[3];
+			var method = _context?.HttpContext?.Request?.Path.ToString().Split("/")[3];
 
 $pt_requestIsNullOrEmpty
             var data = await _dataAccessService
-                .LoadData<Tb$pt_TableName, object>(storeProcedure: "agdSp.usp$pt_TableName$query", request);
+                .LoadData<Tb$pt_TableName, object>(storeProcedure: "agdSp.usp$pt_TableName$query",request);
                 
             int totalCount = data == null ? 0 : data.FirstOrDefault().Total;
 			
@@ -63,9 +64,9 @@ $pt_requestIsNullOrEmpty
             request.creatorName = creatorName;
 
             var data = await _dataAccessService
-                .OperateData(storeProcedure: "agdSp.usp$pt_TableName$insert", request);
+                .OperateDataWithResMsg(storeProcedure: "agdSp.usp$pt_TableName$insert", request);
 
-			return ResponseHandler.ForBool(data, serviceName, method);
+			return ResponseHandler.ForBool(data.ErrorMsg==string.Empty? -1: 0, serviceName, method,data.ErrorMsg);
         }
 
         public async ValueTask<BasicResponse<bool>> Update$pt_TableName($pt_TableName$updateRequest request)
@@ -84,9 +85,9 @@ $pt_requestIsNullOrEmpty
             request.updaterName = updaterName;
 
             var data = await _dataAccessService
-                .OperateData(storeProcedure: "agdSp.usp$pt_TableName$update", request);
+                .OperateDataWithResMsg(storeProcedure: "agdSp.usp$pt_TableName$update", request);
 
-			return ResponseHandler.ForBool(data, serviceName, method);
+			return ResponseHandler.ForBool(data.ErrorMsg==string.Empty? -1: 0, serviceName, method,data.ErrorMsg);
         }
 
         public async ValueTask<BasicResponse<bool>> Delete$pt_TableName($pt_InputPK)
@@ -94,9 +95,9 @@ $pt_requestIsNullOrEmpty
 			var method = _context?.HttpContext?.Request?.Method;
             
 			var data = await _dataAccessService
-                .OperateData(storeProcedure: "agdSp.usp$pt_TableName$delete", new { $pt_InputServicePK = $pt_InputServicePK });
+                .OperateDataWithResMsg(storeProcedure: "agdSp.usp$pt_TableName$delete", new { $pt_InputServicePK = $pt_InputServicePK });
 
-			return ResponseHandler.ForBool(data, serviceName, method);
+			return ResponseHandler.ForBool(data.ErrorMsg==string.Empty? -1: 0, serviceName, method,data.ErrorMsg);
         }
 
         public async ValueTask<BasicResponse<bool>> Exists($pt_InputIsExist)
